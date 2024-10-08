@@ -1,0 +1,19 @@
+{
+    "name": "unocss-preset-tailwindcss-motion",
+    "version": "0.0.1",
+    "description": "Unofficial UnoCSS preset for the TailwindCSS Motion plugin by @romboHQ",
+    "main": "index.js",
+    "scripts": {
+        "website-test": "npx tailwindcss -i ./compare-test/tailwind.css -o ./compare-test/tailwind-output.css --watch"
+    },
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@unocss/preset-uno": "^0.63.4",
+        "tailwindcss": "^3.4.13",
+        "unocss": "^0.63.4"
+    },
+    "dependencies": {
+        "tailwindcss-motion": "^0.3.0-beta"
+    }
+}
