@@ -6,11 +6,11 @@
     <title>Testing the Tailwind Plugin vs the UnoCSS Preset</title>
     
     
-     <!-- Add id to Tailwind CSS link -->
-     <link id="tailwindCSS" href="./tailwind-output.css" rel="stylesheet">
+     <!-- Add id to Tailwind CSS link (initially disabled) -->
+     <link id="tailwindCSS" href="./tailwind-output.css" rel="stylesheet" disabled>
 
-     <!-- Add UnoCSS link (initially disabled) -->
-     <link id="unoCSS" href="./uno-output.css" rel="stylesheet" disabled>
+     <!-- Add UnoCSS link (initially enabled) -->
+     <link id="unoCSS" href="./uno-output.css" rel="stylesheet">
     
     
 </head>
@@ -20,17 +20,16 @@
     <nav class="bg-white shadow-sm py-2 px-5 top-0 sticky sm:flex items-center justify-between">
         <div class="text-slate-600 text-xl font-bold mb-2 sm:mb-0">UnoCSS Motion Preset</div>
         <div class="w-auto bg-slate-300 p-1 rounded-lg grid grid-cols-2">
-            <button id="tailwindToggle" class="active toggle-css bg-white/50 text-slate-500 transition-all px-6 py-4 text-sm font-bold rounded-md rounded-r-none hover:bg-white [&.active]:bg-white [&.active]:text-pink-300">
+            <button id="tailwindToggle" class="toggle-css bg-white/50 text-slate-500 transition-all px-6 py-4 text-sm font-bold rounded-md rounded-r-none hover:bg-white [&.active]:bg-white [&.active]:text-pink-300">
                 Use Tailwind Plugin CSS
             </button>
-            <button id="unoToggle" class="toggle-css bg-white/50 text-slate-500 transition-all px-6 py-4 text-sm font-bold rounded-md rounded-l-none hover:bg-white [&.active]:bg-white [&.active]:text-pink-300">
+            <button id="unoToggle" class="active toggle-css bg-white/50 text-slate-500 transition-all px-6 py-4 text-sm font-bold rounded-md rounded-l-none hover:bg-white [&.active]:bg-white [&.active]:text-pink-300">
                 Use UnoCSS Preset CSS
             </button>
             
         </div>
     </nav>
-    
-    
+
     <div class="flex flex-col-reverse sm:flex-row p-[3%] max-w-screen-xl mx-auto">
         
         <div class="sm:w-1/3">
@@ -594,6 +593,12 @@
 
     tailwindToggle.addEventListener('click', () => toggleCSS(true))
     unoToggle.addEventListener('click', () => toggleCSS(false))
+
+    // Modify the initial state in the script
+    tailwindCSS.setAttribute('disabled', '')
+    unoCSS.removeAttribute('disabled')
+    tailwindToggle.classList.remove('active')
+    unoToggle.classList.add('active')
     </script>
     
 </body>

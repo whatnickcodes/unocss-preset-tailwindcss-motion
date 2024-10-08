@@ -1,6 +1,8 @@
 import { defineConfig } from 'unocss'
 import { presetUno } from 'unocss'
 
+import { presetCustom } from './src/index.js'
+
 
 // Not ideal but it works...
 import fs from 'fs'
@@ -14,6 +16,7 @@ const resetCSS = fs.readFileSync(
 export default defineConfig({
     presets: [
         presetUno(),
+        presetCustom()
     ],
     content: {
         filesystem: ['./compare-test/index.html']
