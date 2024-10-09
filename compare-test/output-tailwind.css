@@ -1566,6 +1566,12 @@ video {
   animation: var(--motion-all-enter-animations);
 }
 
+.motion-rotate-in {
+  --motion-origin-rotate: 12deg;
+  --motion-rotate-in-animation: motion-rotate-in calc(var(--motion-rotate-duration) * var(--motion-rotate-perceptual-duration-multiplier)) var(--motion-rotate-timing) var(--motion-rotate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
 .motion-rotate-in-180 {
   --motion-origin-rotate: 180deg;
   --motion-rotate-in-animation: motion-rotate-in calc(var(--motion-rotate-duration) * var(--motion-rotate-perceptual-duration-multiplier)) var(--motion-rotate-timing) var(--motion-rotate-delay) both;

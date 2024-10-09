@@ -7,7 +7,9 @@
  * providing smooth animations and transitions for UnoCSS projects.
  */
 import { defineConfig, toEscapedSelector as e } from 'unocss'
-import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
+
+
+
 
 
 
@@ -144,6 +146,19 @@ const textColorOutAnimation = 'motion-text-color-out calc(var(--motion-text-colo
 
 
 
+// Tailwind Util taken from import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
+const flattenColorPalette = (colors) =>
+    Object.assign({}, ...Object.entries(colors ?? {}).flatMap(([color, values]) =>
+        typeof values == "object"
+            ? Object.entries(flattenColorPalette(values)).map(([number, hex]) => ({
+                [color + (number === "DEFAULT" ? "" : `-${number}`)]: hex
+            }))
+            : [{ [`${color}`]: values }]
+    ));
+
+
+
+
 export const presetTailwindMotion = () => defineConfig({
     name: 'tailwind-motion',
     presets: [],
@@ -229,10 +244,12 @@ export const presetTailwindMotion = () => defineConfig({
             75: '0.75',
             100: '1',
         },
-        motionBackgroundColor: (theme) => flattenColorPalette(theme('colors')),
-        motionTextColor: (theme) => flattenColorPalette(theme('colors')),
-
     },
+    extendTheme: (theme) => ({
+        ...theme,
+        motionBackgroundColor: flattenColorPalette(theme.colors),
+        motionTextColor: flattenColorPalette(theme.colors),
+    }),
     rules: [
 
         // SCALES...
@@ -571,6 +588,20 @@ export const presetTailwindMotion = () => defineConfig({
 
     ],
     preflights: [
+        {
+            // Get theme
+            getCSS: ({ theme }) => {
+
+                // console.log('flattener', flattenColorPalette(theme.colors))
+                // console.log('motionBackgroundColor', theme.motionBackgroundColor)
+
+                // let themeAsString = JSON.stringify(theme.motionBackgroundColor)
+                // return '/* theme as string: ' + themeAsString + ' */'
+
+                
+
+            }
+        },
         {
             // Add the CSS variables...
             getCSS: () => {
