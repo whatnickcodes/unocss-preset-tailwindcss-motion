@@ -1,10 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-
-
 module.exports = {
     mode: 'jit',
     darkMode: 'class',
-    content: ['./compare-test/index.html'],
+    content: ['./index.html'],
     theme: {
         extend: {},
     },

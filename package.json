@@ -2,10 +2,15 @@
     "name": "unocss-preset-tailwindcss-motion",
     "version": "0.0.1",
     "description": "Unofficial UnoCSS preset for the TailwindCSS Motion plugin by @romboHQ",
-    "main": "index.js",
+    "type": "module",
     "scripts": {
-        "tailwind": "npx tailwindcss -i ./compare-test/tailwind.css -o ./compare-test/tailwind-output.css --watch",
-        "unocss": "unocss ./compare-test/index.html -o ./compare-test/uno-output.css --watch"
+        "dev": "npx vite dev",
+        "open-test": "open index.html",
+        "build:compares": "npm run build:tailwind && npm run build:unocss",
+        "build:tailwind": "npx tailwindcss -i ./tailwind.css -o ./compare-test/output-tailwind.css",
+        "build:tailwind:watch": "npx tailwindcss -i ./tailwind.css -o ./compare-test/output-tailwind.css --watch",
+        "build:unocss": "unocss ./index.html -o ./compare-test/output-uno.css",
+        "build:unocss:watch": "unocss ./index.html -o ./compare-test/output-uno.css --watch"
     },
     "author": "Nicholas Cerminara",
     "license": "MIT",
@@ -14,6 +19,7 @@
         "@unocss/reset": "^0.63.4",
         "tailwindcss": "^3.4.13",
         "tailwindcss-motion": "^0.3.0-beta",
-        "unocss": "^0.63.4"
+        "unocss": "^0.63.4",
+        "vite": "^5.4.8"
     }
 }

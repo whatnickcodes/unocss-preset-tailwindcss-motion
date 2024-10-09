@@ -1,19 +1,34 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <script type="module" src="/main.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing the Tailwind Plugin vs the UnoCSS Preset</title>
+    
+    <!-- For dev... -->
+    <script id="dev-entry" type="module" src="/unocss.js"></script>
+    
+    
 </head>
 <body class="antialiased bg-gradient-to-br from-slate-50 to-slate-200">
-
+    
+    <nav class="bg-white shadow-sm py-2 px-5 top-0 sticky sm:flex items-center justify-between">
+        <div class="text-slate-600 text-xl font-bold mb-2 sm:mb-0">UnoCSS Motion Preset</div>
+        <div class="w-auto bg-slate-300 p-1 rounded-lg grid grid-cols-2">
+            <button id="tailwindToggle" class="toggle-css bg-white/50 text-slate-500 transition-all px-6 py-4 text-sm font-bold rounded-md rounded-r-none hover:bg-white [&.active]:bg-white [&.active]:text-pink-300">
+                Use Tailwind Plugin CSS
+            </button>
+            <button id="unoToggle" class="active toggle-css bg-white/50 text-slate-500 transition-all px-6 py-4 text-sm font-bold rounded-md rounded-l-none hover:bg-white [&.active]:bg-white [&.active]:text-pink-300">
+                Use UnoCSS Preset CSS
+            </button>
+            
+        </div>
+    </nav>
     
     <div class="flex flex-col-reverse sm:flex-row p-[3%] max-w-screen-xl mx-auto">
         
         <div class="sm:w-1/3">
-
+            
             <div class="text-slate-600 text-xl font-bold mb-2">Motion Presets</div>
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="active demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
@@ -132,7 +147,7 @@
                     </div>
                     <span class="hidden motion-preset-confetti">motion-preset-confetti</span>
                 </button>
-        
+                
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Compress
                     <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
@@ -148,10 +163,10 @@
                     <span class="hidden motion-preset-wiggle">motion-preset-wiggle</span>
                 </button>
             </div>
-
+            
             <hr class="my-10 border-white/10">
             <div class="text-slate-600 text-xl font-bold mb-2">Customizing Presets</div>
-
+            
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Fade (delayed 500ms)
@@ -175,10 +190,10 @@
                     <span class="hidden motion-preset-bounce -motion-translate-y-in-150">motion-preset-bounce -motion-translate-y-in-150</span>
                 </button>
             </div>
-
+            
             <hr class="my-10 border-white/10">
             <div class="text-slate-600 text-xl font-bold mb-2">Base Animations</div>
-
+            
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Fade In
@@ -186,6 +201,13 @@
                         motion-opacity-in-0
                     </div>
                     <span class="hidden motion-opacity-in-0">motion-opacity-in-0</span>
+                </button>
+                <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                    Slide In
+                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        motion-translate-y
+                    </div>
+                    <span class="hidden motion-translate-y">motion-translate-y</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Slide In From Below
@@ -211,16 +233,16 @@
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Scale In
                     <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
-                        motion-scale-in-75
-                    </div>
-                    <span class="hidden motion-scale-in-75">motion-scale-in-75</span>
-                </button>
-                <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
-                    Scale In
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-scale-in-[1.1]
                     </div>
                     <span class="hidden motion-scale-in-[1.1]">motion-scale-in-[1.1]</span>
+                </button>
+                <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                    Rotate In
+                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        motion-rotate-in
+                    </div>
+                    <span class="hidden motion-rotate-in">motion-rotate-in</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Rotate In (180 degrees)
@@ -265,10 +287,10 @@
                     <span class="hidden motion-text-in-gray-100 motion-duration-[5s]">motion-text-in-blue-500 motion-duration-[5s]</span>
                 </button>
             </div>
-
+            
             <hr class="my-10 border-white/10">
             <div class="text-slate-600 text-xl font-bold mb-2">Combining Animations</div>
-
+            
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Scale, Slide Up & Rotate
@@ -277,7 +299,7 @@
                     </div>
                     <span class="hidden motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90">motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90</span>
                 </button>
-
+                
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Fade In & Slide Up
                     <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
@@ -307,10 +329,10 @@
                     <span class="hidden motion-preset-pop motion-bg-in-sky-300">motion-preset-pop motion-bg-in-sky-300</span>
                 </button>
             </div>
-
+            
             <hr class="my-10 border-white/10">
             <div class="text-slate-600 text-xl font-bold mb-2">Exit Animations</div>
-
+            
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Exit Fade Out
@@ -348,12 +370,12 @@
                     <span class="hidden motion-blur-out-lg">motion-blur-out-lg</span>
                 </button>
             </div>
-
-
-
+            
+            
+            
             <hr class="my-10 border-white/10">
             <div class="text-slate-600 text-xl font-bold mb-2">Modifiers</div>
-
+            
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Long Duration Rotate
@@ -391,9 +413,9 @@
                     <span class="hidden motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0">motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0</span>
                 </button>
             </div>
-
-
-
+            
+            
+            
             <hr class="my-10 border-white/10">
             <div class="text-slate-600 text-xl font-bold mb-2">Ease Functions</div>
             
@@ -441,14 +463,14 @@
                     <span class="hidden motion-ease-in-quart motion-preset-slide-right">motion-ease-in-quart motion-preset-slide-right</span>
                 </button>
             </div>
-
-
-
+            
+            
+            
             <hr class="my-10 border-white/10">
             <div class="text-slate-600 text-xl font-bold mb-2">With Group Class Modifier</div>
-
+            
             <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.active]:bg-pink-300/50">
-
+                
                 
                 <div class="text-center text-sm mb-10">
                     group/box -This box has custom code to turn pink and add an "active" class when the box is at least 90% visible.
@@ -460,12 +482,12 @@
                     <br>
                     group-[.active]/box:motion-preset-pop
                 </div>
-            
+                
             </div>
-
-
+            
+            
             <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.active]:bg-pink-300/50">
-
+                
                 
                 <div class="text-center text-sm mb-10">
                     group/box - This box has custom code to turn pink and add an "active" class when the box is at least 90% visible.
@@ -473,11 +495,11 @@
                 <div class="transition-all text-xs opacity-0 group-[.active]/box:opacity-100 group-[.active]/box:motion-preset-typewriter-[49] group-[.active]/box:motion-duration-[5s]">
                     group-[.active]/box:motion-preset-typewriter-[49]
                 </div>
-            
+                
             </div>
-
+            
             <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.active]:bg-pink-300/50">
-
+                
                 
                 <div class="text-center text-sm mb-10">
                     group/box - This box has custom code to turn pink and add an "active" class when the box is at least 90% visible.
@@ -485,10 +507,10 @@
                 <div class="bg-white transition-all rounded-lg p-10 text-sm opacity-0 group-[.active]/box:opacity-100 group-[.active]/box:motion-preset-flomoji-🚀">
                     group-[.active]/box:motion-preset-flomoji-🚀
                 </div>
-            
+                
             </div>
-
-        
+            
+            
             
         </div>
         
@@ -497,29 +519,68 @@
                 <div id="demo" class="motion-preset-fade" style="padding: 20px; border-radius: 5px;">
                     <div class="text-xs font-bold font-mono text-center mb-3">Demo</div>
                     <div
-                        class="
-                            w-full h-32
-                            mx-auto
-                            bg-pink-300/50
-                            border border-pink-300
-                            outline outline-4 outline-pink-300
-                            rounded-lg
-                            flex items-center justify-center  
-                        "
+                    class="
+                    w-full h-32
+                    mx-auto
+                    bg-pink-300/50
+                    border border-pink-300
+                    outline outline-4 outline-pink-300
+                    rounded-lg
+                    flex items-center justify-center  
+                    "
                     >
-                    </div>
-                    <input id="input" type="text" class="w-full text-xs mt-2 p-2 rounded-md border border-slate-300 outline-none" placeholder="">
                 </div>
+                <input id="input" type="text" class="w-full text-xs mt-2 p-2 rounded-md border border-slate-300 outline-none" placeholder="">
             </div>
         </div>
     </div>
-    
-    <script>
+</div>
+
+
+<script>
+
+    // Scrappy for the test...
+    // if not localhost:5173
+    if (window.location.hostname !== 'localhost') {
+        
+        // remove the dev entry
+        document.getElementById('dev-entry')
+
+        // Add the following to the head...
+
+        //     <!-- Add id to Tailwind CSS link (initially disabled) -->
+        // <!-- <link id="tailwindCSS" href="./tailwind-output.css" rel="stylesheet" disabled> -->
+
+        // <!-- Add UnoCSS link (initially enabled) -->
+        // <!-- <link id="unoCSS" href="./uno-output.css" rel="stylesheet"> -->
+
+        let tailwindCSS = document.createElement('link')
+        tailwindCSS.id = 'tailwindCSS'
+        tailwindCSS.href = './compare-test/output-tailwind.css'
+        tailwindCSS.rel = 'stylesheet'
+        tailwindCSS.disabled = true
+        document.head.appendChild(tailwindCSS)
+
+        let unoCSS = document.createElement('link')
+        unoCSS.id = 'unoCSS'
+        unoCSS.href = './compare-test/output-uno.css'
+        unoCSS.rel = 'stylesheet'
+        unoCSS.disabled = false
+        document.head.appendChild(unoCSS)
+        
+        
+        
+        
+    }
+
+
+
+
     const demo = document.getElementById('demo')
     const input = document.getElementById('input')
     const buttons = document.querySelectorAll('.demo-toggle')
     const activeWhenVisibleElements = document.querySelectorAll('.active-when-visible')
-
+    
     buttons.forEach(button => {
         button.addEventListener('mouseenter', () => {
             buttons.forEach(btn => btn.classList.remove('active'))
@@ -529,10 +590,10 @@
             
             // Remove the current class
             demo.className = ''
-
+            
             // make the input field the class name
             input.value = motionClass
-
+            
             
             // Force a reflow (for the animation to work 100% of the time)
             void demo.offsetWidth
@@ -541,7 +602,7 @@
             demo.className = motionClass
         })
     })
-
+    
     // Intersection Observer for active-when-visible
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -554,11 +615,47 @@
     }, {
         threshold: 0.9 // 90% visibility
     })
-
+    
     activeWhenVisibleElements.forEach(element => {
         observer.observe(element)
     })
-    </script>
     
+    
+    
+    
+    
+    
+    // Add this new code at the end of the script
+    if (window.location.hostname !== 'localhost') {
+        const tailwindToggle = document.getElementById('tailwindToggle')
+        const unoToggle = document.getElementById('unoToggle')
+        const tailwindCSS = document.getElementById('tailwindCSS')
+        const unoCSS = document.getElementById('unoCSS')
+        
+        function toggleCSS(useTailwind) {
+            if (useTailwind) {
+                tailwindCSS.removeAttribute('disabled')
+                unoCSS.setAttribute('disabled', '')
+                tailwindToggle.classList.add('active')
+                unoToggle.classList.remove('active')
+            } else {
+                tailwindCSS.setAttribute('disabled', '')
+                unoCSS.removeAttribute('disabled')
+                tailwindToggle.classList.remove('active')
+                unoToggle.classList.add('active')
+            }
+        }
+        
+        tailwindToggle.addEventListener('click', () => toggleCSS(true))
+        unoToggle.addEventListener('click', () => toggleCSS(false))
+        
+        // Modify the initial state in the script
+        tailwindCSS.setAttribute('disabled', '')
+        unoCSS.removeAttribute('disabled')
+        tailwindToggle.classList.remove('active')
+        unoToggle.classList.add('active')
+    }
+</script>
+
 </body>
 </html>
