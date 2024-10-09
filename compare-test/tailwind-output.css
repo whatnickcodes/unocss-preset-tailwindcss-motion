@@ -1502,9 +1502,23 @@ video {
   --motion-perceptual-duration-multiplier: 1.66;
 }
 
+.motion-scale-in {
+  --motion-origin-scale-x: 50%;
+  --motion-origin-scale-y: 50%;
+  --motion-scale-in-animation: motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
 .motion-scale-in-75 {
   --motion-origin-scale-x: .75;
   --motion-origin-scale-y: .75;
+  --motion-scale-in-animation: motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-scale-in-\[1\.1\] {
+  --motion-origin-scale-x: 1.1;
+  --motion-origin-scale-y: 1.1;
   --motion-scale-in-animation: motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
   animation: var(--motion-all-enter-animations);
 }

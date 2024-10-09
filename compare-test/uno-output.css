@@ -414,6 +414,9 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .flex{display:flex;}
 .flex-col{flex-direction:column;}
 .flex-col-reverse{flex-direction:column-reverse;}
+@keyframes slideUp{ from {transform: translateY(10px);opacity:0;} to {transform: translateY(0px);opacity:100;}}
+.animate-slideUp{animation:slideUp 1s linear 1;}
+.animate-ease-out{animation-timing-function:cubic-bezier(0, 0, 0.2, 1);}
 .items-center{align-items:center;}
 .justify-center{justify-content:center;}
 .justify-between{justify-content:space-between;}
