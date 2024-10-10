@@ -118,6 +118,7 @@ let keyframes = {
     'motion-translate-out': '{ 0% {translate: 0 0;} 100% {translate: var(--motion-end-translate-x) var(--motion-end-translate-y);} }',
     'motion-rotate-in': '{ 0% {rotate: var(--motion-origin-rotate);} 100% {rotate: 0;} }',
     'motion-rotate-out': '{ 0% {rotate: 0;} 100% {rotate: var(--motion-end-rotate);} }',
+    
     'motion-filter-in': '{ 0% {filter: blur(var(--motion-origin-blur)) grayscale(var(--motion-origin-grayscale));} 100% {filter: blur(0) grayscale(0);} }',
     'motion-filter-out': '{ 0% {filter: blur(0) grayscale(0);} 100% {filter: blur(var(--motion-end-blur)) grayscale(var(--motion-end-grayscale));} }',
     'motion-opacity-in': '{ 0% {opacity: var(--motion-origin-opacity);} }',
@@ -156,6 +157,16 @@ const flattenColorPalette = (colors) =>
             : [{ [`${color}`]: values }]
     ));
 
+
+
+const springPerceptualMultipliers = {
+    'var(--motion-spring-smooth)': '1.66',
+    'var(--motion-spring-snappy)': '1.66',
+    'var(--motion-spring-bouncy)': '1.66',
+    'var(--motion-spring-bouncier)': '2.035',
+    'var(--motion-spring-bounciest)': '5.285',
+    'var(--motion-bounce)': '2',
+};
 
 
 
@@ -249,9 +260,375 @@ export const presetTailwindMotion = () => defineConfig({
         ...theme,
         motionBackgroundColor: flattenColorPalette(theme.colors),
         motionTextColor: flattenColorPalette(theme.colors),
+        animationDuration: {
+            ...theme.transitionDuration,
+            1500: "1500ms",
+            2000: "2000ms",
+        },
     }),
     rules: [
 
+
+
+
+        /*=================================
+        *                                 *
+        *              PRESETS            *
+        *                                 *
+        ==================================*/
+        // Fades
+        [/^motion-preset-fade(-(.+))?$/, ([, , size = 'DEFAULT']) => {
+            const durations = {
+                sm: "300ms",
+                md: "500ms",
+                lg: "800ms",
+            };
+            
+            return {
+                "--motion-origin-opacity": 0,
+                "--motion-duration": durations[size] || durations.md,
+                "--motion-opacity-in-animation": opacityInAnimation,
+                animation: "var(--motion-all-enter-animations)",
+            };
+        }],
+
+        // Slides
+        [/^motion-preset-slide-(right|left|up|down)(-(.+))?$/, ([, direction, , size = 'DEFAULT']) => {
+            const distance = {
+                sm: "5%",
+                md: "25%",
+                lg: "100%",
+            };
+            const translateProperty = direction === 'right' || direction === 'left' ? 'x' : 'y';
+            const sign = direction === 'right' || direction === 'down' ? '-' : '';
+            
+            return {
+                [`--motion-origin-translate-${translateProperty}`]: `${sign}${distance[size] || distance.md}`,
+                "--motion-origin-opacity": 0,
+                "--motion-opacity-in-animation": opacityInAnimation,
+                "--motion-translate-in-animation": translateInAnimation,
+                animation: "var(--motion-all-enter-animations)",
+            };
+        }],
+        // Slide in 4 corners
+        [/^motion-preset-slide-(up-right|up-left|down-left|down-right)(-(.+))?$/, ([, direction, , size = 'DEFAULT']) => {
+            const distance = {
+                sm: "5%",
+                md: "25%",
+                lg: "100%",
+            };
+            const [vertical, horizontal] = direction.split('-');
+            const signX = horizontal === 'right' ? '-' : '';
+            const signY = vertical === 'down' ? '-' : '';
+            
+            return {
+                "--motion-origin-translate-x": `${signX}${distance[size] || distance.md}`,
+                "--motion-origin-translate-y": `${signY}${distance[size] || distance.md}`,
+                "--motion-origin-opacity": 0,
+                "--motion-opacity-in-animation": opacityInAnimation,
+                "--motion-translate-in-animation": translateInAnimation,
+                animation: "var(--motion-all-enter-animations)",
+            };
+        }],
+
+        // Blurs
+        [/^motion-preset-focus(-(.+))?$/, ([, , size = 'DEFAULT']) => {
+            const blurSizes = {
+                sm: "1.25px",
+                md: "5px",
+                lg: "10px",
+            };
+            return {
+                "--motion-origin-blur": blurSizes[size] || blurSizes.md,
+                "--motion-origin-opacity": 0,
+                "--motion-opacity-in-animation": opacityInAnimation,
+                "--motion-filter-in-animation": filterInAnimation,
+                animation: "var(--motion-all-enter-animations)",
+            };
+        }],
+        [/^motion-preset-blur-(right|left|up|down)(-(.+))?$/, ([, direction, , size = 'DEFAULT']) => {
+            const blurSizes = {
+                sm: "1.25px",
+                md: "5px",
+                lg: "10px",
+            };
+            const distance = {
+                sm: "1%",
+                md: "5%",
+                lg: "25%",
+            };
+            const translateProperty = direction === 'right' || direction === 'left' ? 'x' : 'y';
+            const sign = direction === 'right' || direction === 'down' ? '-' : '';
+            
+            return {
+                "--motion-origin-blur": blurSizes[size] || blurSizes.md,
+                [`--motion-origin-translate-${translateProperty}`]: `${sign}${distance[size] || distance.md}`,
+                "--motion-origin-opacity": 0,
+                "--motion-opacity-in-animation": opacityInAnimation,
+                "--motion-filter-in-animation": filterInAnimation,
+                "--motion-translate-in-animation": translateInAnimation,
+                animation: "var(--motion-all-enter-animations)",
+            };
+        }],
+
+        // Rebound
+        [/^motion-preset-rebound-(right|left|up|down)(-(.+))?$/, ([, direction, , size = 'DEFAULT']) => {
+            const distance = {
+                sm: "5%",
+                md: "25%",
+                lg: "100%",
+            };
+            const translateProperty = direction === 'right' || direction === 'left' ? 'x' : 'y';
+            const sign = direction === 'right' || direction === 'down' ? '-' : '';
+            
+            return {
+                [`--motion-origin-translate-${translateProperty}`]: `${sign}${distance[size] || distance.md}`,
+                "--motion-translate-timing": "var(--motion-spring-bouncier)",
+                "--motion-translate-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-bouncier)"],
+                "--motion-origin-opacity": 0,
+                "--motion-opacity-in-animation": opacityInAnimation,
+                "--motion-translate-in-animation": translateInAnimation,
+                animation: "var(--motion-all-enter-animations)",
+            };
+        }],
+
+        // Bounce
+        [/^motion-preset-bounce$/, () => ({
+            "--motion-duration": "300ms",
+            "--motion-translate-timing": "var(--motion-bounce)",
+            "--motion-translate-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-bounce)"],
+            "--motion-origin-opacity": 0,
+            "--motion-origin-translate-y": "-25%",
+            "--motion-opacity-in-animation": opacityInAnimation,
+            "--motion-translate-in-animation": translateInAnimation,
+            animation: "var(--motion-all-enter-animations)",
+        })],
+
+        // Expand
+        [/^motion-preset-expand$/, () => ({
+            "--motion-origin-scale-x": "50%",
+            "--motion-origin-scale-y": "50%",
+            "--motion-origin-opacity": 0,
+            "--motion-opacity-in-animation": opacityInAnimation,
+            "--motion-scale-in-animation": scaleInAnimation,
+            animation: "var(--motion-all-enter-animations)",
+        })],
+
+        // SHRINK
+        [/^motion-preset-shrink$/, () => ({
+            "--motion-origin-scale-x": "150%",
+            "--motion-origin-scale-y": "150%",
+            "--motion-origin-opacity": 0,
+            "--motion-opacity-in-animation": opacityInAnimation,
+            "--motion-scale-in-animation": scaleInAnimation,
+            animation: "var(--motion-all-enter-animations)",
+        })],
+
+        // POP
+        [/^motion-preset-pop$/, () => ({
+            "--motion-origin-scale-x": "50%",
+            "--motion-origin-scale-y": "50%",
+            "--motion-origin-opacity": 0,
+            "--motion-scale-timing": "var(--motion-spring-bouncier)",
+            "--motion-scale-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-bouncier)"],
+            "--motion-opacity-in-animation": opacityInAnimation,
+            "--motion-scale-in-animation": scaleInAnimation,
+            animation: "var(--motion-all-enter-animations)",
+        })],
+
+        // COMPRESS
+        [/^motion-preset-compress$/, () => ({
+            "--motion-origin-scale-x": "150%",
+            "--motion-origin-scale-y": "150%",
+            "--motion-origin-opacity": 0,
+            "--motion-scale-timing": "var(--motion-spring-bouncier)",
+            "--motion-scale-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-bouncier)"],
+            "--motion-opacity-in-animation": opacityInAnimation,
+            "--motion-scale-in-animation": scaleInAnimation,
+            animation: "var(--motion-all-enter-animations)",
+        })],
+
+        // SHAKE
+        [/^motion-preset-shake$/, () => ({
+            "--motion-duration": "300ms",
+            "--motion-origin-rotate": "15deg",
+            "--motion-origin-opacity": 0,
+            "--motion-rotate-timing": "var(--motion-spring-bounciest)",
+            "--motion-rotate-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-bounciest)"],
+            "--motion-opacity-in-animation": opacityInAnimation,
+            "--motion-rotate-in-animation": rotateInAnimation,
+            animation: "var(--motion-all-enter-animations)",
+        })],
+
+        // WIGGLE
+        [/^motion-preset-wiggle$/, () => ({
+            "--motion-duration": "300ms",
+            "--motion-origin-rotate": "15deg",
+            "--motion-origin-translate-x": "-25%",
+            "--motion-origin-translate-y": "-10%",
+            "--motion-origin-opacity": 0,
+            "--motion-timing": "var(--motion-spring-bounciest)",
+            "--motion-perceptual-duration-multiplier": "5.285",
+            "--motion-opacity-timing": "var(--motion-spring-smooth)",
+            "--motion-opacity-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-smooth)"],
+            "--motion-opacity-in-animation": opacityInAnimation,
+            "--motion-rotate-in-animation": rotateInAnimation,
+            "--motion-translate-in-animation": translateInAnimation,
+            animation: "var(--motion-all-enter-animations)",
+        })],
+
+        // CONFETTI
+        [/^motion-preset-confetti$/, (_, { rawSelector }) => {
+            let selector = e(rawSelector);
+            return `
+                @keyframes RomboConfettiPop {
+                    0% { opacity: 0; transform: scale(1); }
+                    33% { opacity: 1; transform: scale(1.15); }
+                    50% { transform: scale(0.975); }
+                    65% { transform: scale(1.025); }
+                    80% { transform: scale(0.99); }
+                    87% { transform: scale(1.01); }
+                    100% { opacity: 1; transform: scale(1); }
+                }
+                @keyframes topfetti {
+                    0% { background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%; }
+                    50% { background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%; }
+                    100% { 
+                        background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+                        background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+                    }
+                }
+                @keyframes bottomfetti {
+                    0% { background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,70% -10%, 70% 0%; }
+                    50% { background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%; }
+                    100% { 
+                        background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+                        background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+                    }
+                }
+                ${selector} {
+                    display: block;
+                    -webkit-appearance: none;
+                    appearance: none;
+                    position: relative;
+                    outline: 0;
+                    z-index: 1;
+                    margin: 0;
+                    animation: RomboConfettiPop var(--motion-duration) var(--motion-timing) both !important;
+                }
+                ${selector}:after {
+                    display: block;
+                    animation-duration: var(--motion-duration);
+                    animation-timing-function: var(--motion-timing);
+                    animation-iteration-count: 1;
+                    animation-direction: normal;
+                    animation-fill-mode: forwards;
+                    animation-name: bottomfetti;
+                    position: absolute;
+                    content: " ";
+                    z-index: -1;
+                    width: 100%;
+                    height: 100%;
+                    left: -20%;
+                    top: 100%;
+                    transition: all var(--motion-timing) var(--motion-duration);
+                    background-repeat: no-repeat;
+                    background-image: radial-gradient(circle, #a2dd60 20%, transparent 20%), radial-gradient(circle, transparent 20%, #ee65a9 20%, transparent 30%), radial-gradient(circle, #6092dd 20%, transparent 20%), radial-gradient(circle, #f3c548 20%, transparent 20%), radial-gradient(circle, transparent 10%, #46ec99 15%, transparent 20%), radial-gradient(circle, #f03e47 20%, transparent 20%), radial-gradient(circle, #7b4df7 20%, transparent 20%), radial-gradient(circle, #3ff1bc 20%, transparent 20%);
+                    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+                }
+                ${selector}:before {
+                    display: block;
+                    animation-duration: var(--motion-duration);
+                    animation-timing-function: var(--motion-timing);
+                    animation-iteration-count: 1;
+                    animation-direction: normal;
+                    animation-fill-mode: forwards;
+                    animation-name: topfetti;
+                    position: absolute;
+                    content: " ";
+                    width: 100%;
+                    height: 100%;
+                    left: -5%;
+                    background-repeat: no-repeat;
+                    transition: all var(--motion-timing) var(--motion-duration);
+                    z-index: -1;
+                    top: -90%;
+                    background-image: radial-gradient(circle, #a2dd60 30%, transparent 20%), radial-gradient(circle, transparent 20%, #ee65a9 40%, transparent 20%), radial-gradient(circle, #6092dd 30%, transparent 20%), radial-gradient(circle, #f3c548 30%, transparent 20%), radial-gradient(circle, transparent 10%, #46ec99 15%, transparent 20%), radial-gradient(circle, #f03e47 30%, transparent 20%), radial-gradient(circle, #7b4df7 30%, transparent 30%), radial-gradient(circle, #3ff1bc 30%, transparent 20%), radial-gradient(circle, #48f088 30%, transparent 30%);
+                    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 25% 25%;
+                }
+            `;
+        }],
+
+        // TYPEWRITER
+        [/^motion-preset-typewriter-\[(.+)\]$/, ([, value], { rawSelector }) => {
+            let selector = e(rawSelector);
+            return `
+                @keyframes typing {
+                    0%, 10%, 90%, 100% { width: 0; }
+                    40%, 60% { width: calc(${value}ch + 1px); }
+                }
+                @keyframes blink {
+                    50% { border-color: transparent; }
+                }
+                ${selector} {
+                    --motion-duration: 2000ms;
+                    --motion-typewriter-value: ${value}ch;
+                    animation: typing var(--motion-duration) steps(${value}) infinite, blink 0.4s step-end infinite alternate;
+                    white-space: nowrap;
+                    border-right: 2px solid;
+                    font-family: monospace;
+                    overflow: hidden;
+                }
+                ${selector} {
+                    animation: typing var(--motion-duration) steps(${value}) infinite, blink 0.4s step-end infinite alternate;
+                }
+
+            `;
+        }],
+
+        // FLOMOJI
+        [/^motion-preset-flomoji-(.+)$/, ([, value], { rawSelector }) => {
+            let selector = e(rawSelector);
+            return `
+                @keyframes emojiAnim {
+                    0% { transform: translateY(-200%) rotate(60deg); }
+                    30% { transform: rotate(50deg); }
+                    40% { transform: rotate(55deg); }
+                    50% { transform: rotate(45deg); }
+                    60% { transform: rotate(40deg); }
+                    100% { transform: translateY(-200%) rotate(25deg); }
+                }
+                ${selector} {
+                    position: relative;
+                }
+                ${selector}:before {
+                    content: "${value}";
+                    animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
+                    top: 0px;
+                    left: 0px;
+                    display: flex;
+                    position: absolute;
+                    z-index: 1000;
+                    background: rgba(255,255,255,0.3);
+                    width: 2rem;
+                    height: 2rem;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 100%;
+                    padding: 2px;
+                    padding-bottom: 6px;
+                }
+                ${selector}:before {
+                    animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
+                }
+            `;
+        }],
+
+        /*=================================
+        *                                 *
+        *        BASE ANIMATIONS          *
+        *                                 *
+        ==================================*/
         // SCALES...
         [/^motion-scale-in(-(.+))?$/, ([, , size = 'DEFAULT'], { rawSelector, theme }) => {
             let scale = size === 'DEFAULT' ? theme.motionScale.DEFAULT : 
@@ -585,6 +962,73 @@ export const presetTailwindMotion = () => defineConfig({
                 'animation': 'var(--motion-all-exit-animations)',
             };
         }],
+
+
+        /*=================================
+        *                                 *
+        *            MODIFIERS            *
+        *                                 *
+        ==================================*/
+        // MOTION DURATION
+        [/^motion-duration(-(.+?))?(\/(scale|translate|rotate|blur|grayscale|opacity|background|text))?$/, ([, , value = 'DEFAULT', , modifier], { theme }) => {
+            const duration = value === 'DEFAULT' ? theme.animationDuration.DEFAULT : 
+                        value.startsWith('[') ? value.slice(1, -1) : 
+                        theme.animationDuration[value] || `${value}ms`;
+
+            if (modifier) {
+                switch (modifier) {
+                    case "scale":
+                        return { "--motion-scale-duration": duration };
+                    case "translate":
+                        return { "--motion-translate-duration": duration };
+                    case "rotate":
+                        return { "--motion-rotate-duration": duration };
+                    case "blur":
+                    case "grayscale":
+                        return { "--motion-filter-duration": duration };
+                    case "opacity":
+                        return { "--motion-opacity-duration": duration };
+                    case "background":
+                        return { "--motion-background-color-duration": duration };
+                    case "text":
+                        return { "--motion-text-color-duration": duration };
+                }
+            }
+
+            return { "--motion-duration": duration };
+        }],
+
+        // MOTION DELAY
+        [/^motion-delay(-(.+?))?(\/(scale|translate|rotate|blur|grayscale|opacity|background|text))?$/, ([, , value = 'DEFAULT', , modifier], { theme }) => {
+            const delay = value === 'DEFAULT' ? theme.animationDuration.DEFAULT : 
+                        value.startsWith('[') ? value.slice(1, -1) : 
+                        theme.animationDuration[value] || `${value}ms`;
+
+            if (modifier) {
+                switch (modifier) {
+                    case "scale":
+                        return { "--motion-scale-delay": delay };
+                    case "translate":
+                        return { "--motion-translate-delay": delay };
+                    case "rotate":
+                        return { "--motion-rotate-delay": delay };
+                    case "blur":
+                    case "grayscale":
+                        return { "--motion-filter-delay": delay };
+                    case "opacity":
+                        return { "--motion-opacity-delay": delay };
+                    case "background":
+                        return { "--motion-background-color-delay": delay };
+                    case "text":
+                        return { "--motion-text-color-delay": delay };
+                }
+            }
+
+            return { "--motion-delay": delay };
+        }],
+
+
+
 
     ],
     preflights: [

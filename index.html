@@ -12,7 +12,7 @@
 </head>
 <body class="antialiased bg-gradient-to-br from-slate-50 to-slate-200">
     
-    <nav class="bg-white shadow-sm py-2 px-5 top-0 sticky sm:flex items-center justify-between">
+    <nav class=" z-50 bg-white shadow-sm py-2 px-5 top-0 sticky sm:flex items-center justify-between">
         <div class="text-slate-600 text-xl font-bold mb-2 sm:mb-0">UnoCSS Motion Preset</div>
         <div class="w-auto bg-slate-300 p-1 rounded-lg grid grid-cols-2">
             <button id="tailwindToggle" class="toggle-css bg-white/50 text-slate-500 transition-all px-6 py-4 text-sm font-bold rounded-md rounded-r-none hover:bg-white [&.active]:bg-white [&.active]:text-pink-300">
@@ -27,137 +27,243 @@
     
     <div class="flex flex-col-reverse sm:flex-row p-[3%] max-w-screen-xl mx-auto">
         
-        <div class="sm:w-1/3">
+        <div class="sm:w-1/2 relative z-30">
             
             <div class="text-slate-600 text-xl font-bold mb-2">Motion Presets</div>
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
-                <button class="active demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
-                    Fade
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
-                        motion-preset-fade
-                    </div>
-                    <span class="hidden motion-preset-fade">motion-preset-fade</span>
-                </button>
-                <div class="grid grid-cols-2 gap-1">
+                <div class="grid grid-cols-4 gap-1">
+                    <button class="active demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Fade
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-fade
+                        </div>
+                        <span class="hidden motion-preset-fade">motion-preset-fade</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Fade SM
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-fade-sm
+                        </div>
+                        <span class="hidden motion-preset-fade-sm">motion-preset-fade-sm</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Fade MD
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-fade-md
+                        </div>
+                        <span class="hidden motion-preset-fade-md">motion-preset-fade-md</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Fade LG
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-fade-lg
+                        </div>
+                        <span class="hidden motion-preset-fade-lg">motion-preset-fade-lg</span>
+                    </button>
+                </div>
+        
+
+                <div class="grid grid-cols-4 gap-1">
                     <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                         Slide Right
-                        <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                             motion-preset-slide-right
                         </div>
                         <span class="hidden motion-preset-slide-right">motion-preset-slide-right</span>
                     </button>
                     <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Slide Right SM
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-slide-right-sm
+                        </div>
+                        <span class="hidden motion-preset-slide-right-sm">motion-preset-slide-right-sm</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Slide Right MD
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-slide-right-md
+                        </div>
+                        <span class="hidden motion-preset-slide-right-md">motion-preset-slide-right-md</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Slide Right LG
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-slide-right-lg
+                        </div>
+                        <span class="hidden motion-preset-slide-right-lg">motion-preset-slide-right-lg</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                         Slide Left
-                        <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                             motion-preset-slide-left
                         </div>
                         <span class="hidden motion-preset-slide-left">motion-preset-slide-left</span>
                     </button>
                     <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                         Slide Up
-                        <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                             motion-preset-slide-up
                         </div>
                         <span class="hidden motion-preset-slide-up">motion-preset-slide-up</span>
                     </button>
                     <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                         Slide Down
-                        <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                             motion-preset-slide-down
                         </div>
                         <span class="hidden motion-preset-slide-down">motion-preset-slide-down</span>
                     </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Slide Up Right
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-slide-up-right
+                        </div>
+                        <span class="hidden motion-preset-slide-up-right">motion-preset-slide-up-right</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Slide Up Left
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-slide-up-left
+                        </div>
+                        <span class="hidden motion-preset-slide-up-left">motion-preset-slide-up-left</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Slide Down Left
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-slide-down-left
+                        </div>
+                        <span class="hidden motion-preset-slide-down-left">motion-preset-slide-down-left</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Slide Down Right
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-slide-down-right
+                        </div>
+                        <span class="hidden motion-preset-slide-down-right">motion-preset-slide-down-right</span>
+                    </button>
                 </div>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Focus
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-focus
                     </div>
                     <span class="hidden motion-preset-focus">motion-preset-focus</span>
                 </button>
-                <div class="grid grid-cols-2 gap-1">
+                <div class="grid grid-cols-4 gap-1">
                     <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                         Blur Right
-                        <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                             motion-preset-blur-right
                         </div>
                         <span class="hidden motion-preset-blur-right">motion-preset-blur-right</span>
                     </button>
                     <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                         Blur Left
-                        <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                             motion-preset-blur-left
                         </div>
                         <span class="hidden motion-preset-blur-left">motion-preset-blur-left</span>
                     </button>
                     <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                         Blur Up
-                        <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                             motion-preset-blur-up
                         </div>
                         <span class="hidden motion-preset-blur-up">motion-preset-blur-up</span>
                     </button>
                     <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                         Blur Down
-                        <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                             motion-preset-blur-down
                         </div>
                         <span class="hidden motion-preset-blur-down">motion-preset-blur-down</span>
                     </button>
                 </div>
+
+                <div class="grid grid-cols-4 gap-1">
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Rebound Right
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-rebound-right
+                        </div>
+                        <span class="hidden motion-preset-rebound-right">motion-preset-rebound-right</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Rebound Left
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-rebound-left
+                        </div>
+                        <span class="hidden motion-preset-rebound-left">motion-preset-rebound-left</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Rebound Up
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-rebound-up
+                        </div>
+                        <span class="hidden motion-preset-rebound-up">motion-preset-rebound-up</span>
+                    </button>
+                    <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                        Rebound Down
+                        <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                            motion-preset-rebound-down
+                        </div>
+                        <span class="hidden motion-preset-rebound-down">motion-preset-rebound-down</span>
+                    </button>
+                </div>
+                
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Expand
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-expand
                     </div>
                     <span class="hidden motion-preset-expand">motion-preset-expand</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Shrink
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-shrink
                     </div>
                     <span class="hidden motion-preset-shrink">motion-preset-shrink</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Pop
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-pop
                     </div>
                     <span class="hidden motion-preset-pop">motion-preset-pop</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Shake
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-shake
                     </div>
                     <span class="hidden motion-preset-shake">motion-preset-shake</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Bounce
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-bounce
                     </div>
                     <span class="hidden motion-preset-bounce">motion-preset-bounce</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Confetti
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-confetti
                     </div>
-                    <span class="hidden motion-preset-confetti">motion-preset-confetti</span>
+                    <span class="!hidden motion-preset-confetti">motion-preset-confetti</span>
                 </button>
                 
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Compress
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-compress
                     </div>
                     <span class="hidden motion-preset-compress">motion-preset-compress</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Wiggle
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-wiggle
                     </div>
                     <span class="hidden motion-preset-wiggle">motion-preset-wiggle</span>
@@ -170,21 +276,21 @@
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Fade (delayed 500ms)
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-fade motion-delay-500
                     </div>
                     <span class="hidden motion-preset-fade motion-delay-500">motion-preset-fade motion-delay-500</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Slide Right (2000ms duration)
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-slide-right motion-duration-2000
                     </div>
                     <span class="hidden motion-preset-slide-right motion-duration-2000">motion-preset-slide-right motion-duration-2000</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Bounce (bigger bounce)
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-bounce -motion-translate-y-in-150
                     </div>
                     <span class="hidden motion-preset-bounce -motion-translate-y-in-150">motion-preset-bounce -motion-translate-y-in-150</span>
@@ -197,87 +303,94 @@
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Fade In
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-opacity-in-0
                     </div>
                     <span class="hidden motion-opacity-in-0">motion-opacity-in-0</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Slide In From Below
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-translate-y-in-100
                     </div>
                     <span class="hidden motion-translate-y-in-100">motion-translate-y-in-100</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Slide In From Above
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         -motion-translate-y-in-100
                     </div>
                     <span class="hidden -motion-translate-y-in-100">-motion-translate-y-in-100</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Scale In
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-scale-in
                     </div>
                     <span class="hidden motion-scale-in">motion-scale-in</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Scale In
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-scale-in-[1.1]
                     </div>
                     <span class="hidden motion-scale-in-[1.1]">motion-scale-in-[1.1]</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Rotate In
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-rotate-in
                     </div>
                     <span class="hidden motion-rotate-in">motion-rotate-in</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Rotate In (180 degrees)
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-rotate-in-180
                     </div>
                     <span class="hidden motion-rotate-in-180">motion-rotate-in-180</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Rotate In (-90 degrees)
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         -motion-rotate-in-90
                     </div>
                     <span class="hidden -motion-rotate-in-90">-motion-rotate-in-90</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Blur In
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-blur-in-sm
                     </div>
                     <span class="hidden motion-blur-in-sm">motion-blur-in-sm</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Grayscale In
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-grayscale-in motion-duration-[5s]
                     </div>
                     <span class="hidden motion-grayscale-in motion-duration-[5s]">motion-grayscale-in motion-duration-[5s]</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Background Color Change
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-bg-in-sky-300 motion-duration-2000
                     </div>
                     <span class="hidden motion-bg-in-sky-300 motion-duration-2000">motion-bg-in-sky-300 motion-duration-2000</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Text Color Change
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-text-in-gray-100 motion-duration-[5s]
                     </div>
                     <span class="hidden motion-text-in-gray-100 motion-duration-[5s]">motion-text-in-blue-500 motion-duration-[5s]</span>
+                </button>
+                <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
+                    Slide Up but slow
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                        motion-preset-slide-right motion-duration-[5s]
+                    </div>
+                    <span class="hidden motion-preset-slide-right motion-duration-[5s]">motion-preset-slide-right motion-duration-[5s]</span>
                 </button>
             </div>
             
@@ -287,7 +400,7 @@
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Scale, Slide Up & Rotate
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90
                     </div>
                     <span class="hidden motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90">motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90</span>
@@ -295,28 +408,28 @@
                 
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Fade In & Slide Up
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-opacity-in-0 motion-translate-y-in-100
                     </div>
                     <span class="hidden motion-opacity-in-0 motion-translate-y-in-100">motion-opacity-in-0 motion-translate-y-in-100</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Zoom In & Rotate
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-scale-in-75 motion-rotate-in-180
                     </div>
                     <span class="hidden motion-scale-in-75 motion-rotate-in-180">motion-scale-in-75 motion-rotate-in-180</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Slide In & Blur
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-translate-x-in-100 motion-blur-in-sm
                     </div>
                     <span class="hidden motion-translate-x-in-100 motion-blur-in-sm">motion-translate-x-in-100 motion-blur-in-sm</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Pop & Color Change
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-preset-pop motion-bg-in-sky-300
                     </div>
                     <span class="hidden motion-preset-pop motion-bg-in-sky-300">motion-preset-pop motion-bg-in-sky-300</span>
@@ -329,35 +442,35 @@
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Exit Fade Out
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-opacity-out-0
                     </div>
                     <span class="hidden motion-opacity-out-0">motion-opacity-out-0</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Exit Slide Down
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-translate-y-out-100
                     </div>
                     <span class="hidden motion-translate-y-out-100">motion-translate-y-out-100</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Exit Scale Down
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-scale-out-75
                     </div>
                     <span class="hidden motion-scale-out-75">motion-scale-out-75</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Exit Rotate Out
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-rotate-out-180
                     </div>
                     <span class="hidden motion-rotate-out-180">motion-rotate-out-180</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Exit Blur Out
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-blur-out-lg
                     </div>
                     <span class="hidden motion-blur-out-lg">motion-blur-out-lg</span>
@@ -372,35 +485,35 @@
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Long Duration Rotate
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-duration-2000 motion-rotate-in-180
                     </div>
                     <span class="hidden motion-duration-2000 motion-rotate-in-180">motion-duration-2000 motion-rotate-in-180</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Delayed Fade In
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-delay-500 motion-opacity-in-0
                     </div>
                     <span class="hidden motion-delay-500 motion-opacity-in-0">motion-delay-500 motion-opacity-in-0</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Bouncy Scale
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-timing-spring-bouncy motion-scale-in-75
                     </div>
                     <span class="hidden motion-timing-spring-bouncy motion-scale-in-75">motion-timing-spring-bouncy motion-scale-in-75</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Combined Modifiers
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-duration-2000 motion-rotate-in-180 motion-opacity-in-0
                     </div>
                     <span class="hidden motion-duration-2000 motion-rotate-in-180 motion-opacity-in-0">motion-duration-2000 motion-rotate-in-180 motion-opacity-in-0</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Property-Specific Modifier
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0
                     </div>
                     <span class="hidden motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0">motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0</span>
@@ -415,42 +528,42 @@
             <div class="w-full bg-slate-300 p-1 rounded-lg grid gap-1">
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Spring Smooth
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-ease-spring-smooth motion-preset-slide-right
                     </div>
                     <span class="hidden motion-ease-spring-smooth motion-preset-slide-right">motion-ease-spring-smooth motion-preset-slide-right</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Spring Snappy
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-ease-spring-snappy motion-preset-slide-right
                     </div>
                     <span class="hidden motion-ease-spring-snappy motion-preset-slide-right">motion-ease-spring-snappy motion-preset-slide-right</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Spring Bouncy
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-ease-spring-bouncy motion-preset-slide-right
                     </div>
                     <span class="hidden motion-ease-spring-bouncy motion-preset-slide-right">motion-ease-spring-bouncy motion-preset-slide-right</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Spring Bounciest
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-ease-spring-bounciest motion-preset-slide-right
                     </div>
                     <span class="hidden motion-ease-spring-bounciest motion-preset-slide-right">motion-ease-spring-bounciest motion-preset-slide-right</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     Bounce
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-ease-bounce motion-preset-slide-right
                     </div>
                     <span class="hidden motion-ease-bounce motion-preset-slide-right">motion-ease-bounce motion-preset-slide-right</span>
                 </button>
                 <button class="demo-toggle group/button flex flex-col items-center justify-center w-full px-2 py-4 rounded-md transition-all text-slate-800 bg-white/70 hover:bg-white [&.active]:bg-white font-bold text-sm">
                     In Quart
-                    <div class="transition-all text-[10px] font-mono group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
+                    <div class="transition-all text-[10px] font-mono leading-none group-hover/button:bg-pink-300 group-[.active]/button:bg-pink-300 text-slate-400 group-hover/button:text-white group-[.active]/button:text-white rounded-sm px-2 py-0.5">
                         motion-ease-in-quart motion-preset-slide-right
                     </div>
                     <span class="hidden motion-ease-in-quart motion-preset-slide-right">motion-ease-in-quart motion-preset-slide-right</span>
@@ -507,8 +620,8 @@
             
         </div>
         
-        <div class="sm:w-2/3">
-            <div class="top-0 sticky px-0 py-24 w-full max-w-96 mx-auto">
+        <div class="sm:w-1/2">
+            <div class="top-0 sticky px-0 py-24 w-full max-w-96 mx-auto z-50">
                 <div id="demo" class="motion-preset-fade" style="padding: 20px; border-radius: 5px;">
                     <div class="text-xs font-bold font-mono text-center mb-3">Demo</div>
                     <div
