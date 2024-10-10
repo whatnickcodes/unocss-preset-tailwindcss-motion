@@ -747,6 +747,27 @@ video {
   animation: var(--motion-all-enter-animations);
 }
 
+.motion-preset-fade-lg {
+  --motion-origin-opacity: 0;
+  --motion-duration: 800ms;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-fade-md {
+  --motion-origin-opacity: 0;
+  --motion-duration: 500ms;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-fade-sm {
+  --motion-origin-opacity: 0;
+  --motion-duration: 300ms;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
 .motion-preset-focus {
   --motion-origin-blur: 5px;
   --motion-origin-opacity: 0;
@@ -756,6 +777,24 @@ video {
 }
 
 .motion-preset-slide-down {
+  --motion-origin-translate-y: -25%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-slide-down-left {
+  --motion-origin-translate-x: 25%;
+  --motion-origin-translate-y: -25%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-slide-down-right {
+  --motion-origin-translate-x: -25%;
   --motion-origin-translate-y: -25%;
   --motion-origin-opacity: 0;
   --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
@@ -779,8 +818,90 @@ video {
   animation: var(--motion-all-enter-animations);
 }
 
+.motion-preset-slide-right-lg {
+  --motion-origin-translate-x: -100%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-slide-right-md {
+  --motion-origin-translate-x: -25%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-slide-right-sm {
+  --motion-origin-translate-x: -5%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
 .motion-preset-slide-up {
   --motion-origin-translate-y: 25%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-slide-up-left {
+  --motion-origin-translate-x: 25%;
+  --motion-origin-translate-y: 25%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-slide-up-right {
+  --motion-origin-translate-x: -25%;
+  --motion-origin-translate-y: 25%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-rebound-down {
+  --motion-origin-translate-y: -25%;
+  --motion-translate-timing: var(--motion-spring-bouncier);
+  --motion-translate-perceptual-duration-multiplier: 2.035;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-rebound-left {
+  --motion-origin-translate-x: 25%;
+  --motion-translate-timing: var(--motion-spring-bouncier);
+  --motion-translate-perceptual-duration-multiplier: 2.035;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-rebound-right {
+  --motion-origin-translate-x: -25%;
+  --motion-translate-timing: var(--motion-spring-bouncier);
+  --motion-translate-perceptual-duration-multiplier: 2.035;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
+.motion-preset-rebound-up {
+  --motion-origin-translate-y: 25%;
+  --motion-translate-timing: var(--motion-spring-bouncier);
+  --motion-translate-perceptual-duration-multiplier: 2.035;
   --motion-origin-opacity: 0;
   --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
   --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
@@ -986,12 +1107,28 @@ video {
   visibility: visible;
 }
 
+.relative {
+  position: relative;
+}
+
 .sticky {
   position: sticky;
 }
 
 .top-0 {
   top: 0px;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.z-30 {
+  z-index: 30;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .mx-auto {
@@ -1033,6 +1170,10 @@ video {
   display: grid;
 }
 
+.\!hidden {
+  display: none !important;
+}
+
 .hidden {
   display: none;
 }
@@ -1063,6 +1204,10 @@ video {
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1254,6 +1399,10 @@ video {
 
 .font-bold {
   font-weight: 700;
+}
+
+.leading-none {
+  line-height: 1;
 }
 
 .text-slate-400 {
@@ -1642,7 +1791,7 @@ nav {
   border-top: 8px solid #0ea5e9;
 }
 
-.group\/box.active .group-\[\.active\]\/box\:motion-preset-pop {
+.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-pop {
   --motion-origin-scale-x: 50%;
   --motion-origin-scale-y: 50%;
   --motion-origin-opacity: 0;
@@ -1653,7 +1802,7 @@ nav {
   animation: var(--motion-all-enter-animations);
 }
 
-.group\/box.active .group-\[\.active\]\/box\:motion-preset-typewriter-\[49\] {
+.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-typewriter-\[49\] {
   --motion-duration: 2000ms;
   --motion-typewriter-value: 49ch;
   animation: typing var(--motion-duration) steps(49) infinite, blink 0.4s step-end infinite alternate;
@@ -1681,11 +1830,11 @@ nav {
   }
 }
 
-.group\/box.active .group-\[\.active\]\/box\:motion-preset-flomoji-\1F680 {
+.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-flomoji-\1F680 {
   position: relative;
 }
 
-.group\/box.active .group-\[\.active\]\/box\:motion-preset-flomoji-\1F680:before {
+.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-flomoji-\1F680:before {
   content: "🚀";
   animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
   top: 0px;
@@ -1756,11 +1905,11 @@ nav {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.group\/box.active .group-\[\.active\]\/box\:opacity-100 {
+.group\/box.in-view .group-\[\.in-view\]\/box\:opacity-100 {
   opacity: 1;
 }
 
-.group\/box.active .group-\[\.active\]\/box\:motion-duration-\[5s\] {
+.group\/box.in-view .group-\[\.in-view\]\/box\:motion-duration-\[5s\] {
   --motion-duration: 5s;
 }
 
@@ -1773,21 +1922,13 @@ nav {
     display: flex;
   }
 
-  .sm\:w-1\/3 {
-    width: 33.333333%;
-  }
-
-  .sm\:w-2\/3 {
-    width: 66.666667%;
+  .sm\:w-1\/2 {
+    width: 50%;
   }
 
   .sm\:flex-row {
     flex-direction: row;
   }
-}
-
-.\[\&\.active\]\:bg-pink-300\/50.active {
-  background-color: rgb(249 168 212 / 0.5);
 }
 
 .\[\&\.active\]\:bg-white.active {
@@ -1798,4 +1939,8 @@ nav {
 .\[\&\.active\]\:text-pink-300.active {
   --tw-text-opacity: 1;
   color: rgb(249 168 212 / var(--tw-text-opacity));
+}
+
+.\[\&\.in-view\]\:bg-pink-300\/50.in-view {
+  background-color: rgb(249 168 212 / 0.5);
 }
