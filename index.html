@@ -570,48 +570,67 @@
                 </button>
             </div>
             
+               
+            <hr class="my-10 border-white/10">
+            <div class="text-slate-600 text-xl font-bold mb-2">Custom "wait" class test - not in library originally</div>
+            
+            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.in-view]:bg-pink-300/50">
+                
+                
+                <div class="text-center text-sm mb-10">
+                    When this box is 90% visible, it adds an in-view class. When in view, the wait class is added to the box.
+                </div>
+                <div class="wait bg-white transition-all rounded-lg p-10 text-sm motion-preset-slide-up-left">
+                    wait motion-preset-slide-up-left
+                </div>
+                
+            </div>
             
             
             <hr class="my-10 border-white/10">
-            <div class="text-slate-600 text-xl font-bold mb-2">With Group Class Modifier</div>
+            <div class="text-slate-600 text-xl font-bold mb-2">With Group Class Modifier (preset)</div>
             
-            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.active]:bg-pink-300/50">
+            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.in-view]:bg-pink-300/50">
                 
                 
                 <div class="text-center text-sm mb-10">
-                    group/box -This box has custom code to turn pink and add an "active" class when the box is at least 90% visible.
+                    group/box -This box has custom code to turn pink and add an "in-view" class when the box is at least 90% visible.
                 </div>
-                <div class="bg-white transition-all rounded-lg p-10 text-sm opacity-0 group-[.active]/box:opacity-100 group-[.active]/box:motion-preset-pop">
+                <div class="bg-white transition-all rounded-lg p-10 text-sm opacity-0 group-[.in-view]/box:opacity-100 group-[.in-view]/box:motion-preset-pop">
                     opacity-0
                     <br>
-                    group-[.active]/box:opacity-100
+                    group-[.in-view]/box:opacity-100
                     <br>
-                    group-[.active]/box:motion-preset-pop
+                    group-[.in-view]/box:motion-preset-pop
+                </div>
+                
+            </div>
+
+        
+
+
+       
+           
+            
+            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.in-view]:bg-pink-300/50">
+                
+                <div class="text-center text-sm mb-10">
+                    group/box - This box has custom code to turn pink and add an "in-view" class when the box is at least 90% visible.
+                </div>
+                <div class="transition-all text-xs opacity-0 group-[.in-view]/box:opacity-100 group-[.in-view]/box:motion-preset-typewriter-[49] group-[.in-view]/box:motion-duration-[5s]">
+                    group-[.in-view]/box:motion-preset-typewriter-[49]
                 </div>
                 
             </div>
             
-            
-            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.active]:bg-pink-300/50">
+            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.in-view]:bg-pink-300/50">
                 
                 
                 <div class="text-center text-sm mb-10">
-                    group/box - This box has custom code to turn pink and add an "active" class when the box is at least 90% visible.
+                    group/box - This box has custom code to turn pink and add an "in-view" class when the box is at least 90% visible.
                 </div>
-                <div class="transition-all text-xs opacity-0 group-[.active]/box:opacity-100 group-[.active]/box:motion-preset-typewriter-[49] group-[.active]/box:motion-duration-[5s]">
-                    group-[.active]/box:motion-preset-typewriter-[49]
-                </div>
-                
-            </div>
-            
-            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.active]:bg-pink-300/50">
-                
-                
-                <div class="text-center text-sm mb-10">
-                    group/box - This box has custom code to turn pink and add an "active" class when the box is at least 90% visible.
-                </div>
-                <div class="bg-white transition-all rounded-lg p-10 text-sm opacity-0 group-[.active]/box:opacity-100 group-[.active]/box:motion-preset-flomoji-🚀">
-                    group-[.active]/box:motion-preset-flomoji-🚀
+                <div class="bg-white transition-all rounded-lg p-10 text-sm opacity-0 group-[.in-view]/box:opacity-100 group-[.in-view]/box:motion-preset-flomoji-🚀">
+                    group-[.in-view]/box:motion-preset-flomoji-🚀
                 </div>
                 
             </div>
@@ -620,7 +639,7 @@
             
         </div>
         
-        <div class="sm:w-1/2">
+        <div class="sm:w-1/2 relative z-10">
             <div class="top-0 sticky px-0 py-24 w-full max-w-96 mx-auto z-50">
                 <div id="demo" class="motion-preset-fade" style="padding: 20px; border-radius: 5px;">
                     <div class="text-xs font-bold font-mono text-center mb-3">Demo</div>
@@ -713,9 +732,9 @@
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
-                entry.target.classList.add('active')
+                entry.target.classList.add('in-view')
             } else {
-                entry.target.classList.remove('active')
+                entry.target.classList.remove('in-view')
             }
         })
     }, {

@@ -265,6 +265,32 @@ export const presetTailwindMotion = () => defineConfig({
             1500: "1500ms",
             2000: "2000ms",
         },
+        animationTimingFunction: {
+            ...theme.transitionTimingFunction,
+            
+            "spring-smooth": "var(--motion-spring-smooth)",
+            "spring-snappy": "var(--motion-spring-snappy)",
+            "spring-bouncy": "var(--motion-spring-bouncy)",
+            "spring-bouncier": "var(--motion-spring-bouncier)",
+            "spring-bounciest": "var(--motion-spring-bounciest)",
+
+            bounce: "var(--motion-bounce)",
+
+            "in-quad": "cubic-bezier(.55, .085, .68, .53)",
+            "in-cubic": "cubic-bezier(.550, .055, .675, .19)",
+            "in-quart": "cubic-bezier(.895, .03, .685, .22)",
+            "in-back": "cubic-bezier(0.6,-0.28,0.74,0.05)",
+
+            "out-quad": "cubic-bezier(.25, .46, .45, .94)",
+            "out-cubic": "cubic-bezier(.215, .61, .355, 1)",
+            "out-quart": "cubic-bezier(.165, .84, .44, 1)",
+            "out-back": "cubic-bezier(0.18,0.89,0.32,1.27)",
+
+            "in-out-quad": "cubic-bezier(.455, .03, .515, .955)",
+            "in-out-cubic": "cubic-bezier(.645, .045, .355, 1)",
+            "in-out-quart": "cubic-bezier(.77, 0, .175, 1)",
+            "in-out-back": "cubic-bezier(0.68,-0.55,0.27,1.55)",
+        },
     }),
     rules: [
 
@@ -1027,8 +1053,6 @@ export const presetTailwindMotion = () => defineConfig({
             return { "--motion-delay": delay };
         }],
 
-
-
         // MOTION EASE
         [/^motion-ease(-(.+?))?(\/(scale|translate|rotate|blur|grayscale|opacity|background|text))?$/, ([, , value = 'DEFAULT', , modifier], { theme }) => {
             const ease = value === 'DEFAULT' ? theme.animationTimingFunction.DEFAULT : 
@@ -1067,6 +1091,29 @@ export const presetTailwindMotion = () => defineConfig({
                 '--motion-timing': ease,
                 '--motion-perceptual-duration-multiplier': `${perceptualDurationMultiplier}`,
             };
+        }],
+
+
+
+        /*===================================
+        *                                 *
+        *          SMART EXTRAS           *
+        *                                 *
+        ===================================*/
+        // Pause rule
+        ['wait', {
+            'animation-play-state': 'paused',
+        }],
+        ['play', {
+            'animation-play-state': 'running',
+        }],
+        [/^in-view$/, (_, { rawSelector }) => {
+            const selector = e(rawSelector)
+            return `
+                ${selector} .wait {
+                    animation-play-state: running;
+                }
+            `
         }],
 
 
