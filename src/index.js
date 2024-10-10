@@ -1029,6 +1029,47 @@ export const presetTailwindMotion = () => defineConfig({
 
 
 
+        // MOTION EASE
+        [/^motion-ease(-(.+?))?(\/(scale|translate|rotate|blur|grayscale|opacity|background|text))?$/, ([, , value = 'DEFAULT', , modifier], { theme }) => {
+            const ease = value === 'DEFAULT' ? theme.animationTimingFunction.DEFAULT : 
+                        value.startsWith('[') ? value.slice(1, -1) : 
+                        theme.animationTimingFunction[value] || value;
+
+            const perceptualDurationMultiplier = springPerceptualMultipliers[ease] || 1;
+            const isSpringWithBounce = ['var(--motion-spring-bouncy)', 'var(--motion-spring-bouncier)', 'var(--motion-spring-bounciest)', 'var(--motion-bounce)'].includes(ease);
+
+            if (modifier) {
+                const prop = modifier === 'blur' || modifier === 'grayscale' ? 'filter' : 
+                            modifier === 'background' ? 'background-color' : 
+                            modifier;
+                return {
+                    [`--motion-${prop}-timing`]: ease,
+                    [`--motion-${prop}-perceptual-duration-multiplier`]: `${perceptualDurationMultiplier}`,
+                };
+            }
+
+            if (isSpringWithBounce) {
+                return {
+                    '--motion-timing': ease,
+                    '--motion-perceptual-duration-multiplier': `${perceptualDurationMultiplier}`,
+                    '--motion-filter-timing': 'var(--motion-spring-smooth)',
+                    '--motion-opacity-timing': 'var(--motion-spring-smooth)',
+                    '--motion-background-color-timing': 'var(--motion-spring-smooth)',
+                    '--motion-text-color-timing': 'var(--motion-spring-smooth)',
+                    '--motion-filter-perceptual-duration-multiplier': '1.66',
+                    '--motion-opacity-perceptual-duration-multiplier': '1.66',
+                    '--motion-background-color-perceptual-duration-multiplier': '1.66',
+                    '--motion-text-color-perceptual-duration-multiplier': '1.66',
+                };
+            }
+
+            return {
+                '--motion-timing': ease,
+                '--motion-perceptual-duration-multiplier': `${perceptualDurationMultiplier}`,
+            };
+        }],
+
+
 
     ],
     preflights: [
