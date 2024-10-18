@@ -1,6 +1,6 @@
 # 😍 unocss-preset-tailwindcss-motion 😍 
 
-![Motion Animation Preview](cover.png)
+![Motion Animation Preview](https://github.com/whatnickcodes/unocss-preset-tailwindcss-motion/blob/HEAD/cover.png?raw=true)
 
 Port of the most beautiful animation Tailwind library [tailwindcss-motion](https://github.com/romboHQ/tailwindcss-motion) by @romboHQ.
 
