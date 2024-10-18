@@ -22,7 +22,7 @@ export default defineConfig({
 
 ## Demo
 
-Coming soon.
+Coming soon. A big fancy demo and doc page will be coming soon. For now, please just reference the README and the index.html file.
 
 
 ## Why?
@@ -197,11 +197,11 @@ If you prefer the other way, please create an issue and I can explain how to reb
 
 ### ::backdrop
 
-I can't remember exactly where, possibly the Tailwind build process, but don't manually add `::backdrop` to the CSS variables and just have it live at `::root`. This is to save on size as it's rarely ever needed or used. I believe this plugin does.
+I can't remember exactly where, possibly the Tailwind build process, but I don't manually add `::backdrop` to the CSS variables and just have it live at `::root` instead only. This is to save on size as it's rarely ever needed or used. I believe the Tailwind plugin will use ::backdrop though.
 
 ### Extra Classes
 
-There's not a super solid way to on/off animations currently without completely adding/removing possibly multiple classes. For certain Tailwind environments, this is probably not an issue. For my purposes, I needed a simpler way to do "activate" the animation, like to easily trigger when it is scrollable viewport.
+There's not a super solid way to on/off animations currently without completely adding/removing possibly multiple classes. For certain Tailwind environments, this is probably not an issue. For my purposes, I needed a simpler way to do "activate" the animation, like to easily trigger when it is scrollable viewport. It makes sense part of the library.
 
 This may change in future versions:
 
@@ -228,6 +228,6 @@ This may change in future versions:
 - For more, reference `package.json`. This may get more sophisticated later but does have a 1 vs the other mode.
 
 
-## Licensse
+## License
 
 In honor of original library this is MIT.
