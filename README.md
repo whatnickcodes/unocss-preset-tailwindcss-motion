@@ -9,7 +9,7 @@ Port of the most beautiful animation Tailwind library [tailwindcss-motion](https
 This is for UnoCSS folks but should be really easy if you are familiar. Simply add the preset to your UnoCSS config.
 
 ```bash
-npm install -D unocss-preset-tailwindcss-motion
+npm i -D unocss-preset-tailwindcss-motion
 ```
 
 ```js
