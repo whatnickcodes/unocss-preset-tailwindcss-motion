@@ -6,7 +6,7 @@
  * @description This is a UnoCSS adaptation of the tailwindcss-motion plugin,
  * providing smooth animations and transitions for UnoCSS projects.
  */
-import { defineConfig, toEscapedSelector as e } from 'unocss'
+import { toEscapedSelector as e } from '@unocss/core'
 
 
 // Their stategy they pull off utility classes + animations...
@@ -166,7 +166,7 @@ const springPerceptualMultipliers = {
 
 
 
-export const presetTailwindMotion = () => defineConfig({
+export const presetTailwindMotion = () => ({
     name: 'tailwind-motion',
     presets: [],
     theme: {
