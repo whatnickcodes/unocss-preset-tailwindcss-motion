@@ -29,6 +29,7 @@ export default defineConfig({
 Coming soon. A big fancy demo and doc page will be coming soon. For now, please just reference the README and the index.html file.
 
 
+
 ## Why?
 
 I needed a solid animation library for my side project that is heavily UnoCSS dependent. UnoCSS is truly a work of art and so is this library. Now you can have both. More on side project soon.
@@ -236,4 +237,8 @@ This may change in future versions:
 
 In honor of original library this is MIT.
 
+## More
+
 Via x.com/@whatnicktweets
+
+https://www.npmjs.com/package/unocss-preset-tailwindcss-motion
