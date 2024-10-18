@@ -1,8 +1,22 @@
 {
     "name": "unocss-preset-tailwindcss-motion",
-    "version": "0.0.1",
+    "version": "0.3.0-beta",
     "description": "Unofficial UnoCSS preset for the TailwindCSS Motion plugin by @romboHQ",
     "type": "module",
+    "main": "src/index.js",
+    "bugs": {
+        "url": "https://github.com/whatnickcodes/unocss-preset-tailwindcss-motion/issues"
+    },
+    "homepage": "https://github.com/whatnickcodes/unocss-preset-tailwindcss-motion#readme",
+    "author": "Nicholas Cerminara",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/whatnickcodes/unocss-preset-tailwindcss-motion.git"
+    },
+    "files": [
+        "src"
+    ],
     "scripts": {
         "dev": "npx vite dev",
         "open-test": "open index.html",
@@ -12,8 +26,6 @@
         "build:unocss": "unocss ./index.html -o ./compare-test/output-uno.css",
         "build:unocss:watch": "unocss ./index.html -o ./compare-test/output-uno.css --watch"
     },
-    "author": "Nicholas Cerminara",
-    "license": "MIT",
     "devDependencies": {
         "@unocss/preset-uno": "^0.63.4",
         "@unocss/reset": "^0.63.4",
