@@ -648,7 +648,7 @@ export const presetTailwindMotion = () => defineConfig({
                     animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
                 }
             `;
-        }, { autocomplete: 'motion-preset-flomoji-<emoji>' }],
+        }, { autocomplete: ['motion-preset-flomoji-👉', 'motion-preset-flomoji-🚀', 'motion-preset-flomoji-👀', 'motion-preset-flomoji-👍'] }],
 
         /*=================================
         *                                 *
