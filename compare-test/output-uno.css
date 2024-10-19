@@ -496,6 +496,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
                 }
             
 /* layer: default */
+.visible{visibility:visible;}
 .relative{position:relative;}
 .sticky{position:sticky;}
 .top-0{top:0;}
@@ -503,6 +504,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .z-30{z-index:30;}
 .z-50{z-index:50;}
 .grid{display:grid;}
+.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr));}
 .grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr));}
 .grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr));}
 .mx-auto{margin-left:auto;margin-right:auto;}
@@ -514,7 +516,6 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .mt-2{margin-top:0.5rem;}
 .\!hidden{display:none !important;}
 .hidden{display:none;}
-.h-\[50vh\]{height:50vh;}
 .h-32{height:8rem;}
 .max-w-96{max-width:24rem;}
 .w-auto{width:auto;}
@@ -527,6 +528,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .justify-center{justify-content:center;}
 .justify-between{justify-content:space-between;}
 .gap-1{gap:0.25rem;}
+.gap-4{gap:1rem;}
 .border{border-width:1px;}
 .border-pink-300{--un-border-opacity:1;border-color:rgb(249 168 212 / var(--un-border-opacity));}
 .border-slate-300{--un-border-opacity:1;border-color:rgb(203 213 225 / var(--un-border-opacity));}
@@ -540,7 +542,6 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .group\/button:hover .group-hover\/button\:bg-pink-300{--un-bg-opacity:1;background-color:rgb(249 168 212 / var(--un-bg-opacity)) /* #f9a8d4 */;}
 .\[\&\.active\]\:bg-white.active,
 .bg-white{--un-bg-opacity:1;background-color:rgb(255 255 255 / var(--un-bg-opacity)) /* #fff */;}
-.\[\&\.in-view\]\:bg-pink-300\/50.in-view,
 .bg-pink-300\/50{background-color:rgb(249 168 212 / 0.5) /* #f9a8d4 */;}
 .bg-slate-300{--un-bg-opacity:1;background-color:rgb(203 213 225 / var(--un-bg-opacity)) /* #cbd5e1 */;}
 .bg-white\/50{background-color:rgb(255 255 255 / 0.5) /* #fff */;}
@@ -549,11 +550,11 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .from-slate-50{--un-gradient-from-position:0%;--un-gradient-from:rgb(248 250 252 / var(--un-from-opacity, 1)) var(--un-gradient-from-position);--un-gradient-to-position:100%;--un-gradient-to:rgb(248 250 252 / 0) var(--un-gradient-to-position);--un-gradient-stops:var(--un-gradient-from), var(--un-gradient-to);}
 .to-slate-200{--un-gradient-to-position:100%;--un-gradient-to:rgb(226 232 240 / var(--un-to-opacity, 1)) var(--un-gradient-to-position);}
 .bg-gradient-to-br{--un-gradient-shape:to bottom right;--un-gradient:var(--un-gradient-shape), var(--un-gradient-stops);background-image:linear-gradient(var(--un-gradient));}
-.p-\[10\%\]{padding:10%;}
 .p-\[3\%\]{padding:3%;}
 .p-1{padding:0.25rem;}
-.p-10{padding:2.5rem;}
 .p-2{padding:0.5rem;}
+.p-6{padding:1.5rem;}
+.p-8{padding:2rem;}
 .px-0{padding-left:0;padding-right:0;}
 .px-2{padding-left:0.5rem;padding-right:0.5rem;}
 .px-5{padding-left:1.25rem;padding-right:1.25rem;}
@@ -562,6 +563,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .py-2{padding-top:0.5rem;padding-bottom:0.5rem;}
 .py-24{padding-top:6rem;padding-bottom:6rem;}
 .py-4{padding-top:1rem;padding-bottom:1rem;}
+.pb-\[50vh\]{padding-bottom:50vh;}
 .text-center{text-align:center;}
 .text-\[10px\]{font-size:10px;}
 .text-sm{font-size:0.875rem;line-height:1.25rem;}
@@ -578,8 +580,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .leading-none{line-height:1;}
 .font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;}
 .antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-.group\/box.in-view .group-\[\.in-view\]\/box\:opacity-100{opacity:1;}
-.opacity-0{opacity:0;}
+.shadow-md{--un-shadow:var(--un-shadow-inset) 0 4px 6px -1px var(--un-shadow-color, rgb(0 0 0 / 0.1)),var(--un-shadow-inset) 0 2px 4px -2px var(--un-shadow-color, rgb(0 0 0 / 0.1));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .shadow-sm{--un-shadow:var(--un-shadow-inset) 0 1px 2px 0 var(--un-shadow-color, rgb(0 0 0 / 0.05));box-shadow:var(--un-ring-offset-shadow), var(--un-ring-shadow), var(--un-shadow);}
 .outline-4{outline-width:4px;}
 .outline-pink-300{--un-outline-color-opacity:1;outline-color:rgb(249 168 212 / var(--un-outline-color-opacity)) /* #f9a8d4 */;}
@@ -605,6 +606,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-preset-blur-down{--motion-origin-blur:5px;--motion-origin-translate-y:-5%;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;--motion-translate-in-animation:motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-blur-left{--motion-origin-blur:5px;--motion-origin-translate-x:5%;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;--motion-translate-in-animation:motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-blur-right{--motion-origin-blur:5px;--motion-origin-translate-x:-5%;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;--motion-translate-in-animation:motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;animation:var(--motion-all-enter-animations);}
+.motion-preset-blur-right-lg{--motion-origin-blur:10px;--motion-origin-translate-x:-25%;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;--motion-translate-in-animation:motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-blur-up{--motion-origin-blur:5px;--motion-origin-translate-y:5%;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;--motion-translate-in-animation:motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-rebound-down{--motion-origin-translate-y:-25%;--motion-translate-timing:var(--motion-spring-bouncier);--motion-translate-perceptual-duration-multiplier:2.035;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-translate-in-animation:motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-rebound-left{--motion-origin-translate-x:25%;--motion-translate-timing:var(--motion-spring-bouncier);--motion-translate-perceptual-duration-multiplier:2.035;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-translate-in-animation:motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;animation:var(--motion-all-enter-animations);}
@@ -613,7 +615,6 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-preset-bounce{--motion-duration:300ms;--motion-translate-timing:var(--motion-bounce);--motion-translate-perceptual-duration-multiplier:2;--motion-origin-opacity:0;--motion-origin-translate-y:-25%;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-translate-in-animation:motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-expand{--motion-origin-scale-x:50%;--motion-origin-scale-y:50%;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-scale-in-animation:motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-shrink{--motion-origin-scale-x:150%;--motion-origin-scale-y:150%;--motion-origin-opacity:0;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-scale-in-animation:motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;animation:var(--motion-all-enter-animations);}
-.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-pop,
 .motion-preset-pop{--motion-origin-scale-x:50%;--motion-origin-scale-y:50%;--motion-origin-opacity:0;--motion-scale-timing:var(--motion-spring-bouncier);--motion-scale-perceptual-duration-multiplier:2.035;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-scale-in-animation:motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-compress{--motion-origin-scale-x:150%;--motion-origin-scale-y:150%;--motion-origin-opacity:0;--motion-scale-timing:var(--motion-spring-bouncier);--motion-scale-perceptual-duration-multiplier:2.035;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-scale-in-animation:motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-preset-shake{--motion-duration:300ms;--motion-origin-rotate:15deg;--motion-origin-opacity:0;--motion-rotate-timing:var(--motion-spring-bounciest);--motion-rotate-perceptual-duration-multiplier:5.285;--motion-opacity-in-animation:motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;--motion-rotate-in-animation:motion-rotate-in calc(var(--motion-rotate-duration) * var(--motion-rotate-perceptual-duration-multiplier)) var(--motion-rotate-timing) var(--motion-rotate-delay) both;animation:var(--motion-all-enter-animations);}
@@ -703,7 +704,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
                 @keyframes blink {
                     50% { border-color: transparent; }
                 }
-                .group-\[\.in-view\]\/box\:motion-preset-typewriter-\[49\] {
+                .motion-preset-typewriter-\[49\] {
                     --motion-duration: 2000ms;
                     --motion-typewriter-value: 49ch;
                     animation: typing var(--motion-duration) steps(49) infinite, blink 0.4s step-end infinite alternate;
@@ -712,7 +713,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
                     font-family: monospace;
                     overflow: hidden;
                 }
-                .group-\[\.in-view\]\/box\:motion-preset-typewriter-\[49\] {
+                .motion-preset-typewriter-\[49\] {
                     animation: typing var(--motion-duration) steps(49) infinite, blink 0.4s step-end infinite alternate;
                 }
 
@@ -726,10 +727,10 @@ Make elements with the HTML hidden attribute stay hidden by default.
                     60% { transform: rotate(40deg); }
                     100% { transform: translateY(-200%) rotate(25deg); }
                 }
-                .group-\[\.in-view\]\/box\:motion-preset-flomoji-🚀 {
+                .motion-preset-flomoji-🚀 {
                     position: relative;
                 }
-                .group-\[\.in-view\]\/box\:motion-preset-flomoji-🚀:before {
+                .motion-preset-flomoji-🚀:before {
                     content: "🚀";
                     animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
                     top: 0px;
@@ -746,7 +747,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
                     padding: 2px;
                     padding-bottom: 6px;
                 }
-                .group-\[\.in-view\]\/box\:motion-preset-flomoji-🚀:before {
+                .motion-preset-flomoji-🚀:before {
                     animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
                 }
             
@@ -898,7 +899,6 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-bg-in-sky-300{--motion-origin-background-color:#7dd3fc;--motion-background-color-in-animation:motion-background-color-in calc(var(--motion-background-color-duration) * var(--motion-background-color-perceptual-duration-multiplier)) var(--motion-background-color-timing) var(--motion-background-color-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-bg-in-sky-300\<\/span\>{--motion-origin-background-color:sky-300</span>;--motion-background-color-in-animation:motion-background-color-in calc(var(--motion-background-color-duration) * var(--motion-background-color-perceptual-duration-multiplier)) var(--motion-background-color-timing) var(--motion-background-color-delay) both;animation:var(--motion-all-enter-animations);}
 .motion-text-in-gray-100{--motion-origin-text-color:#f3f4f6;--motion-text-color-in-animation:motion-text-color-in calc(var(--motion-text-color-duration) * var(--motion-text-color-perceptual-duration-multiplier)) var(--motion-text-color-timing) var(--motion-text-color-delay) both;animation:var(--motion-all-enter-animations);}
-.group\/box.in-view .group-\[\.in-view\]\/box\:motion-duration-\[5s\],
 .motion-duration-\[5s\]{--motion-duration:5s;}
 .motion-duration-\[5s\]\<\/span\>{--motion-duration:5s]</span;}
 .motion-duration-2000{--motion-duration:2000ms;}
@@ -912,13 +912,14 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-ease-spring-bouncy{--motion-timing:var(--motion-spring-bouncy);--motion-perceptual-duration-multiplier:1.66;--motion-filter-timing:var(--motion-spring-smooth);--motion-opacity-timing:var(--motion-spring-smooth);--motion-background-color-timing:var(--motion-spring-smooth);--motion-text-color-timing:var(--motion-spring-smooth);--motion-filter-perceptual-duration-multiplier:1.66;--motion-opacity-perceptual-duration-multiplier:1.66;--motion-background-color-perceptual-duration-multiplier:1.66;--motion-text-color-perceptual-duration-multiplier:1.66;}
 .motion-ease-spring-smooth{--motion-timing:var(--motion-spring-smooth);--motion-perceptual-duration-multiplier:1.66;}
 .motion-ease-spring-snappy{--motion-timing:var(--motion-spring-snappy);--motion-perceptual-duration-multiplier:1.66;}
-.wait{animation-play-state:paused;}
 
-                .in-view .wait {
-                    animation-play-state: running;
+                .wait, .wait [class^="motion"] {
+                    animation-play-state: paused;
                 }
             
 @media (min-width: 640px){
+.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr));}
 .sm\:mb-0{margin-bottom:0;}
 .sm\:w-1\/2{width:50%;}
 .sm\:flex{display:flex;}

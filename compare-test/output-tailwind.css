@@ -730,6 +730,16 @@ video {
   animation: var(--motion-all-enter-animations);
 }
 
+.motion-preset-blur-right-lg {
+  --motion-origin-blur: 10px;
+  --motion-origin-translate-x: -25%;
+  --motion-origin-opacity: 0;
+  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
+  --motion-filter-in-animation: motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;
+  --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
+  animation: var(--motion-all-enter-animations);
+}
+
 .motion-preset-blur-up {
   --motion-origin-blur: 5px;
   --motion-origin-translate-y: 5%;
@@ -1103,6 +1113,84 @@ video {
   }
 }
 
+.motion-preset-typewriter-\[49\] {
+  --motion-duration: 2000ms;
+  --motion-typewriter-value: 49ch;
+  animation: typing var(--motion-duration) steps(49) infinite, blink 0.4s step-end infinite alternate;
+  white-space: nowrap;
+  border-right: 2px solid;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  @keyframes typing {
+    0%, 10%, 90%, 100% {
+      width: 0;
+    }
+
+    40%, 60% {
+      width: calc(var(--motion-typewriter-value) + 1px);
+    }
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.motion-preset-flomoji-\1F680 {
+  position: relative;
+}
+
+.motion-preset-flomoji-\1F680:before {
+  content: "🚀";
+  animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  position: absolute;
+  z-index: 1000;
+  background: rgba(255,255,255,0.3);
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  padding: 2px;
+  padding-bottom: 6px;
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  @keyframes emojiAnim {
+    0% {
+      transform: translateY(-200%) rotate(60deg);
+    }
+
+    30% {
+      transform: rotate(50deg);
+    }
+
+    40% {
+      transform: rotate(55deg);
+    }
+
+    50% {
+      transform: rotate(45deg);
+    }
+
+    60% {
+      transform: rotate(40deg);
+    }
+
+    100% {
+      transform: translateY(-200%) rotate(25deg);
+    }
+  }
+}
+
 .visible {
   visibility: visible;
 }
@@ -1182,10 +1270,6 @@ video {
   height: 8rem;
 }
 
-.h-\[50vh\] {
-  height: 50vh;
-}
-
 .w-auto {
   width: auto;
 }
@@ -1200,6 +1284,10 @@ video {
 
 .max-w-screen-xl {
   max-width: 1280px;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .grid-cols-2 {
@@ -1232,6 +1320,10 @@ video {
 
 .gap-1 {
   gap: 0.25rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .rounded-lg {
@@ -1314,16 +1406,16 @@ video {
   padding: 0.25rem;
 }
 
-.p-10 {
-  padding: 2.5rem;
-}
-
 .p-2 {
   padding: 0.5rem;
 }
 
-.p-\[10\%\] {
-  padding: 10%;
+.p-6 {
+  padding: 1.5rem;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .p-\[3\%\] {
@@ -1368,6 +1460,10 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.pb-\[50vh\] {
+  padding-bottom: 50vh;
 }
 
 .text-center {
@@ -1430,8 +1526,10 @@ video {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.opacity-0 {
-  opacity: 0;
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .shadow-sm {
@@ -1791,95 +1889,6 @@ nav {
   border-top: 8px solid #0ea5e9;
 }
 
-.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-pop {
-  --motion-origin-scale-x: 50%;
-  --motion-origin-scale-y: 50%;
-  --motion-origin-opacity: 0;
-  --motion-scale-timing: var(--motion-spring-bouncier);
-  --motion-scale-perceptual-duration-multiplier: 2.035;
-  --motion-opacity-in-animation: motion-opacity-in calc(var(--motion-opacity-duration) * var(--motion-opacity-perceptual-duration-multiplier)) var(--motion-opacity-timing) var(--motion-opacity-delay) both;
-  --motion-scale-in-animation: motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
-  animation: var(--motion-all-enter-animations);
-}
-
-.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-typewriter-\[49\] {
-  --motion-duration: 2000ms;
-  --motion-typewriter-value: 49ch;
-  animation: typing var(--motion-duration) steps(49) infinite, blink 0.4s step-end infinite alternate;
-  white-space: nowrap;
-  border-right: 2px solid;
-  font-family: monospace;
-  overflow: hidden;
-}
-
-@media screen and (prefers-reduced-motion: no-preference) {
-  @keyframes typing {
-    0%, 10%, 90%, 100% {
-      width: 0;
-    }
-
-    40%, 60% {
-      width: calc(var(--motion-typewriter-value) + 1px);
-    }
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-
-.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-flomoji-\1F680 {
-  position: relative;
-}
-
-.group\/box.in-view .group-\[\.in-view\]\/box\:motion-preset-flomoji-\1F680:before {
-  content: "🚀";
-  animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
-  top: 0px;
-  left: 0px;
-  display: flex;
-  position: absolute;
-  z-index: 1000;
-  background: rgba(255,255,255,0.3);
-  width: 2rem;
-  height: 2rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  padding: 2px;
-  padding-bottom: 6px;
-}
-
-@media screen and (prefers-reduced-motion: no-preference) {
-  @keyframes emojiAnim {
-    0% {
-      transform: translateY(-200%) rotate(60deg);
-    }
-
-    30% {
-      transform: rotate(50deg);
-    }
-
-    40% {
-      transform: rotate(55deg);
-    }
-
-    50% {
-      transform: rotate(45deg);
-    }
-
-    60% {
-      transform: rotate(40deg);
-    }
-
-    100% {
-      transform: translateY(-200%) rotate(25deg);
-    }
-  }
-}
-
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1905,14 +1914,6 @@ nav {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.group\/box.in-view .group-\[\.in-view\]\/box\:opacity-100 {
-  opacity: 1;
-}
-
-.group\/box.in-view .group-\[\.in-view\]\/box\:motion-duration-\[5s\] {
-  --motion-duration: 5s;
-}
-
 @media (min-width: 640px) {
   .sm\:mb-0 {
     margin-bottom: 0px;
@@ -1924,6 +1925,14 @@ nav {
 
   .sm\:w-1\/2 {
     width: 50%;
+  }
+
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .sm\:flex-row {
@@ -1939,8 +1948,4 @@ nav {
 .\[\&\.active\]\:text-pink-300.active {
   --tw-text-opacity: 1;
   color: rgb(249 168 212 / var(--tw-text-opacity));
-}
-
-.\[\&\.in-view\]\:bg-pink-300\/50.in-view {
-  background-color: rgb(249 168 212 / 0.5);
 }
