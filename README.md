@@ -114,9 +114,9 @@ Reference their docs, but here's the fast gist:
 - `motion-ease(-<easing>)?/(scale|translate|rotate|blur|grayscale|opacity|background|text)`
 
 ### Smart Extras
-- `wait`
+- `pause`
 - `play`
-- `in-view`
+- `wait`
 
 ### Example Combos
 
@@ -211,18 +211,12 @@ There's not a super solid way to on/off animations currently without completely 
 This may change in future versions:
 
 ```css
-.wait { 
-    animation-play-state: paused;
-}
+.pause { animation-play-state: paused; }
+.play { animation-play-state: running; }
 
-.play {
-    animation-play-state: running;
-}
-
-/* You'll need to manually add in-view classes, UnoCSS does not do that... */
-.in-view .wait {
-    animation-play-state: running;
-}
+/* You'll need to manually remove "wait" with JS to use this helper when you want the animation to start */
+/* This is excellent for when triggering when in viewport */
+.wait, .wait [class^="motion"] { animation-play-state: paused; }
 ```
 
 ## Testing

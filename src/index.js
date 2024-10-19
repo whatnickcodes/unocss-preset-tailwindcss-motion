@@ -1097,20 +1097,20 @@ export const presetTailwindMotion = () => ({
         *                                 *
         ===================================*/
         // Pause rule
-        ['wait', {
+        ['pause', {
             'animation-play-state': 'paused',
-        }, { autocomplete: 'wait' }],
+        }, { autocomplete: 'pause' }],
         ['play', {
             'animation-play-state': 'running',
         }, { autocomplete: 'play' }],
-        [/^in-view$/, (_, { rawSelector }) => {
+        [/^wait$/, (_, { rawSelector }) => {
             const selector = e(rawSelector)
             return `
-                ${selector} .wait {
-                    animation-play-state: running;
+                .wait, .wait [class^="motion"] {
+                    animation-play-state: paused;
                 }
             `
-        }, { autocomplete: 'in-view' }],
+        }, { autocomplete: 'wait' }],
 
 
 

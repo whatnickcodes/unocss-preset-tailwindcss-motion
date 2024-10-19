@@ -572,70 +572,112 @@
             
                
             <hr class="my-10 border-white/10">
-            <div class="text-slate-600 text-xl font-bold mb-2">Custom "wait" class test - not in library originally</div>
-            
-            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.in-view]:bg-pink-300/50">
-                
-                
+            <div class="text-slate-600 text-xl font-bold mb-2">Custom "wait" class demonstration</div>
+
+            <div class="my-8 bg-slate-300 p-8">
                 <div class="text-center text-sm mb-10">
-                    When this box is 90% visible, it adds an in-view class. When in view, the wait class is added to the box.
-                </div>
-                <div class="wait bg-white transition-all rounded-lg p-10 text-sm motion-preset-slide-up-left">
-                    wait motion-preset-slide-up-left
+                    Scroll down to see elements fade in at different visibility thresholds.
                 </div>
                 
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <!-- Default wait (10% visibility) -->
+                    <div class="bg-white rounded-lg p-6 shadow-md">
+                        <div class="wait motion-preset-fade text-center">
+                            <div class="font-bold mb-2">Default</div>
+                            <p class="text-sm pb-[50vh]">This element uses the default 10% visibility threshold.</p>
+                        </div>
+                    </div>
+
+                    <!-- 25% visibility -->
+                    <div class="bg-white rounded-lg p-6 shadow-md">
+                        <div class="wait motion-preset-fade text-center" data-unwait="0.25">
+                            <div class="font-bold mb-2">25% Visible</div>
+                            <p class="text-sm pb-[50vh]">This element fades in at 25% visibility.</p>
+                        </div>
+                    </div>
+
+                    <!-- 50% visibility -->
+                    <div class="bg-white rounded-lg p-6 shadow-md">
+                        <div class="wait motion-preset-fade text-center" data-unwait="0.5">
+                            <div class="font-bold mb-2">50% Visible</div>
+                            <p class="text-sm pb-[50vh]">This element fades in at 50% visibility.</p>
+                        </div>
+                    </div>
+
+                    <!-- 75% visibility -->
+                    <div class="bg-white rounded-lg p-6 shadow-md">
+                        <div class="wait motion-preset-fade text-center" data-unwait="0.75">
+                            <div class="font-bold mb-2">75% Visible</div>
+                            <p class="text-sm pb-[50vh]">This element fades in at 75% visibility.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            
+
             <hr class="my-10 border-white/10">
-            <div class="text-slate-600 text-xl font-bold mb-2">With Group Class Modifier (preset)</div>
-            
-            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.in-view]:bg-pink-300/50">
-                
-                
+            <div class="text-slate-600 text-xl font-bold mb-2">Additional "wait" class examples</div>
+
+            <!-- Nested wait animation -->
+            <div class="wait my-8 flex flex-col items-center justify-center p-8 bg-slate-300">
                 <div class="text-center text-sm mb-10">
-                    group/box -This box has custom code to turn pink and add an "in-view" class when the box is at least 90% visible.
+                    Wait is on the parent, but the inners will be all animated at once since wait does .wait also target ".wait [class^="motion"]"
                 </div>
-                <div class="bg-white transition-all rounded-lg p-10 text-sm opacity-0 group-[.in-view]/box:opacity-100 group-[.in-view]/box:motion-preset-pop">
-                    opacity-0
-                    <br>
-                    group-[.in-view]/box:opacity-100
-                    <br>
-                    group-[.in-view]/box:motion-preset-pop
+                <div class="flex">
+                    <div class="motion-preset-pop bg-white transition-all rounded-lg p-6 shadow-md font-bold">
+                        <div class="font-bold">motion-preset-pop</div>
+                    </div>
+                    <div class="motion-preset-wiggle bg-white transition-all rounded-lg p-6 shadow-md font-bold">
+                        <div class="font-bold">motion-preset-wiggle</div>
+                    </div>
+                    <div class="motion-preset-shrink bg-white transition-all rounded-lg p-6 shadow-md font-bold">
+                        <div class="font-bold">motion-preset-shrink</div>
+                    </div>
                 </div>
                 
             </div>
 
-        
-
-
-       
-           
-            
-            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.in-view]:bg-pink-300/50">
-                
+            <!-- Wait with different motion presets -->
+            <div class="my-8 bg-slate-300 p-8">
                 <div class="text-center text-sm mb-10">
-                    group/box - This box has custom code to turn pink and add an "in-view" class when the box is at least 90% visible.
+                    More examples of wait with different motion presets
                 </div>
-                <div class="transition-all text-xs opacity-0 group-[.in-view]/box:opacity-100 group-[.in-view]/box:motion-preset-typewriter-[49] group-[.in-view]/box:motion-duration-[5s]">
-                    group-[.in-view]/box:motion-preset-typewriter-[49]
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="wait bg-white transition-all rounded-lg p-6 shadow-md text-center motion-preset-slide-up" data-unwait="0.4">
+                        <div class="font-bold mb-2">Slide Up</div>
+                        <p class="text-sm">wait + motion-preset-slide-up (Unwait at 40%)</p>
+                    </div>
+                    <div class="wait bg-white transition-all rounded-lg p-6 shadow-md text-center motion-preset-pop" data-unwait="0.5">
+                        <div class="font-bold mb-2">Pop</div>
+                        <p class="text-sm">wait + motion-preset-pop (Unwait at 50%)</p>
+                    </div>
+                    <div class="wait bg-white transition-all rounded-lg p-6 shadow-md text-center motion-preset-blur-right-lg" data-unwait="0.6">
+                        <div class="font-bold mb-2">Blur Right</div>
+                        <p class="text-sm">wait + motion-preset-blur-right-lg (Unwait at 60%)</p>
+                    </div>
                 </div>
-                
             </div>
-            
-            <div class="active-when-visible my-8 flex flex-col items-center justify-center h-[50vh] group/box p-[10%] bg-slate-300 [&.in-view]:bg-pink-300/50">
-                
-                
+
+            <!-- Typewriter effect with wait -->
+            <div class="my-8 flex flex-col items-center justify-center p-8 bg-slate-300">
                 <div class="text-center text-sm mb-10">
-                    group/box - This box has custom code to turn pink and add an "in-view" class when the box is at least 90% visible.
+                    Typewriter effect with wait
                 </div>
-                <div class="bg-white transition-all rounded-lg p-10 text-sm opacity-0 group-[.in-view]/box:opacity-100 group-[.in-view]/box:motion-preset-flomoji-🚀">
-                    group-[.in-view]/box:motion-preset-flomoji-🚀
+                <div class="wait bg-white transition-all rounded-lg p-6 shadow-md text-center motion-preset-typewriter-[49] motion-duration-[5s]" data-unwait="0.4">
+                    <div class="font-bold mb-2">Typewriter</div>
+                    <p class="text-sm">wait + motion-preset-typewriter-[49] (Unwait at 40%)</p>
                 </div>
-                
             </div>
-            
-            
+
+            <!-- Flomoji effect with wait -->
+            <div class="my-8 flex flex-col items-center justify-center p-8 bg-slate-300">
+                <div class="text-center text-sm mb-10">
+                    Flomoji effect with wait
+                </div>
+                <div class="wait bg-white transition-all rounded-lg p-6 shadow-md text-center motion-preset-flomoji-🚀" data-unwait="0.6">
+                    <div class="font-bold mb-2">Flomoji Rocket</div>
+                    <p class="text-sm">wait + motion-preset-flomoji-🚀 (Unwait at 60%)</p>
+                </div>
+            </div>
             
         </div>
         
@@ -704,7 +746,6 @@
     const demo = document.getElementById('demo')
     const input = document.getElementById('input')
     const buttons = document.querySelectorAll('.demo-toggle')
-    const activeWhenVisibleElements = document.querySelectorAll('.active-when-visible')
     
     buttons.forEach(button => {
         button.addEventListener('mouseenter', () => {
@@ -728,26 +769,42 @@
         })
     })
     
-    // Intersection Observer for active-when-visible
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
-                entry.target.classList.add('in-view')
-            } else {
-                entry.target.classList.remove('in-view')
+
+
+    // Simple observer that removes the wait class
+    // <div class="wait" data-unwait="0.5">
+        // This element will remove the 'wait' class when 50% visible
+    // </div>
+
+    // <div class="wait" data-unwait="0.75">
+        // This element will remove the 'wait' class when 75% visible
+    // </div>
+
+    // <div class="wait">
+        // This element will use the default 10% visibility threshold
+    // </div>
+    // Create and apply the Intersection Observer
+    const createObserver = threshold => new IntersectionObserver(
+        (entries, observer) => entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('wait');
+                observer.unobserve(entry.target);
             }
-        })
-    }, {
-        threshold: 0.9 // 90% visibility
-    })
-    
-    activeWhenVisibleElements.forEach(element => {
-        observer.observe(element)
-    })
-    
-    
-    
-    
+        }),
+        { threshold }
+    );
+
+    // Initialize observers for wait elements
+    const defaultObserver = createObserver(0.1);
+
+    document.querySelectorAll('.wait').forEach(element => {
+        const customThreshold = parseFloat(element.dataset.unwait);
+        const observer = (customThreshold >= 0 && customThreshold <= 1)
+            ? createObserver(customThreshold)
+            : defaultObserver;
+        
+        observer.observe(element);
+    });
     
     
     // Add this new code at the end of the script
