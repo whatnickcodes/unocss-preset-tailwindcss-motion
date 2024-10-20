@@ -1,6 +1,6 @@
 {
     "name": "unocss-preset-tailwindcss-motion",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "description": "Unofficial UnoCSS preset for the TailwindCSS Motion plugin by @romboHQ",
     "type": "module",
     "main": "src/index.js",
