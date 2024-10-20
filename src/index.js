@@ -1050,9 +1050,27 @@ export const presetTailwindMotion = () => ({
 
         // MOTION EASE
         [/^motion-ease(-(.+?))?(\/(scale|translate|rotate|blur|grayscale|opacity|background|text))?$/, ([, , value = 'DEFAULT', , modifier], { theme }) => {
-            const ease = value === 'DEFAULT' ? theme.animationTimingFunction.DEFAULT : 
-                        value.startsWith('[') ? value.slice(1, -1) : 
-                        theme.animationTimingFunction[value] || value;
+            let ease;
+            if (value === 'DEFAULT') {
+                ease = theme.animationTimingFunction.DEFAULT;
+            } else if (value.startsWith('[')) {
+                ease = value.slice(1, -1);
+            } else {
+                // Correct mapping for ease-in, ease-out, and ease-in-out
+                switch (value) {
+                    case 'in':
+                        ease = theme.animationTimingFunction['ease-in'] || 'ease-in';
+                        break;
+                    case 'out':
+                        ease = theme.animationTimingFunction['ease-out'] || 'ease-out';
+                        break;
+                    case 'in-out':
+                        ease = theme.animationTimingFunction['ease-in-out'] || 'ease-in-out';
+                        break;
+                    default:
+                        ease = theme.animationTimingFunction[value] || value;
+                }
+            }
 
             const perceptualDurationMultiplier = springPerceptualMultipliers[ease] || 1;
             const isSpringWithBounce = ['var(--motion-spring-bouncy)', 'var(--motion-spring-bouncier)', 'var(--motion-spring-bounciest)', 'var(--motion-bounce)'].includes(ease);
