@@ -913,8 +913,8 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-ease-spring-smooth{--motion-timing:var(--motion-spring-smooth);--motion-perceptual-duration-multiplier:1.66;}
 .motion-ease-spring-snappy{--motion-timing:var(--motion-spring-snappy);--motion-perceptual-duration-multiplier:1.66;}
 
-                .wait, .wait:before, .wait:after,
-                .wait [class^="motion"], .wait [class^="motion"]:before, .wait [class^="motion"]:after {
+                .wait, .wait::before, .wait::after,
+                .wait *, .wait *::before, .wait *::after {
                     animation-play-state: paused;
                 }
             

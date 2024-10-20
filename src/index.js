@@ -1106,8 +1106,8 @@ export const presetTailwindMotion = () => ({
         [/^wait$/, (_, { rawSelector }) => {
             const selector = e(rawSelector)
             return `
-                .wait, .wait:before, .wait:after,
-                .wait [class^="motion"], .wait [class^="motion"]:before, .wait [class^="motion"]:after {
+                .wait, .wait::before, .wait::after,
+                .wait *, .wait *::before, .wait *::after {
                     animation-play-state: paused;
                 }
             `
@@ -1115,8 +1115,8 @@ export const presetTailwindMotion = () => ({
         [/^still$/, (_, { rawSelector }) => {
             const selector = e(rawSelector)
             return `
-                .still, .still:before, .still:after,
-                .still [class^="motion"], .still [class^="motion"]:before, .still [class^="motion"]:after {
+                .still, .still::before, .still::after,
+                .still *, .still *::before, .still *::after {
                     --motion-duration: 0.01ms !important;
                     --motion-delay: 0ms !important;
                     animation-duration: 0.01ms !important;

@@ -217,11 +217,11 @@ This may change in future versions:
 
 /* You'll need to manually remove "wait" with JS to use this helper when you want the animation to start */
 /* This is excellent for when triggering when in viewport */
-/* Note: wait also applies to :before and :after pseudo-attributes */
-.wait, .wait [class^="motion"] { animation-play-state: paused; }
+/* Note: wait also applies to ::before and ::after pseudo-attributes */
+.wait, .wait * { animation-play-state: paused; }
 
-/* Note: still also applies to :before and :after pseudo-attributes */
-.still, .still [class^="motion"] {
+/* Note: still also applies to ::before and ::after pseudo-attributes */
+.still, .still * {
     --motion-duration: 0.01ms !important;
     --motion-delay: 0ms !important;
     animation-duration: 0.01ms !important;
