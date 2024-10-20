@@ -598,7 +598,6 @@ export const presetTailwindMotion = () => ({
                     animation: typing var(--motion-duration) steps(${value}) infinite, blink 0.4s step-end infinite alternate;
                     white-space: nowrap;
                     border-right: 2px solid;
-                    font-family: monospace;
                     overflow: hidden;
                 }
                 ${selector} {
@@ -609,42 +608,42 @@ export const presetTailwindMotion = () => ({
         }, { autocomplete: 'motion-preset-typewriter-[<num>]' }],
 
         // FLOMOJI
-        [/^motion-preset-flomoji-(.+)$/, ([, value], { rawSelector }) => {
-            let selector = e(rawSelector);
-            return `
-                @keyframes emojiAnim {
-                    0% { transform: translateY(-200%) rotate(60deg); }
-                    30% { transform: rotate(50deg); }
-                    40% { transform: rotate(55deg); }
-                    50% { transform: rotate(45deg); }
-                    60% { transform: rotate(40deg); }
-                    100% { transform: translateY(-200%) rotate(25deg); }
-                }
-                ${selector} {
-                    position: relative;
-                }
-                ${selector}:before {
-                    content: "${value}";
-                    animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
-                    top: 0px;
-                    left: 0px;
-                    display: flex;
-                    position: absolute;
-                    z-index: 1000;
-                    background: rgba(255,255,255,0.3);
-                    width: 2rem;
-                    height: 2rem;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 100%;
-                    padding: 2px;
-                    padding-bottom: 6px;
-                }
-                ${selector}:before {
-                    animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
-                }
-            `;
-        }, { autocomplete: ['motion-preset-flomoji-👉', 'motion-preset-flomoji-🚀', 'motion-preset-flomoji-👀', 'motion-preset-flomoji-👍'] }],
+        // [/^motion-preset-flomoji-(.+)$/, ([, value], { rawSelector }) => {
+        //     let selector = e(rawSelector);
+        //     return `
+        //         @keyframes emojiAnim {
+        //             0% { transform: translateY(-200%) rotate(60deg); }
+        //             30% { transform: rotate(50deg); }
+        //             40% { transform: rotate(55deg); }
+        //             50% { transform: rotate(45deg); }
+        //             60% { transform: rotate(40deg); }
+        //             100% { transform: translateY(-200%) rotate(25deg); }
+        //         }
+        //         ${selector} {
+        //             position: relative;
+        //         }
+        //         ${selector}:before {
+        //             content: "${value}";
+        //             animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
+        //             top: 0px;
+        //             left: 0px;
+        //             display: flex;
+        //             position: absolute;
+        //             z-index: 1000;
+        //             background: rgba(255,255,255,0.3);
+        //             width: 2rem;
+        //             height: 2rem;
+        //             align-items: center;
+        //             justify-content: center;
+        //             border-radius: 100%;
+        //             padding: 2px;
+        //             padding-bottom: 6px;
+        //         }
+        //         ${selector}:before {
+        //             animation: emojiAnim 3000ms infinite cubic-bezier(0, 0.2, 0.2, 1) both;
+        //         }
+        //     `;
+        // }, { autocomplete: ['motion-preset-flomoji-👉', 'motion-preset-flomoji-🚀', 'motion-preset-flomoji-👀', 'motion-preset-flomoji-👍'] }],
 
         /*=================================
         *                                 *

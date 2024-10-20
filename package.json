@@ -35,6 +35,7 @@
         "vite": "^5.4.8"
     },
     "dependencies": {
+        "@unocss/autocomplete": "^0.63.4",
         "@unocss/core": "^0.63.4"
     }
 }

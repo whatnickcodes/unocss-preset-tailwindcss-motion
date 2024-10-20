@@ -205,6 +205,14 @@ If you prefer the other way, please create an issue and I can explain how to reb
 
 I can't remember exactly where, possibly the Tailwind build process, but I don't manually add `::backdrop` to the CSS variables and just have it live at `::root` instead only. This is to save on size as it's rarely ever needed or used. I believe the Tailwind plugin will use ::backdrop though.
 
+### typewriter effect supports custom fonts
+
+Unlike the original library, this version doesn't set `font-family: monospace;` for the typewriter effect. This allows for greater flexibility in font choices, though it may require minor adjustments if spacing issues occur.
+
+### No flomoji
+
+There is currently a class that I think is for demo purposes that takes a lot of space, removed it. It was called flomoji and just added a flying rocket or emoji over your text that was hard to have many use cases for.
+
 ### Extra Classes
 
 There's not a super solid way to on/off animations currently without completely adding/removing possibly multiple classes. For certain Tailwind environments, this is probably not an issue. For my purposes, I needed a simpler way to do "activate" the animation, like to easily trigger when it is scrollable viewport. It makes sense part of the library.
