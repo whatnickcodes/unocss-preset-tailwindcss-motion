@@ -1017,8 +1017,7 @@ export const presetTailwindMotion = () => ({
             }
 
             return { "--motion-duration": duration };
-        }, { autocomplete: ['motion-duration', 'motion-duration-<num>', 'motion-duration-(75|100|150|200|300|500|700|1000)', 'motion-duration-<num>/(scale|translate|rotate|blur|grayscale|opacity|background|text)'] }],
-
+        }, { autocomplete: ['motion-duration', 'motion-duration-(75|100|150|200|300|500|700|1000)', 'motion-duration-[<num>]', 'motion-duration-<num>/(scale|translate|rotate|blur|grayscale|opacity|background|text)'] }],
         // MOTION DELAY
         [/^motion-delay(-(.+?))?(\/(scale|translate|rotate|blur|grayscale|opacity|background|text))?$/, ([, , value = 'DEFAULT', , modifier], { theme }) => {
             const delay = value === 'DEFAULT' ? theme.animationDuration.DEFAULT : 
@@ -1046,7 +1045,7 @@ export const presetTailwindMotion = () => ({
             }
 
             return { "--motion-delay": delay };
-        }, { autocomplete: ['motion-delay', 'motion-delay-<num>', 'motion-delay-(75|100|150|200|300|500|700|1000)', 'motion-delay-<num>/(scale|translate|rotate|blur|grayscale|opacity|background|text)'] }],
+        }, { autocomplete: ['motion-delay', 'motion-delay-(75|100|150|200|300|500|700|1000)', 'motion-delay-[<num>]', 'motion-delay-<num>/(scale|translate|rotate|blur|grayscale|opacity|background|text)'] }],
 
         // MOTION EASE
         [/^motion-ease(-(.+?))?(\/(scale|translate|rotate|blur|grayscale|opacity|background|text))?$/, ([, , value = 'DEFAULT', , modifier], { theme }) => {
