@@ -331,7 +331,7 @@ export const presetTailwindMotion = () => ({
                 "--motion-translate-in-animation": translateInAnimation,
                 animation: "var(--motion-all-enter-animations)",
             };
-        }, { autocomplete: ['motion-preset-slide-(right|left|up|down)', 'motion-preset-slide-(right|left|up|down)-(sm|md|lg)'] }],
+        }, { autocomplete: ['motion-preset-slide', 'motion-preset-slide-right', 'motion-preset-slide-left', 'motion-preset-slide-up', 'motion-preset-slide-down', 'motion-preset-slide-(right|left|up|down)-(sm|md|lg)'] }],
         // Slide in 4 corners
         [/^motion-preset-slide-(up-right|up-left|down-left|down-right)(-(.+))?$/, ([, direction, , size = 'DEFAULT']) => {
             const distance = {
@@ -351,7 +351,7 @@ export const presetTailwindMotion = () => ({
                 "--motion-translate-in-animation": translateInAnimation,
                 animation: "var(--motion-all-enter-animations)",
             };
-        }, { autocomplete: ['motion-preset-slide-(up-right|up-left|down-left|down-right)', 'motion-preset-slide-(up-right|up-left|down-left|down-right)-(sm|md|lg)'] }],
+        }, { autocomplete: ['motion-preset-slide', 'motion-preset-slide-up-right', 'motion-preset-slide-up-left', 'motion-preset-slide-down-left', 'motion-preset-slide-down-right', 'motion-preset-slide-(up-right|up-left|down-left|down-right)-(sm|md|lg)'] }],
 
         // Blurs
         [/^motion-preset-focus(-(.+))?$/, ([, , size = 'DEFAULT']) => {
@@ -391,7 +391,7 @@ export const presetTailwindMotion = () => ({
                 "--motion-translate-in-animation": translateInAnimation,
                 animation: "var(--motion-all-enter-animations)",
             };
-        }, { autocomplete: ['motion-preset-blur-(right|left|up|down)', 'motion-preset-blur-(right|left|up|down)-(sm|md|lg)'] }],
+        }, { autocomplete: ['motion-preset-blur', 'motion-preset-blur-right', 'motion-preset-blur-left', 'motion-preset-blur-up', 'motion-preset-blur-down', 'motion-preset-blur-(right|left|up|down)-(sm|md|lg)'] }],
 
         // Rebound
         [/^motion-preset-rebound-(right|left|up|down)(-(.+))?$/, ([, direction, , size = 'DEFAULT']) => {
@@ -412,7 +412,7 @@ export const presetTailwindMotion = () => ({
                 "--motion-translate-in-animation": translateInAnimation,
                 animation: "var(--motion-all-enter-animations)",
             };
-        }, { autocomplete: ['motion-preset-rebound-(right|left|up|down)', 'motion-preset-rebound-(right|left|up|down)-(sm|md|lg)'] }],
+        }, { autocomplete: ['motion-preset-rebound', 'motion-preset-rebound-right', 'motion-preset-rebound-left', 'motion-preset-rebound-up', 'motion-preset-rebound-down', 'motion-preset-rebound-(right|left|up|down)-(sm|md|lg)'] }],
 
         // Bounce
         [/^motion-preset-bounce$/, () => ({
@@ -669,7 +669,7 @@ export const presetTailwindMotion = () => ({
                     animation: var(--motion-all-enter-animations);
                 }
             `;
-        }, { autocomplete: ['motion-scale-in', 'motion-scale-in-<num>', 'motion-scale-in-(0|50|75|90|95|100|105|110|125|150)'] }],
+        }, { autocomplete: ['motion-scale-in', 'motion-scale-in-<num>', 'motion-scale-in-(50|75|90|95|100|105|110|125|150)'] }],
         [/^motion-scale-x-in(-(.+))?$/, ([, , size = 'DEFAULT'], { rawSelector, theme }) => {
             let scale = size === 'DEFAULT' ? theme.motionScale.DEFAULT : 
                         size.startsWith('[') ? size.slice(1, -1) : 
