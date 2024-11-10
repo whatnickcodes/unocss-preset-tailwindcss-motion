@@ -26,8 +26,7 @@ export default defineConfig({
 
 ## Demo
 
-Coming soon. A big fancy demo and doc page will be coming soon. For now, please just reference the README and the index.html file.
-
+Coming soon. A big fancy demo and doc page will be coming soon. For now, please just reference the README and the `test/index.html file.`
 
 
 ## Why?
@@ -36,145 +35,226 @@ I needed a solid animation library for my side project that is heavily UnoCSS de
 
 ## Features
 
-- Fully ported support as of 10/17/2024!
-- Autocomplete (for UnoCSS people who need it)
-
-Reference their docs, but here's the fast gist:
-
-### Presets (easy combined ones)
-- `motion-preset-fade(-sm|-md|-lg)?`
-- `motion-preset-slide-(right|left|up|down)(-sm|-md|-lg)?`
-- `motion-preset-slide-(up-right|up-left|down-left|down-right)(-sm|-md|-lg)?`
-- `motion-preset-focus(-sm|-md|-lg)?`
-- `motion-preset-blur-(right|left|up|down)(-sm|-md|-lg)?`
-- `motion-preset-rebound-(right|left|up|down)(-sm|-md|-lg)?`
-- `motion-preset-bounce`
-- `motion-preset-expand`
-- `motion-preset-shrink`
-- `motion-preset-pop`
-- `motion-preset-compress`
-- `motion-preset-shake`
-- `motion-preset-wiggle`
-- `motion-preset-confetti`
-- `motion-preset-typewriter-[<num>]`
-- `motion-preset-flomoji-<emoji>`
-
 ### Base Animations
 
 #### Scale
-- `motion-scale-in(-<num>)?`
-- `motion-scale-x-in(-<num>)?`
-- `motion-scale-y-in(-<num>)?`
-- `motion-scale-out(-<num>)?`
-- `motion-scale-x-out(-<num>)?`
-- `motion-scale-y-out(-<num>)?`
+```
+motion-scale-in
+motion-scale-in-(0|25|50|75|90|95|100|105|110|125|150)
+```
+
+#### Scale X
+```
+motion-scale-x-in
+motion-scale-x-in-(0|25|50|75|90|95|100|105|110|125|150)
+```
+
+#### Scale Y
+```
+motion-scale-y-in
+motion-scale-y-in-(0|25|50|75|90|95|100|105|110|125|150)
+```
+
+#### Scale Out
+```
+motion-scale-out
+motion-scale-out-(0|25|50|75|90|95|100|105|110|125|150)
+```
+
+#### Scale Loop
+```
+motion-scale-loop
+motion-scale-loop-(0|25|50|75|90|95|100|105|110|125|150)/mirror
+motion-scale-loop-(0|25|50|75|90|95|100|105|110|125|150)/reset
+```
 
 #### Translate
-- `motion-translate-x-in(-<num>)?`
-- `motion-translate-y-in(-<num>)?`
-- `motion-translate-x-out(-<num>)?`
-- `motion-translate-y-out(-<num>)?`
+```
+motion-translate-x-in
+motion-translate-x-in-(0|25|50|75|100|150)
+
+motion-translate-y-in
+motion-translate-y-in-(0|25|50|75|100|150)
+
+motion-translate-x-out
+motion-translate-x-out-(0|25|50|75|100|150)
+
+motion-translate-y-out
+motion-translate-y-out-(0|25|50|75|100|150)
+
+motion-translate-x-loop
+motion-translate-x-loop-(0|25|50|75|100|150)
+motion-translate-x-loop-(0|25|50|75|100|150)/mirror
+motion-translate-x-loop-(0|25|50|75|100|150)/reset
+```
 
 #### Rotate
-- `motion-rotate-in(-<num>)?`
-- `motion-rotate-out(-<num>)?`
+```
+motion-rotate-in
+motion-rotate-in-(0|1|2|3|6|12|45|90|180|360)
+
+motion-rotate-out
+motion-rotate-out-(0|1|2|3|6|12|45|90|180|360)
+
+motion-rotate-loop
+motion-rotate-loop-(0|1|2|3|6|12|45|90|180|360)
+motion-rotate-loop-(0|1|2|3|6|12|45|90|180|360)/mirror
+motion-rotate-loop-(0|1|2|3|6|12|45|90|180|360)/reset
+```
 
 #### Blur
-- `motion-blur-in(-sm|-md|-lg|-xl|-2xl|-3xl)?`
-- `motion-blur-out(-sm|-md|-lg|-xl|-2xl|-3xl)?`
+```
+motion-blur-in
+motion-blur-in-(0|none|sm|md|lg|xl|2xl|3xl)
 
-#### Grayscale
-- `motion-grayscale-in(-<num>)?`
-- `motion-grayscale-out(-<num>)?`
+motion-blur-out
+motion-blur-out-(0|none|sm|md|lg|xl|2xl|3xl)
 
-#### Opacity
-- `motion-opacity-in(-<num>)?`
-- `motion-opacity-out(-<num>)?`
+motion-blur-loop
+motion-blur-loop-(0|none|sm|md|lg|xl|2xl|3xl)
+motion-blur-loop-(0|none|sm|md|lg|xl|2xl|3xl)/mirror
+motion-blur-loop-(0|none|sm|md|lg|xl|2xl|3xl)/reset
+```
 
 #### Background Color
-- `motion-bg-in(-<color>)?`
-- `motion-bg-out(-<color>)?`
+```
+motion-bg-in
+motion-bg-in-{color}-{shade}
+
+motion-bg-out
+motion-bg-out-{color}-{shade}
+
+motion-bg-loop
+motion-bg-loop-{color}-{shade}
+motion-bg-loop-{color}-{shade}/mirror
+motion-bg-loop-{color}-{shade}/reset
+```
 
 #### Text Color
-- `motion-text-in(-<color>)?`
-- `motion-text-out(-<color>)?`
+```
+motion-text-in
+motion-text-in-{color}-{shade}
+
+motion-text-out
+motion-text-out-{color}-{shade}
+
+motion-text-loop
+motion-text-loop-{color}-{shade}
+motion-text-loop-{color}-{shade}/mirror
+motion-text-loop-{color}-{shade}/reset
+```
+
+### Presets
+```
+motion-preset-fade
+motion-preset-fade-(sm|md|lg)
+
+motion-preset-slide-right
+motion-preset-slide-right-(sm|md|lg)
+
+motion-preset-slide-left
+motion-preset-slide-left-(sm|md|lg)
+
+motion-preset-slide-up
+motion-preset-slide-up-(sm|md|lg)
+
+motion-preset-slide-down
+motion-preset-slide-down-(sm|md|lg)
+
+motion-preset-focus
+motion-preset-focus-(sm|md|lg)
+
+motion-preset-blur-right
+motion-preset-blur-right-(sm|md|lg)
+
+motion-preset-blur-left
+motion-preset-blur-left-(sm|md|lg)
+
+motion-preset-blur-up
+motion-preset-blur-up-(sm|md|lg)
+
+motion-preset-blur-down
+motion-preset-blur-down-(sm|md|lg)
+
+motion-preset-stretch
+motion-preset-stretch-(sm|md|lg)
+
+motion-preset-blink
+motion-preset-blink-(sm|md|lg)
+
+motion-preset-pop
+
+motion-preset-compress
+
+motion-preset-shake
+
+motion-preset-wiggle
+
+motion-preset-confetti
+
+motion-preset-pulse
+motion-preset-pulse-(sm|md|lg)
+
+motion-preset-wobble
+motion-preset-wobble-(sm|md|lg)
+
+motion-preset-seesaw
+motion-preset-seesaw-(sm|md|lg)
+
+motion-preset-oscillate
+```
 
 ### Modifiers
 
 #### Duration
-- `motion-duration(-<num>)?`
-- `motion-duration(-<num>)?/(scale|translate|rotate|blur|grayscale|opacity|background|text)`
+```
+motion-duration
+motion-duration-(75|100|150|200|300|500|700|1000)
+motion-duration-(75|100|150|200|300|500|700|1000)/(scale|translate|rotate|blur|grayscale|opacity|background|text)
+```
 
 #### Delay
-- `motion-delay(-<num>)?`
-- `motion-delay(-<num>)?/(scale|translate|rotate|blur|grayscale|opacity|background|text)`
+```
+motion-delay
+motion-delay-(75|100|150|200|300|500|700|1000)
+motion-delay-(75|100|150|200|300|500|700|1000)/(scale|translate|rotate|blur|grayscale|opacity|background|text)
+```
 
 #### Easing
-- `motion-ease(-<easing>)?`
-- `motion-ease(-<easing>)?/(scale|translate|rotate|blur|grayscale|opacity|background|text)`
+```
+motion-ease-(linear|in|out|in-out)
+motion-ease-(spring-smooth|spring-snappy|spring-bouncy|spring-bouncier|spring-bounciest|bounce)
+motion-ease-(linear|in|out|in-out)/(scale|translate|rotate|blur|grayscale|opacity|background|text)
+```
+
+#### Loop
+```
+motion-loop
+motion-loop-infinite
+motion-loop-[number]
+motion-loop-(infinite|number)/(scale|translate|rotate|blur|grayscale|opacity|background|text)
+```
+
+#### Animation State
+```
+motion-paused
+motion-running
+```
 
 ### Smart Extras
-- `.pause`
-- `.play`
-- `.wait`
-- `.still`
+```css
+/* Short-hand pause */
+.pause
 
-### Example Combos
+/* Short-hand paly */
+.play
 
-1. Scale, Slide Up & Rotate:
-```html
-<div class="motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90">
+/* Same as pause, but better name - meant to be used with JS to "remove this class" to trigger the animation */
+.wait
+
+/* Motion = 0, Completes the animations forcefully, this is technically different than pause */
+.still
 ```
-
-2. Fade In & Slide Up:
-```html
-<div class="motion-opacity-in-0 motion-translate-y-in-100">
-```
-
-3. Zoom In & Rotate:
-```html
-<div class="motion-scale-in-75 motion-rotate-in-180">
-```
-
-4. Slide In & Blur:
-```html
-<div class="motion-translate-x-in-100 motion-blur-in-sm">
-```
-
-5. Pop & Color Change:
-```html
-<div class="motion-preset-pop motion-bg-in-sky-300">
-```
-
-6. Long Duration Rotate:
-```html
-<div class="motion-duration-2000 motion-rotate-in-180">
-```
-
-7. Delayed Fade In:
-```html
-<div class="motion-delay-500 motion-opacity-in-0">
-```
-
-8. Bouncy Scale:
-```html
-<div class="motion-timing-spring-bouncy motion-scale-in-75">
-```
-
-9. Combined Modifiers:
-```html
-<div class="motion-duration-2000 motion-rotate-in-180 motion-opacity-in-0">
-```
-
-10. Property-Specific Modifier:
-```html
-<div class="motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0">
-```
-
-These combinations showcase how different motion classes can be combined to create complex animations. You can mix and match presets, base animations, modifiers, and easing functions to achieve the desired effect.
-
-
-
 
 ## What's different?
 
@@ -182,9 +262,9 @@ Not much. This should be near identical for 99% of purposes.
 
 ### prefers-reduced-motion
 
-Currently, tailwindcss-motion manually applies the `@media screen and (prefers-reduced-motion: no-preference)` on [various animations](https://github.com/romboHQ/tailwindcss-motion/blob/main/src/keyframes.js) that have basically big translates. It's also applied on some of [their custom one-off](https://github.com/romboHQ/tailwindcss-motion/blob/main/src/presets.js) more fun animations like the emoji dancing one.
+Currently, tailwindcss-motion manually applies the `@media screen and (prefers-reduced-motion: no-preference)` on [various keyframes](https://github.com/romboHQ/tailwindcss-motion/blob/main/src/keyframes.js) that have basically big translates. It's also applied on some of [their custom one-off](https://github.com/romboHQ/tailwindcss-motion/blob/main/src/presets.js) more fun animations (Flomoji, Typewriter).
 
-Rather than doing that, this library will automatically apply the following for simplicity:
+Rather than doing that, this library will automatically add the following for simplicity to your CSS:
 
 ```css
  @media (prefers-reduced-motion: reduce) {
@@ -199,25 +279,44 @@ Rather than doing that, this library will automatically apply the following for 
 }
 ```
 
-If you prefer the other way, please create an issue and I can explain how to rebuild this with it or point you in the direction. This was a purposeful choice on my part.
-
 ### ::backdrop
 
-I can't remember exactly where, possibly the Tailwind build process, but I don't manually add `::backdrop` to the CSS variables and just have it live at `::root` instead only. This is to save on size as it's rarely ever needed or used. I believe the Tailwind plugin will use ::backdrop though.
+Tailwind *I think* compiles to both `:root {}` and `::backdrop {}` separately for variables. Because of how browsers work, you can't even do this they are treated separately: `:root, ::backdrop {}`. That's a lot of extra bytes... So we purposely skip `::backdrop` it is rarely used.
 
 ### typewriter effect supports custom fonts
 
-Unlike the original library, this version doesn't set `font-family: monospace;` for the typewriter effect. This allows for greater flexibility in font choices, though it may require minor adjustments if spacing issues occur.
+Unlike the original library, this version doesn't set `font-family: monospace;` for the typewriter effect. This allows for greater flexibility in font choices and the animation, however it may require minor adjustments if spacing issues occur with various custom fonts. You can just do this instead:
 
-### No flomoji
+```
+motion-preset-typewriter-[29] font-mono
+```
 
-There is currently a class that I think is for demo purposes that takes a lot of space, removed it. It was called flomoji and just added a flying rocket or emoji over your text that was hard to have many use cases for.
+### confetti doesn't set margin and block
 
-### Extra Classes
+The preset `motion-preset-confetti` normally applies `display: block` and `margin: 0;`. This makes a ton of sense but also can be annoying because it can mess the layout when applying these animations (which goal wise we ideally don't want to happen). You can instead do this if you want it back perfectly:
 
-There's not a super solid way to on/off animations currently without completely adding/removing possibly multiple classes. For certain Tailwind environments, this is probably not an issue. For my purposes, I needed a simpler way to do "activate" the animation, like to easily trigger when it is scrollable viewport. It makes sense part of the library.
+```
+motion-preset-confetti block m-0
+```
 
-This may change in future versions:
+### Flomoji is back and supports JIT
+
+For maximum port, I decided to add Flomoji back and with JIT support:
+
+```
+motion-preset-flomoji-👉
+motion-preset-flomoji-🚀
+motion-preset-flomoji-👀
+motion-preset-flomoji-👍
+motion-preset-flomoji-[🎉]
+motion-preset-flomoji-[🌟]
+motion-preset-flomoji-[🎸]
+motion-preset-flomoji-[Woah!]
+```
+
+### Smart Classes
+
+These are extra short-hands. Note that still and pause (or motion-pause) are different.
 
 ```css
 .pause { animation-play-state: paused; }
@@ -239,13 +338,13 @@ This may change in future versions:
 }
 ```
 
-## Testing
+## Contributing
 
-- The folder `tailwindcss-motion-detached-for-reference` is just for easy file comparison and is not used.
-- To dev it up here just run `npm run dev`
-- To see the test file, just run `open-test`
+- The folder tailwind is for the tailwind styles, `tailwindcss-motion-reference` is detached just for easy file comparison and is not used.
+- To dev it up here... just run `npm run dev`
+- To see the test file, just run `npm run serve`
+- To build it all, just run `npm run build`
 - For more, reference `package.json`. This may get more sophisticated later but does have a 1 vs the other mode.
-
 
 ## License
 

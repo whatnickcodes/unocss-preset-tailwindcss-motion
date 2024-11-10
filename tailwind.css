@@ -1,9 +1,0 @@
-/* FOR TAILWIND TESTS ONLY */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-nav {
-    border-top: 8px solid #0ea5e9;
-}

@@ -1,9 +1,9 @@
 {
     "name": "unocss-preset-tailwindcss-motion",
-    "version": "0.3.8",
+    "version": "4.0.0",
     "description": "Unofficial UnoCSS preset for the TailwindCSS Motion plugin by @romboHQ",
     "type": "module",
-    "main": "src/index.js",
+    "main": "dist/index.js",
     "bugs": {
         "url": "https://github.com/whatnickcodes/unocss-preset-tailwindcss-motion/issues"
     },
@@ -15,24 +15,23 @@
         "url": "git+https://github.com/whatnickcodes/unocss-preset-tailwindcss-motion.git"
     },
     "files": [
-        "src"
+        "dist"
     ],
     "scripts": {
-        "dev": "npx vite dev",
-        "open-test": "open index.html",
-        "build:compares": "npm run build:tailwind && npm run build:unocss",
-        "build:tailwind": "npx tailwindcss -i ./tailwind.css -o ./compare-test/output-tailwind.css",
-        "build:tailwind:watch": "npx tailwindcss -i ./tailwind.css -o ./compare-test/output-tailwind.css --watch",
-        "build:unocss": "unocss ./index.html -o ./compare-test/output-uno.css",
-        "build:unocss:watch": "unocss ./index.html -o ./compare-test/output-uno.css --watch"
+        "dev": "node unocss/build.js",
+        "build": "npm run build:unocss && npm run build:tailwind && npm run build:preset",
+        "build:unocss": "node unocss/build.js",
+        "build:tailwind": "npx tailwindcss -i ./tailwind/app.css -o ./tailwind/tailwind.css -c ./tailwind/tailwind.config.js",
+        "build:preset": "cp ./unocss/index.js ./dist/index.js",
+        "serve": "open ./test/index.html"
     },
     "devDependencies": {
         "@unocss/preset-uno": "^0.63.4",
-        "@unocss/reset": "^0.63.4",
+        "@unocss/reset": "^0.63.6",
+        "chokidar": "^4.0.1",
         "tailwindcss": "^3.4.13",
-        "tailwindcss-motion": "^0.3.0-beta",
-        "unocss": "^0.63.4",
-        "vite": "^5.4.8"
+        "tailwindcss-motion": "^0.4.1-beta",
+        "unocss": "^0.63.6"
     },
     "dependencies": {
         "@unocss/autocomplete": "^0.63.4",
