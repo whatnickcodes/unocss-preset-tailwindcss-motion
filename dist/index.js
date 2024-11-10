@@ -1,8 +1,6 @@
 /**
  * UnoCSS Fork of tailwindcss-motion
  * @see https://github.com/romboHQ/tailwindcss-motion
- * @version 1.0.0
- * @date 2024-10-09
  * @description This is a UnoCSS adaptation of the tailwindcss-motion plugin,
  * providing smooth animations and transitions for UnoCSS projects.
  */
