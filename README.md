@@ -97,12 +97,10 @@ Making sense? Easy, great! Check out the million options below:
 
 #### Scale
 ```
-// API
 motion-scale-<in|out|loop>
 motion-scale-<in|out|loop>-[0|50|75|90|95|100|105|110|125|150]
 motion-scale-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-scale-in
 motion-scale-out
 motion-scale-loop
@@ -115,13 +113,11 @@ motion-scale-loop-[1.5]/reset
 ```
 
 #### Scale X/Y
-```
-// API 
+``` 
 motion-scale-<x|y>-<in|out|loop>
 motion-scale-<x|y>-<in|out|loop>-[0|50|75|90|95|100|105|110|125|150]
 motion-scale-<x|y>-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-scale-x-in
 motion-scale-y-out
 motion-scale-x-loop
@@ -135,12 +131,10 @@ motion-scale-y-loop-[1.5]/reset
 
 #### Translate
 ```
-// API
 motion-translate-<x|y>-<in|out|loop>
 motion-translate-<x|y>-<in|out|loop>-(0|25|50|75|100|150)
 motion-translate-<x|y>-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-translate-x-in
 motion-translate-y-out
 motion-translate-x-loop
@@ -154,12 +148,10 @@ motion-translate-y-loop-[88vh]/reset
 
 #### Rotate
 ```
-// API
 motion-rotate-<in|out|loop>
 motion-rotate-<in|out|loop>-(0|1|2|3|6|12|45|90|180)
 motion-rotate-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-rotate-in
 motion-rotate-out-45
 motion-rotate-loop
@@ -171,12 +163,10 @@ motion-rotate-loop-[180deg]/reset
 
 #### Opacity
 ```
-// API
 motion-opacity-<in|out|loop>
 motion-opacity-<in|out|loop>-(0|25|50|75|100)
 motion-opacity-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-opacity-in
 motion-opacity-out-50
 motion-opacity-loop
@@ -188,12 +178,10 @@ motion-opacity-loop-[0.875]/reset
 
 #### Blur
 ```
-// API
 motion-blur-<in|out|loop>
 motion-blur-<in|out|loop>-(sm|md|lg|xl|2xl|3xl)
 motion-blur-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-blur-in
 motion-blur-out-lg
 motion-blur-loop
@@ -205,12 +193,10 @@ motion-blur-loop-[15px]/reset
 
 #### Text Color
 ```
-// API
 motion-text-<in|out|loop>
 motion-text-<in|out|loop>-{color}
 motion-text-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-text-in
 motion-text-out-red-500
 motion-text-loop-blue-500
@@ -222,12 +208,10 @@ motion-text-loop-[#0000ff]/reset
 
 #### Background Color
 ```
-// API
 motion-bg-<in|out|loop>
 motion-bg-<in|out|loop>-{color}
 motion-bg-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-bg-in
 motion-bg-out-red-500
 motion-bg-loop-blue-500
@@ -239,12 +223,10 @@ motion-bg-loop-[#0000ff]/reset
 
 #### Grayscale
 ```
-// API
 motion-grayscale-<in|out|loop>
 motion-grayscale-<in|out|loop>-(0|25|50|75|100)
 motion-grayscale-<in|out|loop>-[value]
 
-// EXAMPLES
 motion-grayscale-in
 motion-grayscale-out-50
 motion-grayscale-loop
@@ -258,7 +240,6 @@ motion-grayscale-loop-[0.875]/reset
 
 ##### Classics
 ```
-// Slides
 motion-preset-slide-down
 motion-preset-slide-down-(sm|md|lg)
 motion-preset-slide-up-right
@@ -270,11 +251,9 @@ motion-preset-slide-down-left-(sm|md|lg)
 motion-preset-slide-down-right
 motion-preset-slide-down-right-(sm|md|lg)
 
-// Focus
 motion-preset-focus
 motion-preset-focus-(sm|md|lg)
 
-// Blur
 motion-preset-blur-right
 motion-preset-blur-right-(sm|md|lg)
 motion-preset-blur-left
@@ -284,11 +263,9 @@ motion-preset-blur-up-(sm|md|lg)
 motion-preset-blur-down
 motion-preset-blur-down-(sm|md|lg)
 
-// Rebound
 motion-preset-rebound
 motion-preset-rebound-(right|left|up|down)
 
-// Misc
 motion-preset-bounce
 motion-preset-expand
 motion-preset-shrink
@@ -301,11 +278,9 @@ motion-preset-wiggle
 ##### Loops
 
 ```
-// Pulses
 motion-preset-pulse
 motion-preset-pulse-(sm|md|lg)
 
-// Wobble
 motion-preset-wobble
 motion-preset-wobble-(sm|md|lg)
 
@@ -313,34 +288,26 @@ motion-preset-wobble-(sm|md|lg)
 motion-preset-seesaw
 motion-preset-seesaw-(sm|md|lg)
 
-// Oscillate
 motion-preset-oscillate
 motion-preset-oscillate-(sm|md|lg)
 
-// Stretch
 motion-preset-stretch
 motion-preset-stretch-(sm|md|lg)
 
-// Float
 motion-preset-float
 motion-preset-float-(sm|md|lg)
 
-// Spins
 motion-preset-spin
 
-// Blink
 motion-preset-blink
 ```
 
 ##### Fun
 ```
-// Typewriter (animates to count of letters)
 motion-preset-typewriter-[<number of letters>]
 
-// Confetti
 motion-preset-confetti
 
-// Flomoji
 motion-preset-flomoji-👉
 motion-preset-flomoji-🚀
 motion-preset-flomoji-👀
