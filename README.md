@@ -357,6 +357,6 @@ In honor of original library this is MIT.
 
 ## More
 
-Via x.com/@whatnicktweets
+[Via x.com/@whatnicktweets](https://x.com/@whatnicktweets)
 
 https://www.npmjs.com/package/unocss-preset-tailwindcss-motion
