@@ -45,168 +45,432 @@ I needed a solid animation library for my side project that is heavily UnoCSS de
 #### Scale
 ```
 motion-scale-in
-motion-scale-in-(0|25|50|75|90|95|100|105|110|125|150)
+motion-scale-in-(0|50|75|90|95|100|105|110|125|150)
+motion-scale-in-[0.82|1.337|2.5] // JIT
 ```
 
 #### Scale X
 ```
 motion-scale-x-in
-motion-scale-x-in-(0|25|50|75|90|95|100|105|110|125|150)
+motion-scale-x-in-(0|50|75|90|95|100|105|110|125|150)
+motion-scale-x-in-[0.82|1.337|2.5] // JIT
 ```
 
 #### Scale Y
 ```
 motion-scale-y-in
-motion-scale-y-in-(0|25|50|75|90|95|100|105|110|125|150)
+motion-scale-y-in-(0|50|75|90|95|100|105|110|125|150)
+motion-scale-y-in-[0.82|1.337|2.5] // JIT
 ```
 
 #### Scale Out
 ```
 motion-scale-out
-motion-scale-out-(0|25|50|75|90|95|100|105|110|125|150)
+motion-scale-out-(0|50|75|90|95|100|105|110|125|150)
+motion-scale-out-[0.82|1.337|2.5] // JIT
+```
+
+#### Scale X Out
+```
+motion-scale-x-out
+motion-scale-x-out-(0|50|75|90|95|100|105|110|125|150)
+motion-scale-x-out-[0.82|1.337|2.5] // JIT
+```
+
+#### Scale Y Out
+```
+motion-scale-y-out
+motion-scale-y-out-(0|50|75|90|95|100|105|110|125|150)
+motion-scale-y-out-[0.82|1.337|2.5] // JIT
 ```
 
 #### Scale Loop
 ```
 motion-scale-loop
-motion-scale-loop-(0|25|50|75|90|95|100|105|110|125|150)/mirror
-motion-scale-loop-(0|25|50|75|90|95|100|105|110|125|150)/reset
+motion-scale-loop-(0|50|75|90|95|100|105|110|125|150)
+motion-scale-loop-[0.82|1.337|2.5] // JIT
+motion-scale-loop-(0|50|75|2.5)/mirror
+motion-scale-loop-(0|50|75|2.5)/reset
 ```
 
-#### Translate
+#### Scale X Loop
+```
+motion-scale-x-loop
+motion-scale-x-loop-(0|50|75|2.5)
+motion-scale-x-loop-(0|50|75|2.5)/mirror
+motion-scale-x-loop-(0|50|75|2.5)/reset
+```
+
+#### Scale Y Loop
+```
+motion-scale-y-loop
+motion-scale-y-loop-(0|50|75|2.5)
+motion-scale-y-loop-(0|50|75|2.5)/mirror
+motion-scale-y-loop-(0|50|75|2.5)/reset
+```
+
+#### Translate X In
 ```
 motion-translate-x-in
 motion-translate-x-in-(0|25|50|75|100|150)
+motion-translate-x-in-[42px|13rem|27vw]
+-motion-translate-x-in-50
+motion-translate-x-in-[-15rem]
+-motion-translate-x-in-[42px]
+```
 
+#### Translate Y In
+```
 motion-translate-y-in
 motion-translate-y-in-(0|25|50|75|100|150)
+motion-translate-y-in-[88vh|23px|7.5em]
+-motion-translate-y-in-75
+motion-translate-y-in-[-42vh]
+-motion-translate-y-in-[65px]
+```
 
+#### Translate X Out
+```
 motion-translate-x-out
 motion-translate-x-out-(0|25|50|75|100|150)
+motion-translate-x-out-[42px]
+-motion-translate-x-out-50
+motion-translate-x-out-[-15rem]
+```
 
+#### Translate Y Out
+```
 motion-translate-y-out
 motion-translate-y-out-(0|25|50|75|100|150)
+motion-translate-y-out-[88vh]
+-motion-translate-y-out-75
+motion-translate-y-out-[-42vh]
+```
 
+#### Translate X Loop
+```
 motion-translate-x-loop
 motion-translate-x-loop-(0|25|50|75|100|150)
-motion-translate-x-loop-(0|25|50|75|100|150)/mirror
-motion-translate-x-loop-(0|25|50|75|100|150)/reset
+motion-translate-x-loop-[42px]
+-motion-translate-x-loop-50
+motion-translate-x-loop-[-15rem]
+motion-translate-x-loop-25/mirror
+motion-translate-x-loop-50/reset
+motion-translate-x-loop-[42px]/mirror
+motion-translate-x-loop-[-15rem]/reset
 ```
 
-#### Rotate
+#### Translate Y Loop
+```
+motion-translate-y-loop
+motion-translate-y-loop-(0|25|50|75|100|150)
+-motion-translate-y-loop-150
+motion-translate-y-loop-[88vh]
+-motion-translate-y-loop-75
+motion-translate-y-loop-[-42vh]
+motion-translate-y-loop-25/mirror
+motion-translate-y-loop-50/reset
+motion-translate-y-loop-[88vh]/mirror
+motion-translate-y-loop-[-42vh]/reset
+```
+
+#### Rotate In
 ```
 motion-rotate-in
-motion-rotate-in-(0|1|2|3|6|12|45|90|180|360)
-
-motion-rotate-out
-motion-rotate-out-(0|1|2|3|6|12|45|90|180|360)
-
-motion-rotate-loop
-motion-rotate-loop-(0|1|2|3|6|12|45|90|180|360)
-motion-rotate-loop-(0|1|2|3|6|12|45|90|180|360)/mirror
-motion-rotate-loop-(0|1|2|3|6|12|45|90|180|360)/reset
+motion-rotate-in-(0|1|2|3|6|12|45|90|180)
+motion-rotate-in-[42deg]
+-motion-rotate-in-45
+motion-rotate-in-[-15deg]
 ```
 
-#### Blur
+#### Rotate Out
+```
+motion-rotate-out
+motion-rotate-out-(0|1|2|3|6|12|45|90|180)
+motion-rotate-out-[42deg]
+-motion-rotate-out-45
+motion-rotate-out-[-15deg]
+```
+
+#### Rotate Loop
+```
+motion-rotate-loop
+motion-rotate-loop-(0|1|2|3|6|12|45|90|180)
+motion-rotate-loop-[42deg]
+-motion-rotate-loop-45
+motion-rotate-loop-[-15deg]
+motion-rotate-loop-25/mirror
+motion-rotate-loop-50/reset
+motion-rotate-loop-[42deg]/mirror
+motion-rotate-loop-[-15deg]/reset
+```
+
+#### Opacity In
+```
+motion-opacity-in
+motion-opacity-in-(0|25|50|75|100)
+motion-opacity-in-[0.42|33%|0.875] // JIT
+```
+
+#### Opacity Out
+```
+motion-opacity-out
+motion-opacity-out-(0|25|50|75|100)
+motion-opacity-out-[0.42|33%|0.875] // JIT
+```
+
+#### Opacity Loop
+```
+motion-opacity-loop
+motion-opacity-loop-(0|25|50|75|100)
+motion-opacity-loop-[0.42|33%|0.875] // JIT
+motion-opacity-loop-25/mirror
+motion-opacity-loop-50/reset
+motion-opacity-loop-[0.42]/mirror
+motion-opacity-loop-[33%]/reset
+```
+
+#### Blur In
 ```
 motion-blur-in
-motion-blur-in-(0|none|sm|md|lg|xl|2xl|3xl)
+motion-blur-in-(sm|md|lg|xl|2xl)
+motion-blur-in-[5px|10px|15px]
+```
 
+#### Blur Out
+```
 motion-blur-out
-motion-blur-out-(0|none|sm|md|lg|xl|2xl|3xl)
+motion-blur-out-(sm|md|lg|xl|2xl)
+motion-blur-out-[5px|10px|15px]
+```
 
+#### Blur Loop
+```
 motion-blur-loop
-motion-blur-loop-(0|none|sm|md|lg|xl|2xl|3xl)
-motion-blur-loop-(0|none|sm|md|lg|xl|2xl|3xl)/mirror
-motion-blur-loop-(0|none|sm|md|lg|xl|2xl|3xl)/reset
+motion-blur-loop-(sm|md|lg|xl|2xl)
+motion-blur-loop-[5px|10px|15px]
+motion-blur-loop-sm/mirror
+motion-blur-loop-md/reset
+motion-blur-loop-[5px]/mirror
+motion-blur-loop-[10px]/reset
 ```
 
-#### Background Color
-```
-motion-bg-in
-motion-bg-in-{color}-{shade}
-
-motion-bg-out
-motion-bg-out-{color}-{shade}
-
-motion-bg-loop
-motion-bg-loop-{color}-{shade}
-motion-bg-loop-{color}-{shade}/mirror
-motion-bg-loop-{color}-{shade}/reset
-```
-
-#### Text Color
+#### Text In
 ```
 motion-text-in
-motion-text-in-{color}-{shade}
+motion-text-in-(red-500|blue-500|green-500|purple-500)
+motion-text-in-[#ff0000|#0000ff|#00ff00|#800080]
+```
 
+#### Text Out
+```
 motion-text-out
-motion-text-out-{color}-{shade}
+motion-text-out-(red-500|blue-500|green-500|purple-500)
+motion-text-out-[#ff0000|#0000ff|#00ff00|#800080]
+```
 
+#### Text Loop
+```
 motion-text-loop
-motion-text-loop-{color}-{shade}
-motion-text-loop-{color}-{shade}/mirror
-motion-text-loop-{color}-{shade}/reset
+motion-text-loop-(red-500|blue-500|green-500|purple-500)
+motion-text-loop-[#ff0000|#0000ff|#00ff00|#800080]
+motion-text-loop-red-500/mirror
+motion-text-loop-blue-500/reset
+motion-text-loop-[#ff0000]/mirror
+motion-text-loop-[#0000ff]/reset
 ```
 
-### Presets
+#### Background In
 ```
-motion-preset-fade
-motion-preset-fade-(sm|md|lg)
+motion-bg-in
+motion-bg-in-(red-500|blue-500|green-500|purple-500)
+motion-bg-in-[#ff0000|#0000ff|#00ff00|#800080]
+```
 
-motion-preset-slide-right
-motion-preset-slide-right-(sm|md|lg)
+#### Background Out
+```
+motion-bg-out
+motion-bg-out-(red-500|blue-500|green-500|purple-500)
+motion-bg-out-[#ff0000|#0000ff|#00ff00|#800080]
+```
 
-motion-preset-slide-left
-motion-preset-slide-left-(sm|md|lg)
+#### Background Loop
+```
+motion-bg-loop
+motion-bg-loop-(red-500|blue-500|green-500|purple-500)
+motion-bg-loop-[#ff0000|#0000ff|#00ff00|#800080]
+motion-bg-loop-red-500/mirror
+motion-bg-loop-blue-500/reset
+motion-bg-loop-[#ff0000]/mirror
+motion-bg-loop-[#0000ff]/reset
+```
 
-motion-preset-slide-up
-motion-preset-slide-up-(sm|md|lg)
+#### Grayscale In
+```
+motion-grayscale-in
+motion-grayscale-in-(0|25|50|75|100)
+motion-grayscale-in-[0.42|33%|0.875] // JIT
+```
 
+#### Grayscale Out
+```
+motion-grayscale-out
+motion-grayscale-out-(0|25|50|75|100)
+motion-grayscale-out-[0.42|33%|0.875] // JIT
+```
+
+#### Grayscale Loop
+```
+motion-grayscale-loop
+motion-grayscale-loop-(0|25|50|75|100)
+motion-grayscale-loop-[0.42|33%|0.875] // JIT
+motion-grayscale-loop-25/mirror
+motion-grayscale-loop-50/reset
+motion-grayscale-loop-[0.42]/mirror
+motion-grayscale-loop-[33%]/reset
+```
+
+#### Preset Animations
+
+##### Slide
+```
 motion-preset-slide-down
 motion-preset-slide-down-(sm|md|lg)
+motion-preset-slide-up-right
+motion-preset-slide-up-right-(sm|md|lg)
+motion-preset-slide-up-left
+motion-preset-slide-up-left-(sm|md|lg)
+motion-preset-slide-down-left
+motion-preset-slide-down-left-(sm|md|lg)
+motion-preset-slide-down-right
+motion-preset-slide-down-right-(sm|md|lg)
+```
 
+##### Focus
+```
 motion-preset-focus
 motion-preset-focus-(sm|md|lg)
+```
 
+##### Blur
+```
 motion-preset-blur-right
 motion-preset-blur-right-(sm|md|lg)
-
 motion-preset-blur-left
 motion-preset-blur-left-(sm|md|lg)
-
 motion-preset-blur-up
 motion-preset-blur-up-(sm|md|lg)
-
 motion-preset-blur-down
 motion-preset-blur-down-(sm|md|lg)
+```
 
-motion-preset-stretch
-motion-preset-stretch-(sm|md|lg)
+##### Rebound
+```
+motion-preset-rebound
+motion-preset-rebound-(right|left|up|down)
+```
 
-motion-preset-blink
-motion-preset-blink-(sm|md|lg)
+##### Bounce
+```
+motion-preset-bounce
+```
 
+##### Expand
+```
+motion-preset-expand
+```
+
+##### Shrink
+```
+motion-preset-shrink
+```
+
+##### Pop
+```
 motion-preset-pop
+```
 
+##### Compress
+```
 motion-preset-compress
+```
 
+##### Shake
+```
 motion-preset-shake
+```
 
+##### Wiggle
+```
 motion-preset-wiggle
+```
 
+##### Confetti
+```
 motion-preset-confetti
+```
 
+##### Pulse
+```
 motion-preset-pulse
 motion-preset-pulse-(sm|md|lg)
+```
 
+##### Wobble
+```
 motion-preset-wobble
 motion-preset-wobble-(sm|md|lg)
+```
 
+##### Seesaw
+```
 motion-preset-seesaw
 motion-preset-seesaw-(sm|md|lg)
+```
 
+##### Oscillate
+```
 motion-preset-oscillate
+motion-preset-oscillate-(sm|md|lg)
+```
+
+##### Stretch
+```
+motion-preset-stretch
+motion-preset-stretch-(sm|md|lg)
+```
+
+##### Float
+```
+motion-preset-float
+motion-preset-float-(sm|md|lg)
+```
+
+##### Spin
+```
+motion-preset-spin
+```
+
+##### Blink
+```
+motion-preset-blink
+```
+
+##### Typewriter
+```
+motion-preset-typewriter-[<number of letters>]
+```
+
+##### Flomoji
+```
+motion-preset-flomoji-👉
+motion-preset-flomoji-🚀
+motion-preset-flomoji-👀
+motion-preset-flomoji-👍
+motion-preset-flomoji-[🎉]
+motion-preset-flomoji-[🌟]
+motion-preset-flomoji-[🎸]
+motion-preset-flomoji-[Woah!]
 ```
 
 ### Modifiers
@@ -239,6 +503,30 @@ motion-loop-infinite
 motion-loop-[number]
 motion-loop-(infinite|number)/(scale|translate|rotate|blur|grayscale|opacity|background|text)
 ```
+
+#### Mirror and Reset
+- **Mirror**: Reverses the animation direction after completion.
+  - Example: `motion-scale-loop-50/mirror`
+- **Reset**: Resets the animation to its initial state after completion.
+  - Example: `motion-scale-loop-50/reset`
+
+### Combining Animations
+```
+motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90 motion-blur-in-md motion-opacity-in-0
+motion-opacity-in-0 motion-translate-y-in-100 motion-scale-in-150 motion-rotate-in-180 motion-grayscale-in-75
+motion-scale-in-75 motion-rotate-in-180 motion-translate-x-in-100 motion-blur-in-lg motion-bg-in-blue-500
+motion-translate-x-in-100 motion-translate-y-in-50 motion-scale-in-125 motion-rotate-in-45 motion-text-in-purple-500
+motion-preset-pop motion-preset-slide-up motion-preset-focus motion-delay-100
+motion-preset-shake motion-preset-blur-right motion-preset-stretch motion-delay-200
+motion-preset-wiggle motion-preset-slide-down motion-preset-blink motion-delay-150
+motion-preset-pop motion-translate-y-loop-50 motion-scale-in-150 motion-rotate-in-360 motion-blur-in-xl
+motion-preset-compress motion-translate-x-loop-75 motion-scale-loop-125 motion-rotate-loop-180 motion-delay-100
+motion-preset-stretch motion-scale-in-[250%] motion-rotate-in-[720deg] motion-blur-in-[15px] motion-grayscale-in-100
+motion-preset-oscillate motion-translate-x-in-[150%] motion-translate-y-in-[150%] motion-scale-in-[175%] motion-rotate-in-[1080deg]
+motion-preset-slide-up motion-preset-blur-up motion-scale-in-[300%] motion-rotate-loop-[360deg] motion-delay-150
+```
+
+
 
 #### Animation State
 ```
