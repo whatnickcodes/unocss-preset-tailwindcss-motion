@@ -40,9 +40,7 @@ I needed a solid animation library for my side project that is heavily UnoCSS de
 
 ## Features
 
-Please reference the [official plugin docs](https://github.com/romboHQ/tailwindcss-motion) for a better explanation.
-
-Basically it comes down to:
+Please reference the [official plugin docs](https://github.com/romboHQ/tailwindcss-motion) for a better explanation. Basically it comes down to:
 
 ```html
 <!--
