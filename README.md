@@ -535,6 +535,9 @@ motion-running
 ```
 
 ### Smart Extras
+
+These are not part of the original library, see "What's Different" below for more info:
+
 ```css
 /* Short-hand pause */
 .pause
@@ -549,9 +552,12 @@ motion-running
 .still
 ```
 
+
 ## What's different?
 
 Not much. This should be near identical for 99% of purposes.
+
+
 
 ### prefers-reduced-motion
 
@@ -574,7 +580,9 @@ Rather than doing that, this library will automatically add the following for si
 
 ### ::backdrop
 
-Tailwind *I think* compiles to both `:root {}` and `::backdrop {}` separately for variables. Because of how browsers work, you can't even do this they are treated separately: `:root, ::backdrop {}`. That's a lot of extra bytes... So we purposely skip `::backdrop` it is rarely used.
+Tailwind compiles `:root {}` and `::backdrop {}` separately for variables since browsers treat them as distinct contexts. Unfortunately, you can't even do something like this `:root, ::backdrop {}` as that does not work.
+
+That's a lot of bytes to do twice... So we skip `::backdrop`. It's rarely used anyway by people.
 
 ### typewriter effect supports custom fonts
 
@@ -586,13 +594,13 @@ motion-preset-typewriter-[29] font-mono
 
 ### confetti doesn't set margin and block
 
-The preset `motion-preset-confetti` normally applies `display: block` and `margin: 0;`. This makes a ton of sense but also can be annoying because it can mess the layout when applying these animations (which goal wise we ideally don't want to happen). You can instead do this if you want it back perfectly:
+The preset `motion-preset-confetti` normally applies `display: block` and `margin: 0;`. This makes a ton of sense but also can be annoying because it can mess the layout when applying these animations (which goal wise we ideally don't want layout to ever shift when applying an animation). You can instead do this if you want it back perfectly to original:
 
 ```
 motion-preset-confetti block m-0
 ```
 
-### Flomoji is back and supports JIT
+### Flomoji is back and our version supports JIT
 
 For maximum port, I decided to add Flomoji back and with JIT support:
 
