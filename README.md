@@ -40,6 +40,61 @@ I needed a solid animation library for my side project that is heavily UnoCSS de
 
 ## Features
 
+Please reference the [official plugin docs](https://github.com/romboHQ/tailwindcss-motion) for a better explanation.
+
+Basically it comes down to:
+
+```html
+<!--
+PRESETS
+These are easy perfectly built out-of-the-box animations.
+-->
+<div class="motion-preset-slide-up"></div>
+<div class="motion-preset-bounce"></div>
+<div class="motion-preset-confetti"></div>
+Etc...
+
+
+<!--
+BASE ANIMATIONS
+These are specific one-offs.
+-->
+<div class="motion-translate-y">Default</div>
+<div class="motion-translate-y-75">Custom</div>
+<div class="motion-translate-y-[25px]">JIT</div>
+
+<div class="motion-rotate-in">Default</div>
+<div class="motion-rotate-in-45">Custom</div>
+<div class="motion-rotate-in-[69deg]">JIT support</div>
+Etc...
+
+
+<!--
+COMBINING ANIMATIONS
+The real power comes in combining these
+-->
+<div class="motion-translate-y-in motion-rotate-in-45"></div>
+
+
+<!-- 
+MODIFIERS
+Adjust duration, spring, delay and loop modifiers
+-->
+<div class="motion-translate-y-in">Normal</div>
+<div class="motion-translate-y-in motion-duration-2000">2000ms speed</div>
+<div class="motion-translate-y-in motion-ease-spring-bouncy">Bouncy</div>
+<div class="motion-translate-y-in motion-delay-300">300ms delay</div>
+<div class="motion-translate-y-loop-75 motion-loop-twice">Loop 2x</div>
+
+<div class="motion-translate-y-in motion-duration-2000 motion-ease-spring-bouncy">2000ms speed, bouncy</div>
+
+```
+
+Making sense? Check out the million options below:
+
+## Full Docs & Reference
+
+
 ### Base Animations
 
 #### Scale
