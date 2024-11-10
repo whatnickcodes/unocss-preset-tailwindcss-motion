@@ -315,6 +315,7 @@ export const presetTailwindMotion = () => ({
    
         // Default values for the animations...
         motionScale: {
+            0: '0',
             50: '.5',
             75: '.75',
             90: '.9',
