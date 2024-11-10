@@ -24,6 +24,11 @@ export default defineConfig({
 })
 ```
 
+## Changelog
+
+It is now updated to match `v4` of the Tailwind plugin.
+
+
 ## Demo
 
 Coming soon. A big fancy demo and doc page will be coming soon. For now, please just reference the README and the `test/index.html file.`

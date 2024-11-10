@@ -1,0 +1,1112 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing the Tailwind Plugin vs the UnoCSS Preset</title>
+    <link id="stylesheet" rel="stylesheet" href="../unocss/uno.css">
+
+    <style>
+    .subtitle {
+        font-size: 12px;
+        font-weight: bold;
+        color: #6b7280;
+        margin-bottom: 10px;
+    }
+    aside button {
+        transition: all 225ms ease;
+        display: block;
+        width: 100%;
+        font-size: 11px;
+        font-family: monospace;
+        line-height: 1;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #9ba1ab;
+        background-color: #f8fbff;
+        border: solid 1px #e5e7eb;
+        padding: 10px 10px;
+        text-align: left;
+        outline: none;
+        margin: 2px 0;
+    }
+    aside button:hover {
+        background-color: #e5eaf2;
+    }
+    aside button span {
+        display: none !important;
+    }
+    aside .group {
+        padding-left: 20px;
+    }
+    aside hr {
+        margin: 20px 0;
+        opacity: 0.5;
+    }
+    .toggle-group {
+        position: relative;
+    }
+    .toggle-group:before {
+        content: '+';
+        opacity: 0.6;
+        font-size: 17px;
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+    }
+    </style>
+
+</head>
+<body class="antialiased bg-gradient-to-br from-slate-50 to-slate-200">
+    
+
+    <nav class="fixed top-0 left-0 w-full flex justify-center bg-white/90 shadow-sm p-3 z-50">
+        <div class="bg-slate-200 p-0.5 rounded-md flex gap-0.5">
+            <button id="switch-to-unocss" class="transition-all cursor-pointer text-sm text-slate-400 bg-slate-100 px-7 py-4 border-none outline-none font-bold rounded-sm hover:opacity-80 [&.active]:bg-white [&.active]:text-pink-300 active">
+                Switch to UnoCSS
+            </button>
+            <button id="switch-to-tailwind" class="transition-all cursor-pointer text-sm text-slate-400 bg-slate-100 px-7 py-4 border-none outline-none font-bold rounded-sm hover:opacity-80 [&.active]:bg-white [&.active]:text-pink-300">
+                Switch to Tailwind
+            </button>
+        </div>
+    </nav>
+
+    
+
+    <div class="grid grid-cols-3 pt-[60px]">
+        <aside class="col-span-1 bg-slate-200/30 h-full overflow-scroll p-[8%]">
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Base Animations (scales)</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+                <div class="subtitle">scale-in</div>
+                <button>motion-scale-in<span class="motion-scale-in">motion-scale-in</span></button>
+                <div class="group">
+                    <button>motion-scale-in-0<span class="motion-scale-in-0">motion-scale-in-0</span></button>
+                    <button>motion-scale-in-50<span class="motion-scale-in-50">motion-scale-in-50</span></button>
+                    <button>motion-scale-in-75<span class="motion-scale-in-75">motion-scale-in-75</span></button>
+                    <button>motion-scale-in-90<span class="motion-scale-in-90">motion-scale-in-90</span></button>
+                    <button>motion-scale-in-95<span class="motion-scale-in-95">motion-scale-in-95</span></button>
+                    <button>motion-scale-in-100<span class="motion-scale-in-100">motion-scale-in-100</span></button>
+                    <button>motion-scale-in-105<span class="motion-scale-in-105">motion-scale-in-105</span></button>
+                    <button>motion-scale-in-110<span class="motion-scale-in-110">motion-scale-in-110</span></button>
+                    <button>motion-scale-in-125<span class="motion-scale-in-125">motion-scale-in-125</span></button>
+                    <button>motion-scale-in-150<span class="motion-scale-in-150">motion-scale-in-150</span></button>
+                    <button>motion-scale-in-[0.82]<span class="motion-scale-in-[0.82]">motion-scale-in-[0.82]</span></button>
+                    <button>motion-scale-in-[1.337]<span class="motion-scale-in-[1.337]">motion-scale-in-[1.337]</span></button>
+                    <button>motion-scale-in-[2.5]<span class="motion-scale-in-[2.5]">motion-scale-in-[2.5]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">scale-x-in</div>
+                <button>motion-scale-x-in<span class="motion-scale-x-in">motion-scale-x-in</span></button>
+                <div class="group">
+                    <button>motion-scale-x-in-0<span class="motion-scale-x-in-0">motion-scale-x-in-0</span></button>
+                    <button>motion-scale-x-in-50<span class="motion-scale-x-in-50">motion-scale-x-in-50</span></button>
+                    <button>motion-scale-x-in-75<span class="motion-scale-x-in-75">motion-scale-x-in-75</span></button>
+                    <button>motion-scale-x-in-90<span class="motion-scale-x-in-90">motion-scale-x-in-90</span></button>
+                    <button>motion-scale-x-in-95<span class="motion-scale-x-in-95">motion-scale-x-in-95</span></button>
+                    <button>motion-scale-x-in-100<span class="motion-scale-x-in-100">motion-scale-x-in-100</span></button>
+                    <button>motion-scale-x-in-105<span class="motion-scale-x-in-105">motion-scale-x-in-105</span></button>
+                    <button>motion-scale-x-in-110<span class="motion-scale-x-in-110">motion-scale-x-in-110</span></button>
+                    <button>motion-scale-x-in-125<span class="motion-scale-x-in-125">motion-scale-x-in-125</span></button>
+                    <button>motion-scale-x-in-150<span class="motion-scale-x-in-150">motion-scale-x-in-150</span></button>
+                    <button>motion-scale-x-in-[0.82]<span class="motion-scale-x-in-[0.82]">motion-scale-x-in-[0.82]</span></button>
+                    <button>motion-scale-x-in-[1.337]<span class="motion-scale-x-in-[1.337]">motion-scale-x-in-[1.337]</span></button>
+                    <button>motion-scale-x-in-[2.5]<span class="motion-scale-x-in-[2.5]">motion-scale-x-in-[2.5]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">scale-y-in</div>
+                <button>motion-scale-y-in<span class="motion-scale-y-in">motion-scale-y-in</span></button>
+                <div class="group">
+                    <button>motion-scale-y-in-0<span class="motion-scale-y-in-0">motion-scale-y-in-0</span></button>
+                    <button>motion-scale-y-in-50<span class="motion-scale-y-in-50">motion-scale-y-in-50</span></button>
+                    <button>motion-scale-y-in-75<span class="motion-scale-y-in-75">motion-scale-y-in-75</span></button>
+                    <button>motion-scale-y-in-90<span class="motion-scale-y-in-90">motion-scale-y-in-90</span></button>
+                    <button>motion-scale-y-in-95<span class="motion-scale-y-in-95">motion-scale-y-in-95</span></button>
+                    <button>motion-scale-y-in-100<span class="motion-scale-y-in-100">motion-scale-y-in-100</span></button>
+                    <button>motion-scale-y-in-105<span class="motion-scale-y-in-105">motion-scale-y-in-105</span></button>
+                    <button>motion-scale-y-in-110<span class="motion-scale-y-in-110">motion-scale-y-in-110</span></button>
+                    <button>motion-scale-y-in-125<span class="motion-scale-y-in-125">motion-scale-y-in-125</span></button>
+                    <button>motion-scale-y-in-150<span class="motion-scale-y-in-150">motion-scale-y-in-150</span></button>
+                    <button>motion-scale-y-in-[0.82]<span class="motion-scale-y-in-[0.82]">motion-scale-y-in-[0.82]</span></button>
+                    <button>motion-scale-y-in-[1.337]<span class="motion-scale-y-in-[1.337]">motion-scale-y-in-[1.337]</span></button>
+                    <button>motion-scale-y-in-[2.5]<span class="motion-scale-y-in-[2.5]">motion-scale-y-in-[2.5]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">scale-out</div>
+                <button>motion-scale-out<span class="motion-scale-out">motion-scale-out</span></button>
+                <div class="group">
+                    <button>motion-scale-out-0<span class="motion-scale-out-0">motion-scale-out-0</span></button>
+                    <button>motion-scale-out-50<span class="motion-scale-out-50">motion-scale-out-50</span></button>
+                    <button>motion-scale-out-75<span class="motion-scale-out-75">motion-scale-out-75</span></button>
+                    <button>motion-scale-out-90<span class="motion-scale-out-90">motion-scale-out-90</span></button>
+                    <button>motion-scale-out-95<span class="motion-scale-out-95">motion-scale-out-95</span></button>
+                    <button>motion-scale-out-100<span class="motion-scale-out-100">motion-scale-out-100</span></button>
+                    <button>motion-scale-out-105<span class="motion-scale-out-105">motion-scale-out-105</span></button>
+                    <button>motion-scale-out-110<span class="motion-scale-out-110">motion-scale-out-110</span></button>
+                    <button>motion-scale-out-125<span class="motion-scale-out-125">motion-scale-out-125</span></button>
+                    <button>motion-scale-out-150<span class="motion-scale-out-150">motion-scale-out-150</span></button>
+                    <button>motion-scale-out-[0.82]<span class="motion-scale-out-[0.82]">motion-scale-out-[0.82]</span></button>
+                    <button>motion-scale-out-[1.337]<span class="motion-scale-out-[1.337]">motion-scale-out-[1.337]</span></button>
+                    <button>motion-scale-out-[2.5]<span class="motion-scale-out-[2.5]">motion-scale-out-[2.5]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">scale-x-out</div>
+                <button>motion-scale-x-out<span class="motion-scale-x-out">motion-scale-x-out</span></button>
+                <div class="group">
+                    <button>motion-scale-x-out-0<span class="motion-scale-x-out-0">motion-scale-x-out-0</span></button>
+                    <button>motion-scale-x-out-50<span class="motion-scale-x-out-50">motion-scale-x-out-50</span></button>
+                    <button>motion-scale-x-out-75<span class="motion-scale-x-out-75">motion-scale-x-out-75</span></button>
+                    <button>motion-scale-x-out-90<span class="motion-scale-x-out-90">motion-scale-x-out-90</span></button>
+                    <button>motion-scale-x-out-95<span class="motion-scale-x-out-95">motion-scale-x-out-95</span></button>
+                    <button>motion-scale-x-out-100<span class="motion-scale-x-out-100">motion-scale-x-out-100</span></button>
+                    <button>motion-scale-x-out-105<span class="motion-scale-x-out-105">motion-scale-x-out-105</span></button>
+                    <button>motion-scale-x-out-110<span class="motion-scale-x-out-110">motion-scale-x-out-110</span></button>
+                    <button>motion-scale-x-out-125<span class="motion-scale-x-out-125">motion-scale-x-out-125</span></button>
+                    <button>motion-scale-x-out-150<span class="motion-scale-x-out-150">motion-scale-x-out-150</span></button>
+                    <button>motion-scale-x-out-[0.82]<span class="motion-scale-x-out-[0.82]">motion-scale-x-out-[0.82]</span></button>
+                    <button>motion-scale-x-out-[1.337]<span class="motion-scale-x-out-[1.337]">motion-scale-x-out-[1.337]</span></button>
+                    <button>motion-scale-x-out-[2.5]<span class="motion-scale-x-out-[2.5]">motion-scale-x-out-[2.5]</span></button>
+                </div>
+                <hr>
+                <div class="subtitle">scale-y-out</div>
+                <button>motion-scale-y-out<span class="motion-scale-y-out">motion-scale-y-out</span></button>
+                <div class="group">
+                    <button>motion-scale-y-out-0<span class="motion-scale-y-out-0">motion-scale-y-out-0</span></button>
+                    <button>motion-scale-y-out-50<span class="motion-scale-y-out-50">motion-scale-y-out-50</span></button>
+                    <button>motion-scale-y-out-75<span class="motion-scale-y-out-75">motion-scale-y-out-75</span></button>
+                    <button>motion-scale-y-out-90<span class="motion-scale-y-out-90">motion-scale-y-out-90</span></button>
+                    <button>motion-scale-y-out-95<span class="motion-scale-y-out-95">motion-scale-y-out-95</span></button>
+                    <button>motion-scale-y-out-100<span class="motion-scale-y-out-100">motion-scale-y-out-100</span></button>
+                    <button>motion-scale-y-out-105<span class="motion-scale-y-out-105">motion-scale-y-out-105</span></button>
+                    <button>motion-scale-y-out-110<span class="motion-scale-y-out-110">motion-scale-y-out-110</span></button>
+                    <button>motion-scale-y-out-125<span class="motion-scale-y-out-125">motion-scale-y-out-125</span></button>
+                    <button>motion-scale-y-out-150<span class="motion-scale-y-out-150">motion-scale-y-out-150</span></button>
+                    <button>motion-scale-y-out-[0.82]<span class="motion-scale-y-out-[0.82]">motion-scale-y-out-[0.82]</span></button>
+                    <button>motion-scale-y-out-[1.337]<span class="motion-scale-y-out-[1.337]">motion-scale-y-out-[1.337]</span></button>
+                    <button>motion-scale-y-out-[2.5]<span class="motion-scale-y-out-[2.5]">motion-scale-y-out-[2.5]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">scale-loop</div>
+                <button>motion-scale-loop<span class="motion-scale-loop">motion-scale-loop</span></button>
+                <div class="group">
+                    <button>motion-scale-loop-0<span class="motion-scale-loop-0">motion-scale-loop-0</span></button>
+                    <button>motion-scale-loop-50<span class="motion-scale-loop-50">motion-scale-loop-50</span></button>
+                    <button>motion-scale-loop-75<span class="motion-scale-loop-75">motion-scale-loop-75</span></button>
+                    <button>motion-scale-loop-90<span class="motion-scale-loop-90">motion-scale-loop-90</span></button>
+                    <button>motion-scale-loop-95<span class="motion-scale-loop-95">motion-scale-loop-95</span></button>
+                    <button>motion-scale-loop-100<span class="motion-scale-loop-100">motion-scale-loop-100</span></button>
+                    <button>motion-scale-loop-105<span class="motion-scale-loop-105">motion-scale-loop-105</span></button>
+                    <button>motion-scale-loop-110<span class="motion-scale-loop-110">motion-scale-loop-110</span></button>
+                    <button>motion-scale-loop-125<span class="motion-scale-loop-125">motion-scale-loop-125</span></button>
+                    <button>motion-scale-loop-150<span class="motion-scale-loop-150">motion-scale-loop-150</span></button>
+                    <button>motion-scale-loop-[0.82]<span class="motion-scale-loop-[0.82]">motion-scale-loop-[0.82]</span></button>
+                    <button>motion-scale-loop-[1.337]<span class="motion-scale-loop-[1.337]">motion-scale-loop-[1.337]</span></button>
+                    <button>motion-scale-loop-[2.5]<span class="motion-scale-loop-[2.5]">motion-scale-loop-[2.5]</span></button>
+                </div>
+                <div class="group">
+                    <button>motion-scale-loop-0/mirror<span class="motion-scale-loop-0/mirror">motion-scale-loop-0/mirror</span></button>
+                    <button>motion-scale-loop-50/mirror<span class="motion-scale-loop-50/mirror">motion-scale-loop-50/mirror</span></button>
+                    <button>motion-scale-loop-75/mirror<span class="motion-scale-loop-75/mirror">motion-scale-loop-75/mirror</span></button>
+                    <button>motion-scale-loop-[2.5]/mirror<span class="motion-scale-loop-[2.5]/mirror">motion-scale-loop-[2.5]/mirror</span></button>
+                </div>
+                <div class="group">
+                    <button>motion-scale-loop-0/reset<span class="motion-scale-loop-0/reset">motion-scale-loop-0/reset</span></button>
+                    <button>motion-scale-loop-50/reset<span class="motion-scale-loop-50/reset">motion-scale-loop-50/reset</span></button>
+                    <button>motion-scale-loop-75/reset<span class="motion-scale-loop-75/reset">motion-scale-loop-75/reset</span></button>
+                    <button>motion-scale-loop-[2.5]/reset<span class="motion-scale-loop-[2.5]/reset">motion-scale-loop-[2.5]/reset</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">scale-x-loop</div>
+                <button>motion-scale-x-loop<span class="motion-scale-x-loop">motion-scale-x-loop</span></button>
+                <div class="group">
+                    <button>motion-scale-x-loop-0<span class="motion-scale-x-loop-0">motion-scale-x-loop-0</span></button>
+                    <button>motion-scale-x-loop-50<span class="motion-scale-x-loop-50">motion-scale-x-loop-50</span></button>
+                    <button>motion-scale-x-loop-75<span class="motion-scale-x-loop-75">motion-scale-x-loop-75</span></button>
+                    <button>motion-scale-x-loop-[2.5]<span class="motion-scale-x-loop-[2.5]">motion-scale-x-loop-[2.5]</span></button>
+                </div>
+                <div class="group">
+                    <button>motion-scale-x-loop-0/mirror<span class="motion-scale-x-loop-0/mirror">motion-scale-x-loop-0/mirror</span></button>
+                    <button>motion-scale-x-loop-50/mirror<span class="motion-scale-x-loop-50/mirror">motion-scale-x-loop-50/mirror</span></button>
+                    <button>motion-scale-x-loop-75/mirror<span class="motion-scale-x-loop-75/mirror">motion-scale-x-loop-75/mirror</span></button>
+                    <button>motion-scale-x-loop-[2.5]/mirror<span class="motion-scale-x-loop-[2.5]/mirror">motion-scale-x-loop-[2.5]/mirror</span></button>
+                </div>
+                <div class="group">
+                    <button>motion-scale-x-loop-0/reset<span class="motion-scale-x-loop-0/reset">motion-scale-x-loop-0/reset</span></button>
+                    <button>motion-scale-x-loop-50/reset<span class="motion-scale-x-loop-50/reset">motion-scale-x-loop-50/reset</span></button>
+                    <button>motion-scale-x-loop-75/reset<span class="motion-scale-x-loop-75/reset">motion-scale-x-loop-75/reset</span></button>
+                    <button>motion-scale-x-loop-[2.5]/reset<span class="motion-scale-x-loop-[2.5]/reset">motion-scale-x-loop-[2.5]/reset</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">scale-y-loop</div>
+                <button>motion-scale-y-loop<span class="motion-scale-y-loop">motion-scale-y-loop</span></button>
+                <div class="group">
+                    <button>motion-scale-y-loop-0<span class="motion-scale-y-loop-0">motion-scale-y-loop-0</span></button>
+                    <button>motion-scale-y-loop-50<span class="motion-scale-y-loop-50">motion-scale-y-loop-50</span></button>
+                    <button>motion-scale-y-loop-75<span class="motion-scale-y-loop-75">motion-scale-y-loop-75</span></button>
+                    <button>motion-scale-y-loop-[2.5]<span class="motion-scale-y-loop-[2.5]">motion-scale-y-loop-[2.5]</span></button>
+                </div>
+                <div class="group">
+                    <button>motion-scale-y-loop-0/mirror<span class="motion-scale-y-loop-0/mirror">motion-scale-y-loop-0/mirror</span></button>
+                    <button>motion-scale-y-loop-50/mirror<span class="motion-scale-y-loop-50/mirror">motion-scale-y-loop-50/mirror</span></button>
+                    <button>motion-scale-y-loop-75/mirror<span class="motion-scale-y-loop-75/mirror">motion-scale-y-loop-75/mirror</span></button>
+                    <button>motion-scale-y-loop-[2.5]/mirror<span class="motion-scale-y-loop-[2.5]/mirror">motion-scale-y-loop-[2.5]/mirror</span></button>
+                </div>
+                <div class="group">
+                    <button>motion-scale-y-loop-0/reset<span class="motion-scale-y-loop-0/reset">motion-scale-y-loop-0/reset</span></button>
+                    <button>motion-scale-y-loop-50/reset<span class="motion-scale-y-loop-50/reset">motion-scale-y-loop-50/reset</span></button>
+                    <button>motion-scale-y-loop-75/reset<span class="motion-scale-y-loop-75/reset">motion-scale-y-loop-75/reset</span></button>
+                    <button>motion-scale-y-loop-[2.5]/reset<span class="motion-scale-y-loop-[2.5]/reset">motion-scale-y-loop-[2.5]/reset</span></button>
+                </div>
+                <hr>
+
+            </div>
+
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Base Animations (translates)</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+                <div class="subtitle">translate-x-in</div>
+                <button>motion-translate-x-in<span class="motion-translate-x-in">motion-translate-x-in</span></button>
+                <div class="group">
+                    <button>motion-translate-x-in-0<span class="motion-translate-x-in-0">motion-translate-x-in-0</span></button>
+                    <button>motion-translate-x-in-25<span class="motion-translate-x-in-25">motion-translate-x-in-25</span></button>
+                    <button>motion-translate-x-in-50<span class="motion-translate-x-in-50">motion-translate-x-in-50</span></button>
+                    <button>motion-translate-x-in-75<span class="motion-translate-x-in-75">motion-translate-x-in-75</span></button>
+                    <button>motion-translate-x-in-100<span class="motion-translate-x-in-100">motion-translate-x-in-100</span></button>
+                    <button>motion-translate-x-in-150<span class="motion-translate-x-in-150">motion-translate-x-in-150</span></button>
+                    <button>motion-translate-x-in-[42px]<span class="motion-translate-x-in-[42px]">motion-translate-x-in-[42px]</span></button>
+                    <button>motion-translate-x-in-[13rem]<span class="motion-translate-x-in-[13rem]">motion-translate-x-in-[13rem]</span></button>
+                    <button>motion-translate-x-in-[27vw]<span class="motion-translate-x-in-[27vw]">motion-translate-x-in-[27vw]</span></button>
+                    <button>-motion-translate-x-in-50<span class="-motion-translate-x-in-50">-motion-translate-x-in-50</span></button>
+                    <button>motion-translate-x-in-[-15rem]<span class="motion-translate-x-in-[-15rem]">motion-translate-x-in-[-15rem]</span></button>
+                    <button>-motion-translate-x-in-[42px]<span class="-motion-translate-x-in-[42px]">-motion-translate-x-in-[42px]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">translate-y-in</div>
+                <button>motion-translate-y-in<span class="motion-translate-y-in">motion-translate-y-in</span></button>
+                <div class="group">
+                    <button>motion-translate-y-in-0<span class="motion-translate-y-in-0">motion-translate-y-in-0</span></button>
+                    <button>motion-translate-y-in-25<span class="motion-translate-y-in-25">motion-translate-y-in-25</span></button>
+                    <button>motion-translate-y-in-50<span class="motion-translate-y-in-50">motion-translate-y-in-50</span></button>
+                    <button>motion-translate-y-in-75<span class="motion-translate-y-in-75">motion-translate-y-in-75</span></button>
+                    <button>motion-translate-y-in-100<span class="motion-translate-y-in-100">motion-translate-y-in-100</span></button>
+                    <button>motion-translate-y-in-150<span class="motion-translate-y-in-150">motion-translate-y-in-150</span></button>
+                    <button>motion-translate-y-in-[88vh]<span class="motion-translate-y-in-[88vh]">motion-translate-y-in-[88vh]</span></button>
+                    <button>motion-translate-y-in-[23px]<span class="motion-translate-y-in-[23px]">motion-translate-y-in-[23px]</span></button>
+                    <button>motion-translate-y-in-[7.5em]<span class="motion-translate-y-in-[7.5em]">motion-translate-y-in-[7.5em]</span></button>
+                    <button>-motion-translate-y-in-75<span class="-motion-translate-y-in-75">-motion-translate-y-in-75</span></button>
+                    <button>motion-translate-y-in-[-42vh]<span class="motion-translate-y-in-[-42vh]">motion-translate-y-in-[-42vh]</span></button>
+                    <button>-motion-translate-y-in-[65px]<span class="-motion-translate-y-in-[65px]">-motion-translate-y-in-[65px]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">translate-x-out</div>
+                <button>motion-translate-x-out<span class="motion-translate-x-out">motion-translate-x-out</span></button>
+                <div class="group">
+                    <button>motion-translate-x-out-0<span class="motion-translate-x-out-0">motion-translate-x-out-0</span></button>
+                    <button>motion-translate-x-out-25<span class="motion-translate-x-out-25">motion-translate-x-out-25</span></button>
+                    <button>motion-translate-x-out-50<span class="motion-translate-x-out-50">motion-translate-x-out-50</span></button>
+                    <button>motion-translate-x-out-75<span class="motion-translate-x-out-75">motion-translate-x-out-75</span></button>
+                    <button>motion-translate-x-out-100<span class="motion-translate-x-out-100">motion-translate-x-out-100</span></button>
+                    <button>motion-translate-x-out-150<span class="motion-translate-x-out-150">motion-translate-x-out-150</span></button>
+                    <button>motion-translate-x-out-[42px]<span class="motion-translate-x-out-[42px]">motion-translate-x-out-[42px]</span></button>
+                    <button>-motion-translate-x-out-50<span class="-motion-translate-x-out-50">-motion-translate-x-out-50</span></button>
+                    <button>motion-translate-x-out-[-15rem]<span class="motion-translate-x-out-[-15rem]">motion-translate-x-out-[-15rem]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">translate-y-out</div>
+                <button>motion-translate-y-out<span class="motion-translate-y-out">motion-translate-y-out</span></button>
+                <div class="group">
+                    <button>motion-translate-y-out-0<span class="motion-translate-y-out-0">motion-translate-y-out-0</span></button>
+                    <button>motion-translate-y-out-25<span class="motion-translate-y-out-25">motion-translate-y-out-25</span></button>
+                    <button>motion-translate-y-out-50<span class="motion-translate-y-out-50">motion-translate-y-out-50</span></button>
+                    <button>motion-translate-y-out-75<span class="motion-translate-y-out-75">motion-translate-y-out-75</span></button>
+                    <button>motion-translate-y-out-100<span class="motion-translate-y-out-100">motion-translate-y-out-100</span></button>
+                    <button>motion-translate-y-out-150<span class="motion-translate-y-out-150">motion-translate-y-out-150</span></button>
+                    <button>motion-translate-y-out-[88vh]<span class="motion-translate-y-out-[88vh]">motion-translate-y-out-[88vh]</span></button>
+                    <button>-motion-translate-y-out-75<span class="-motion-translate-y-out-75">-motion-translate-y-out-75</span></button>
+                    <button>motion-translate-y-out-[-42vh]<span class="motion-translate-y-out-[-42vh]">motion-translate-y-out-[-42vh]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">translate-x-loop</div>
+                <button>motion-translate-x-loop<span class="motion-translate-x-loop">motion-translate-x-loop</span></button>
+                <div class="group">
+                    <button>motion-translate-x-loop-0<span class="motion-translate-x-loop-0">motion-translate-x-loop-0</span></button>
+                    <button>motion-translate-x-loop-25<span class="motion-translate-x-loop-25">motion-translate-x-loop-25</span></button>
+                    <button>motion-translate-x-loop-50<span class="motion-translate-x-loop-50">motion-translate-x-loop-50</span></button>
+                    <button>motion-translate-x-loop-75<span class="motion-translate-x-loop-75">motion-translate-x-loop-75</span></button>
+                    <button>motion-translate-x-loop-100<span class="motion-translate-x-loop-100">motion-translate-x-loop-100</span></button>
+                    <button>motion-translate-x-loop-150<span class="motion-translate-x-loop-150">motion-translate-x-loop-150</span></button>
+                    <button>motion-translate-x-loop-[42px]<span class="motion-translate-x-loop-[42px]">motion-translate-x-loop-[42px]</span></button>
+                    <button>-motion-translate-x-loop-50<span class="-motion-translate-x-loop-50">-motion-translate-x-loop-50</span></button>
+                    <button>motion-translate-x-loop-[-15rem]<span class="motion-translate-x-loop-[-15rem]">motion-translate-x-loop-[-15rem]</span></button>
+                    <button>motion-translate-x-loop-25/mirror<span class="motion-translate-x-loop-25/mirror">motion-translate-x-loop-25/mirror</span></button>
+                    <button>motion-translate-x-loop-50/reset<span class="motion-translate-x-loop-50/reset">motion-translate-x-loop-50/reset</span></button>
+                    <button>motion-translate-x-loop-[42px]/mirror<span class="motion-translate-x-loop-[42px]/mirror">motion-translate-x-loop-[42px]/mirror</span></button>
+                    <button>motion-translate-x-loop-[-15rem]/reset<span class="motion-translate-x-loop-[-15rem]/reset">motion-translate-x-loop-[-15rem]/reset</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">translate-y-loop</div>
+                <button>motion-translate-y-loop<span class="motion-translate-y-loop">motion-translate-y-loop</span></button>
+                <div class="group">
+                    <button>motion-translate-y-loop-0<span class="motion-translate-y-loop-0">motion-translate-y-loop-0</span></button>
+                    <button>motion-translate-y-loop-25<span class="motion-translate-y-loop-25">motion-translate-y-loop-25</span></button>
+                    <button>motion-translate-y-loop-50<span class="motion-translate-y-loop-50">motion-translate-y-loop-50</span></button>
+                    <button>motion-translate-y-loop-75<span class="motion-translate-y-loop-75">motion-translate-y-loop-75</span></button>
+                    <button>motion-translate-y-loop-100<span class="motion-translate-y-loop-100">motion-translate-y-loop-100</span></button>
+                    <button>motion-translate-y-loop-150<span class="motion-translate-y-loop-150">motion-translate-y-loop-150</span></button>
+                    <button>-motion-translate-y-loop-150<span class="-motion-translate-y-loop-150">-motion-translate-y-loop-150</span></button>
+                    <button>motion-translate-y-loop-[88vh]<span class="motion-translate-y-loop-[88vh]">motion-translate-y-loop-[88vh]</span></button>
+                    <button>-motion-translate-y-loop-75<span class="-motion-translate-y-loop-75">-motion-translate-y-loop-75</span></button>
+                    <button>motion-translate-y-loop-[-42vh]<span class="motion-translate-y-loop-[-42vh]">motion-translate-y-loop-[-42vh]</span></button>
+                    <button>motion-translate-y-loop-25/mirror<span class="motion-translate-y-loop-25/mirror">motion-translate-y-loop-25/mirror</span></button>
+                    <button>motion-translate-y-loop-50/reset<span class="motion-translate-y-loop-50/reset">motion-translate-y-loop-50/reset</span></button>
+                    <button>motion-translate-y-loop-[88vh]/mirror<span class="motion-translate-y-loop-[88vh]/mirror">motion-translate-y-loop-[88vh]/mirror</span></button>
+                    <button>motion-translate-y-loop-[-42vh]/reset<span class="motion-translate-y-loop-[-42vh]/reset">motion-translate-y-loop-[-42vh]/reset</span></button>
+                </div>
+                <hr>
+                
+            </div>
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Base Animations (rotates)</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+                <div class="subtitle">rotate-in</div>
+                <button>motion-rotate-in<span class="motion-rotate-in">motion-rotate-in</span></button>
+                <div class="group">
+                    <button>motion-rotate-in-0<span class="motion-rotate-in-0">motion-rotate-in-0</span></button>
+                    <button>motion-rotate-in-1<span class="motion-rotate-in-1">motion-rotate-in-1</span></button>
+                    <button>motion-rotate-in-2<span class="motion-rotate-in-2">motion-rotate-in-2</span></button>
+                    <button>motion-rotate-in-3<span class="motion-rotate-in-3">motion-rotate-in-3</span></button>
+                    <button>motion-rotate-in-6<span class="motion-rotate-in-6">motion-rotate-in-6</span></button>
+                    <button>motion-rotate-in-12<span class="motion-rotate-in-12">motion-rotate-in-12</span></button>
+                    <button>motion-rotate-in-45<span class="motion-rotate-in-45">motion-rotate-in-45</span></button>
+                    <button>motion-rotate-in-90<span class="motion-rotate-in-90">motion-rotate-in-90</span></button>
+                    <button>motion-rotate-in-180<span class="motion-rotate-in-180">motion-rotate-in-180</span></button>
+                    <button>motion-rotate-in-[42deg]<span class="motion-rotate-in-[42deg]">motion-rotate-in-[42deg]</span></button>
+                    <button>-motion-rotate-in-45<span class="-motion-rotate-in-45">-motion-rotate-in-45</span></button>
+                    <button>motion-rotate-in-[-15deg]<span class="motion-rotate-in-[-15deg]">motion-rotate-in-[-15deg]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">rotate-out</div>
+                <button>motion-rotate-out<span class="motion-rotate-out">motion-rotate-out</span></button>
+                <div class="group">
+                    <button>motion-rotate-out-0<span class="motion-rotate-out-0">motion-rotate-out-0</span></button>
+                    <button>motion-rotate-out-45<span class="motion-rotate-out-45">motion-rotate-out-45</span></button>
+                    <button>motion-rotate-out-90<span class="motion-rotate-out-90">motion-rotate-out-90</span></button>
+                    <button>motion-rotate-out-180<span class="motion-rotate-out-180">motion-rotate-out-180</span></button>
+                    <button>motion-rotate-out-[42deg]<span class="motion-rotate-out-[42deg]">motion-rotate-out-[42deg]</span></button>
+                    <button>-motion-rotate-out-90<span class="-motion-rotate-out-90">-motion-rotate-out-90</span></button>
+                    <button>motion-rotate-out-[-15deg]<span class="motion-rotate-out-[-15deg]">motion-rotate-out-[-15deg]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">rotate-loop</div>
+                <button>motion-rotate-loop<span class="motion-rotate-loop">motion-rotate-loop</span></button>
+                <div class="group">
+                    <button>motion-rotate-loop-0<span class="motion-rotate-loop-0">motion-rotate-loop-0</span></button>
+                    <button>motion-rotate-loop-45<span class="motion-rotate-loop-45">motion-rotate-loop-45</span></button>
+                    <button>motion-rotate-loop-90<span class="motion-rotate-loop-90">motion-rotate-loop-90</span></button>
+                    <button>motion-rotate-loop-180<span class="motion-rotate-loop-180">motion-rotate-loop-180</span></button>
+                    <button>motion-rotate-loop-[42deg]<span class="motion-rotate-loop-[42deg]">motion-rotate-loop-[42deg]</span></button>
+                    <button>-motion-rotate-loop-90<span class="-motion-rotate-loop-90">-motion-rotate-loop-90</span></button>
+                    <button>motion-rotate-loop-[-15deg]<span class="motion-rotate-loop-[-15deg]">motion-rotate-loop-[-15deg]</span></button>
+                    <button>motion-rotate-loop-45/mirror<span class="motion-rotate-loop-45/mirror">motion-rotate-loop-45/mirror</span></button>
+                    <button>motion-rotate-loop-90/reset<span class="motion-rotate-loop-90/reset">motion-rotate-loop-90/reset</span></button>
+                    <button>motion-rotate-loop-[42deg]/mirror<span class="motion-rotate-loop-[42deg]/mirror">motion-rotate-loop-[42deg]/mirror</span></button>
+                    <button>motion-rotate-loop-[-15deg]/reset<span class="motion-rotate-loop-[-15deg]/reset">motion-rotate-loop-[-15deg]/reset</span></button>
+                </div>
+                <hr>
+            </div>
+
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Base Animations (blurs)</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+                <div class="subtitle">blur-in</div>
+                <button>motion-blur-in<span class="motion-blur-in">motion-blur-in</span></button>
+                <div class="group">
+                    <button>motion-blur-in-0<span class="motion-blur-in-0">motion-blur-in-0</span></button>
+                    <button>motion-blur-in-none<span class="motion-blur-in-none">motion-blur-in-none</span></button>
+                    <button>motion-blur-in-sm<span class="motion-blur-in-sm">motion-blur-in-sm</span></button>
+                    <button>motion-blur-in-md<span class="motion-blur-in-md">motion-blur-in-md</span></button>
+                    <button>motion-blur-in-lg<span class="motion-blur-in-lg">motion-blur-in-lg</span></button>
+                    <button>motion-blur-in-xl<span class="motion-blur-in-xl">motion-blur-in-xl</span></button>
+                    <button>motion-blur-in-2xl<span class="motion-blur-in-2xl">motion-blur-in-2xl</span></button>
+                    <button>motion-blur-in-3xl<span class="motion-blur-in-3xl">motion-blur-in-3xl</span></button>
+                    <button>motion-blur-in-[2px]<span class="motion-blur-in-[2px]">motion-blur-in-[2px]</span></button>
+                    <button>motion-blur-in-[4.5px]<span class="motion-blur-in-[4.5px]">motion-blur-in-[4.5px]</span></button>
+                    <button>motion-blur-in-[0.8rem]<span class="motion-blur-in-[0.8rem]">motion-blur-in-[0.8rem]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">blur-out</div>
+                <button>motion-blur-out<span class="motion-blur-out">motion-blur-out</span></button>
+                <div class="group">
+                    <button>motion-blur-out-0<span class="motion-blur-out-0">motion-blur-out-0</span></button>
+                    <button>motion-blur-out-none<span class="motion-blur-out-none">motion-blur-out-none</span></button>
+                    <button>motion-blur-out-sm<span class="motion-blur-out-sm">motion-blur-out-sm</span></button>
+                    <button>motion-blur-out-md<span class="motion-blur-out-md">motion-blur-out-md</span></button>
+                    <button>motion-blur-out-lg<span class="motion-blur-out-lg">motion-blur-out-lg</span></button>
+                    <button>motion-blur-out-xl<span class="motion-blur-out-xl">motion-blur-out-xl</span></button>
+                    <button>motion-blur-out-2xl<span class="motion-blur-out-2xl">motion-blur-out-2xl</span></button>
+                    <button>motion-blur-out-3xl<span class="motion-blur-out-3xl">motion-blur-out-3xl</span></button>
+                    <button>motion-blur-out-[2px]<span class="motion-blur-out-[2px]">motion-blur-out-[2px]</span></button>
+                    <button>motion-blur-out-[4.5px]<span class="motion-blur-out-[4.5px]">motion-blur-out-[4.5px]</span></button>
+                    <button>motion-blur-out-[0.8rem]<span class="motion-blur-out-[0.8rem]">motion-blur-out-[0.8rem]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">blur-loop</div>
+                <button>motion-blur-loop<span class="motion-blur-loop">motion-blur-loop</span></button>
+                <div class="group">
+                    <button>motion-blur-loop-0<span class="motion-blur-loop-0">motion-blur-loop-0</span></button>
+                    <button>motion-blur-loop-none<span class="motion-blur-loop-none">motion-blur-loop-none</span></button>
+                    <button>motion-blur-loop-sm<span class="motion-blur-loop-sm">motion-blur-loop-sm</span></button>
+                    <button>motion-blur-loop-md<span class="motion-blur-loop-md">motion-blur-loop-md</span></button>
+                    <button>motion-blur-loop-lg<span class="motion-blur-loop-lg">motion-blur-loop-lg</span></button>
+                    <button>motion-blur-loop-xl<span class="motion-blur-loop-xl">motion-blur-loop-xl</span></button>
+                    <button>motion-blur-loop-2xl<span class="motion-blur-loop-2xl">motion-blur-loop-2xl</span></button>
+                    <button>motion-blur-loop-3xl<span class="motion-blur-loop-3xl">motion-blur-loop-3xl</span></button>
+                    <button>motion-blur-loop-sm/mirror<span class="motion-blur-loop-sm/mirror">motion-blur-loop-sm/mirror</span></button>
+                    <button>motion-blur-loop-md/reset<span class="motion-blur-loop-md/reset">motion-blur-loop-md/reset</span></button>
+                    <button>motion-blur-loop-lg/mirror<span class="motion-blur-loop-lg/mirror">motion-blur-loop-lg/mirror</span></button>
+                    <button>motion-blur-loop-xl/reset<span class="motion-blur-loop-xl/reset">motion-blur-loop-xl/reset</span></button>
+                    <button>motion-blur-loop-[2px]<span class="motion-blur-loop-[2px]">motion-blur-loop-[2px]</span></button>
+                    <button>motion-blur-loop-[4.5px]<span class="motion-blur-loop-[4.5px]">motion-blur-loop-[4.5px]</span></button>
+                    <button>motion-blur-loop-[0.8rem]<span class="motion-blur-loop-[0.8rem]">motion-blur-loop-[0.8rem]</span></button>
+                </div>
+                <hr>
+            </div>
+            
+
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Base Animations (grayscale)</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+                <div class="subtitle">grayscale-in</div>
+                <button>motion-grayscale-in<span class="motion-grayscale-in">motion-grayscale-in</span></button>
+                <div class="group">
+                    <button>motion-grayscale-in-0<span class="motion-grayscale-in-0">motion-grayscale-in-0</span></button>
+                    <button>motion-grayscale-in-25<span class="motion-grayscale-in-25">motion-grayscale-in-25</span></button>
+                    <button>motion-grayscale-in-50<span class="motion-grayscale-in-50">motion-grayscale-in-50</span></button>
+                    <button>motion-grayscale-in-75<span class="motion-grayscale-in-75">motion-grayscale-in-75</span></button>
+                    <button>motion-grayscale-in-100<span class="motion-grayscale-in-100">motion-grayscale-in-100</span></button>
+                    <button>motion-grayscale-in-[0.42]<span class="motion-grayscale-in-[0.42]">motion-grayscale-in-[0.42]</span></button>
+                    <button>motion-grayscale-in-[33%]<span class="motion-grayscale-in-[33%]">motion-grayscale-in-[33%]</span></button>
+                    <button>motion-grayscale-in-[0.875]<span class="motion-grayscale-in-[0.875]">motion-grayscale-in-[0.875]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">grayscale-out</div>
+                <button>motion-grayscale-out<span class="motion-grayscale-out">motion-grayscale-out</span></button>
+                <div class="group">
+                    <button>motion-grayscale-out-0<span class="motion-grayscale-out-0">motion-grayscale-out-0</span></button>
+                    <button>motion-grayscale-out-25<span class="motion-grayscale-out-25">motion-grayscale-out-25</span></button>
+                    <button>motion-grayscale-out-50<span class="motion-grayscale-out-50">motion-grayscale-out-50</span></button>
+                    <button>motion-grayscale-out-75<span class="motion-grayscale-out-75">motion-grayscale-out-75</span></button>
+                    <button>motion-grayscale-out-100<span class="motion-grayscale-out-100">motion-grayscale-out-100</span></button>
+                    <button>motion-grayscale-out-[0.42]<span class="motion-grayscale-out-[0.42]">motion-grayscale-out-[0.42]</span></button>
+                    <button>motion-grayscale-out-[33%]<span class="motion-grayscale-out-[33%]">motion-grayscale-out-[33%]</span></button>
+                    <button>motion-grayscale-out-[0.875]<span class="motion-grayscale-out-[0.875]">motion-grayscale-out-[0.875]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">grayscale-loop</div>
+                <button>motion-grayscale-loop<span class="motion-grayscale-loop">motion-grayscale-loop</span></button>
+                <div class="group">
+                    <button>motion-grayscale-loop-0<span class="motion-grayscale-loop-0">motion-grayscale-loop-0</span></button>
+                    <button>motion-grayscale-loop-25<span class="motion-grayscale-loop-25">motion-grayscale-loop-25</span></button>
+                    <button>motion-grayscale-loop-50<span class="motion-grayscale-loop-50">motion-grayscale-loop-50</span></button>
+                    <button>motion-grayscale-loop-75<span class="motion-grayscale-loop-75">motion-grayscale-loop-75</span></button>
+                    <button>motion-grayscale-loop-100<span class="motion-grayscale-loop-100">motion-grayscale-loop-100</span></button>
+                    <button>motion-grayscale-loop-25/mirror<span class="motion-grayscale-loop-25/mirror">motion-grayscale-loop-25/mirror</span></button>
+                    <button>motion-grayscale-loop-50/reset<span class="motion-grayscale-loop-50/reset">motion-grayscale-loop-50/reset</span></button>
+                    <button>motion-grayscale-loop-75/mirror<span class="motion-grayscale-loop-75/mirror">motion-grayscale-loop-75/mirror</span></button>
+                    <button>motion-grayscale-loop-100/reset<span class="motion-grayscale-loop-100/reset">motion-grayscale-loop-100/reset</span></button>
+                    <button>motion-grayscale-loop-[0.42]<span class="motion-grayscale-loop-[0.42]">motion-grayscale-loop-[0.42]</span></button>
+                    <button>motion-grayscale-loop-[33%]<span class="motion-grayscale-loop-[33%]">motion-grayscale-loop-[33%]</span></button>
+                    <button>motion-grayscale-loop-[0.875]<span class="motion-grayscale-loop-[0.875]">motion-grayscale-loop-[0.875]</span></button>
+                </div>
+                <hr>
+            </div>
+
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Base Animations (opacity)</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+                <div class="subtitle">opacity-in</div>
+                <button>motion-opacity-in<span class="motion-opacity-in">motion-opacity-in</span></button>
+                <div class="group">
+                    <button>motion-opacity-in-0<span class="motion-opacity-in-0">motion-opacity-in-0</span></button>
+                    <button>motion-opacity-in-25<span class="motion-opacity-in-25">motion-opacity-in-25</span></button>
+                    <button>motion-opacity-in-50<span class="motion-opacity-in-50">motion-opacity-in-50</span></button>
+                    <button>motion-opacity-in-75<span class="motion-opacity-in-75">motion-opacity-in-75</span></button>
+                    <button>motion-opacity-in-100<span class="motion-opacity-in-100">motion-opacity-in-100</span></button>
+                    <button>motion-opacity-in-[0.42]<span class="motion-opacity-in-[0.42]">motion-opacity-in-[0.42]</span></button>
+                    <button>motion-opacity-in-[33%]<span class="motion-opacity-in-[33%]">motion-opacity-in-[33%]</span></button>
+                    <button>motion-opacity-in-[0.875]<span class="motion-opacity-in-[0.875]">motion-opacity-in-[0.875]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">opacity-out</div>
+                <button>motion-opacity-out<span class="motion-opacity-out">motion-opacity-out</span></button>
+                <div class="group">
+                    <button>motion-opacity-out-0<span class="motion-opacity-out-0">motion-opacity-out-0</span></button>
+                    <button>motion-opacity-out-25<span class="motion-opacity-out-25">motion-opacity-out-25</span></button>
+                    <button>motion-opacity-out-50<span class="motion-opacity-out-50">motion-opacity-out-50</span></button>
+                    <button>motion-opacity-out-75<span class="motion-opacity-out-75">motion-opacity-out-75</span></button>
+                    <button>motion-opacity-out-100<span class="motion-opacity-out-100">motion-opacity-out-100</span></button>
+                    <button>motion-opacity-out-[0.42]<span class="motion-opacity-out-[0.42]">motion-opacity-out-[0.42]</span></button>
+                    <button>motion-opacity-out-[33%]<span class="motion-opacity-out-[33%]">motion-opacity-out-[33%]</span></button>
+                    <button>motion-opacity-out-[0.875]<span class="motion-opacity-out-[0.875]">motion-opacity-out-[0.875]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">opacity-loop</div>
+                <button>motion-opacity-loop<span class="motion-opacity-loop">motion-opacity-loop</span></button>
+                <div class="group">
+                    <button>motion-opacity-loop-0<span class="motion-opacity-loop-0">motion-opacity-loop-0</span></button>
+                    <button>motion-opacity-loop-25<span class="motion-opacity-loop-25">motion-opacity-loop-25</span></button>
+                    <button>motion-opacity-loop-50<span class="motion-opacity-loop-50">motion-opacity-loop-50</span></button>
+                    <button>motion-opacity-loop-75<span class="motion-opacity-loop-75">motion-opacity-loop-75</span></button>
+                    <button>motion-opacity-loop-100<span class="motion-opacity-loop-100">motion-opacity-loop-100</span></button>
+                    <button>motion-opacity-loop-25/mirror<span class="motion-opacity-loop-25/mirror">motion-opacity-loop-25/mirror</span></button>
+                    <button>motion-opacity-loop-50/reset<span class="motion-opacity-loop-50/reset">motion-opacity-loop-50/reset</span></button>
+                    <button>motion-opacity-loop-75/mirror<span class="motion-opacity-loop-75/mirror">motion-opacity-loop-75/mirror</span></button>
+                    <button>motion-opacity-loop-100/reset<span class="motion-opacity-loop-100/reset">motion-opacity-loop-100/reset</span></button>
+                    <button>motion-opacity-loop-[0.42]<span class="motion-opacity-loop-[0.42]">motion-opacity-loop-[0.42]</span></button>
+                    <button>motion-opacity-loop-[33%]<span class="motion-opacity-loop-[33%]">motion-opacity-loop-[33%]</span></button>
+                    <button>motion-opacity-loop-[0.875]<span class="motion-opacity-loop-[0.875]">motion-opacity-loop-[0.875]</span></button>
+                </div>
+                <hr>
+            </div>
+
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Base Animations (background-color)</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+                <div class="subtitle">background-color-in</div>
+                <button>motion-bg-in<span class="motion-bg-in">motion-bg-in</span></button>
+                <div class="group">
+                    <button>motion-bg-in-red-500<span class="motion-bg-in-red-500">motion-bg-in-red-500</span></button>
+                    <button>motion-bg-in-blue-500<span class="motion-bg-in-blue-500">motion-bg-in-blue-500</span></button>
+                    <button>motion-bg-in-green-500<span class="motion-bg-in-green-500">motion-bg-in-green-500</span></button>
+                    <button>motion-bg-in-yellow-500<span class="motion-bg-in-yellow-500">motion-bg-in-yellow-500</span></button>
+                    <button>motion-bg-in-purple-500<span class="motion-bg-in-purple-500">motion-bg-in-purple-500</span></button>
+                    <button>motion-bg-in-[#ff5733]<span class="motion-bg-in-[#ff5733]">motion-bg-in-[#ff5733]</span></button>
+                    <button>motion-bg-in-[rgb(100,200,50)]<span class="motion-bg-in-[rgb(100,200,50)]">motion-bg-in-[rgb(100,200,50)]</span></button>
+                    <button>motion-bg-in-[hsl(200,50%,75%)]<span class="motion-bg-in-[hsl(200,50%,75%)]">motion-bg-in-[hsl(200,50%,75%)]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">background-color-out</div>
+                <button>motion-bg-out<span class="motion-bg-out">motion-bg-out</span></button>
+                <div class="group">
+                    <button>motion-bg-out-red-500<span class="motion-bg-out-red-500">motion-bg-out-red-500</span></button>
+                    <button>motion-bg-out-blue-500<span class="motion-bg-out-blue-500">motion-bg-out-blue-500</span></button>
+                    <button>motion-bg-out-green-500<span class="motion-bg-out-green-500">motion-bg-out-green-500</span></button>
+                    <button>motion-bg-out-yellow-500<span class="motion-bg-out-yellow-500">motion-bg-out-yellow-500</span></button>
+                    <button>motion-bg-out-purple-500<span class="motion-bg-out-purple-500">motion-bg-out-purple-500</span></button>
+                    <button>motion-bg-out-[#ff5733]<span class="motion-bg-out-[#ff5733]">motion-bg-out-[#ff5733]</span></button>
+                    <button>motion-bg-out-[rgb(100,200,50)]<span class="motion-bg-out-[rgb(100,200,50)]">motion-bg-out-[rgb(100,200,50)]</span></button>
+                    <button>motion-bg-out-[hsl(200,50%,75%)]<span class="motion-bg-out-[hsl(200,50%,75%)]">motion-bg-out-[hsl(200,50%,75%)]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">background-color-loop</div>
+                <button>motion-bg-loop<span class="motion-bg-loop">motion-bg-loop</span></button>
+                <div class="group">
+                    <button>motion-bg-loop-red-500<span class="motion-bg-loop-red-500">motion-bg-loop-red-500</span></button>
+                    <button>motion-bg-loop-blue-500<span class="motion-bg-loop-blue-500">motion-bg-loop-blue-500</span></button>
+                    <button>motion-bg-loop-green-500<span class="motion-bg-loop-green-500">motion-bg-loop-green-500</span></button>
+                    <button>motion-bg-loop-yellow-500<span class="motion-bg-loop-yellow-500">motion-bg-loop-yellow-500</span></button>
+                    <button>motion-bg-loop-purple-500<span class="motion-bg-loop-purple-500">motion-bg-loop-purple-500</span></button>
+                    <button>motion-bg-loop-red-500/mirror<span class="motion-bg-loop-red-500/mirror">motion-bg-loop-red-500/mirror</span></button>
+                    <button>motion-bg-loop-blue-500/reset<span class="motion-bg-loop-blue-500/reset">motion-bg-loop-blue-500/reset</span></button>
+                    <button>motion-bg-loop-[#ff5733]<span class="motion-bg-loop-[#ff5733]">motion-bg-loop-[#ff5733]</span></button>
+                    <button>motion-bg-loop-[rgb(100,200,50)]<span class="motion-bg-loop-[rgb(100,200,50)]">motion-bg-loop-[rgb(100,200,50)]</span></button>
+                    <button>motion-bg-loop-[hsl(200,50%,75%)]<span class="motion-bg-loop-[hsl(200,50%,75%)]">motion-bg-loop-[hsl(200,50%,75%)]</span></button>
+                </div>
+                <hr>
+            </div>
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Base Animations (text-color)</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+                <div class="subtitle">text-color-in</div>
+                <button>motion-text-in<span class="motion-text-in">motion-text-in</span></button>
+                <div class="group">
+                    <button>motion-text-in-red-500<span class="motion-text-in-red-500">motion-text-in-red-500</span></button>
+                    <button>motion-text-in-blue-500<span class="motion-text-in-blue-500">motion-text-in-blue-500</span></button>
+                    <button>motion-text-in-green-500<span class="motion-text-in-green-500">motion-text-in-green-500</span></button>
+                    <button>motion-text-in-yellow-500<span class="motion-text-in-yellow-500">motion-text-in-yellow-500</span></button>
+                    <button>motion-text-in-purple-500<span class="motion-text-in-purple-500">motion-text-in-purple-500</span></button>
+                    <button>motion-text-in-[#ff5733]<span class="motion-text-in-[#ff5733]">motion-text-in-[#ff5733]</span></button>
+                    <button>motion-text-in-[rgb(100,200,50)]<span class="motion-text-in-[rgb(100,200,50)]">motion-text-in-[rgb(100,200,50)]</span></button>
+                    <button>motion-text-in-[hsl(200,50%,75%)]<span class="motion-text-in-[hsl(200,50%,75%)]">motion-text-in-[hsl(200,50%,75%)]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">text-color-out</div>
+                <button>motion-text-out<span class="motion-text-out">motion-text-out</span></button>
+                <div class="group">
+                    <button>motion-text-out-red-500<span class="motion-text-out-red-500">motion-text-out-red-500</span></button>
+                    <button>motion-text-out-blue-500<span class="motion-text-out-blue-500">motion-text-out-blue-500</span></button>
+                    <button>motion-text-out-green-500<span class="motion-text-out-green-500">motion-text-out-green-500</span></button>
+                    <button>motion-text-out-yellow-500<span class="motion-text-out-yellow-500">motion-text-out-yellow-500</span></button>
+                    <button>motion-text-out-purple-500<span class="motion-text-out-purple-500">motion-text-out-purple-500</span></button>
+                    <button>motion-text-out-[#ff5733]<span class="motion-text-out-[#ff5733]">motion-text-out-[#ff5733]</span></button>
+                    <button>motion-text-out-[rgb(100,200,50)]<span class="motion-text-out-[rgb(100,200,50)]">motion-text-out-[rgb(100,200,50)]</span></button>
+                    <button>motion-text-out-[hsl(200,50%,75%)]<span class="motion-text-out-[hsl(200,50%,75%)]">motion-text-out-[hsl(200,50%,75%)]</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">text-color-loop</div>
+                <button>motion-text-loop<span class="motion-text-loop">motion-text-loop</span></button>
+                <div class="group">
+                    <button>motion-text-loop-red-500<span class="motion-text-loop-red-500">motion-text-loop-red-500</span></button>
+                    <button>motion-text-loop-blue-500<span class="motion-text-loop-blue-500">motion-text-loop-blue-500</span></button>
+                    <button>motion-text-loop-green-500<span class="motion-text-loop-green-500">motion-text-loop-green-500</span></button>
+                    <button>motion-text-loop-yellow-500<span class="motion-text-loop-yellow-500">motion-text-loop-yellow-500</span></button>
+                    <button>motion-text-loop-purple-500<span class="motion-text-loop-purple-500">motion-text-loop-purple-500</span></button>
+                    <button>motion-text-loop-red-500/mirror<span class="motion-text-loop-red-500/mirror">motion-text-loop-red-500/mirror</span></button>
+                    <button>motion-text-loop-blue-500/reset<span class="motion-text-loop-blue-500/reset">motion-text-loop-blue-500/reset</span></button>
+                    <button>motion-text-loop-[#ff5733]<span class="motion-text-loop-[#ff5733]">motion-text-loop-[#ff5733]</span></button>
+                    <button>motion-text-loop-[rgb(100,200,50)]<span class="motion-text-loop-[rgb(100,200,50)]">motion-text-loop-[rgb(100,200,50)]</span></button>
+                    <button>motion-text-loop-[hsl(200,50%,75%)]<span class="motion-text-loop-[hsl(200,50%,75%)]">motion-text-loop-[hsl(200,50%,75%)]</span></button>
+                </div>
+                <hr>
+            </div>
+
+            
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Motion Presets</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+                
+
+                <div class="subtitle">fade</div>
+                <button>motion-preset-fade<span class="motion-preset-fade">motion-preset-fade</span></button>
+                <div class="group">
+                    <button>motion-preset-fade-sm<span class="motion-preset-fade-sm">motion-preset-fade-sm</span></button>
+                    <button>motion-preset-fade-md<span class="motion-preset-fade-md">motion-preset-fade-md</span></button>
+                    <button>motion-preset-fade-lg<span class="motion-preset-fade-lg">motion-preset-fade-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">slide (right)</div>
+                <button>motion-preset-slide-right<span class="motion-preset-slide-right">motion-preset-slide-right</span></button>
+                <div class="group">
+                    <button>motion-preset-slide-right-sm<span class="motion-preset-slide-right-sm">motion-preset-slide-right-sm</span></button>
+                    <button>motion-preset-slide-right-md<span class="motion-preset-slide-right-md">motion-preset-slide-right-md</span></button>
+                    <button>motion-preset-slide-right-lg<span class="motion-preset-slide-right-lg">motion-preset-slide-right-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">slide (left)</div>
+                <button>motion-preset-slide-left<span class="motion-preset-slide-left">motion-preset-slide-left</span></button>
+                <div class="group">
+                    <button>motion-preset-slide-left-sm<span class="motion-preset-slide-left-sm">motion-preset-slide-left-sm</span></button>
+                    <button>motion-preset-slide-left-md<span class="motion-preset-slide-left-md">motion-preset-slide-left-md</span></button>
+                    <button>motion-preset-slide-left-lg<span class="motion-preset-slide-left-lg">motion-preset-slide-left-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">slide (up)</div>
+                <button>motion-preset-slide-up<span class="motion-preset-slide-up">motion-preset-slide-up</span></button>
+                <div class="group">
+                    <button>motion-preset-slide-up-sm<span class="motion-preset-slide-up-sm">motion-preset-slide-up-sm</span></button>
+                    <button>motion-preset-slide-up-md<span class="motion-preset-slide-up-md">motion-preset-slide-up-md</span></button>
+                    <button>motion-preset-slide-up-lg<span class="motion-preset-slide-up-lg">motion-preset-slide-up-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">slide (down)</div>
+                <button>motion-preset-slide-down<span class="motion-preset-slide-down">motion-preset-slide-down</span></button>
+                <div class="group">
+                    <button>motion-preset-slide-down-sm<span class="motion-preset-slide-down-sm">motion-preset-slide-down-sm</span></button>
+                    <button>motion-preset-slide-down-md<span class="motion-preset-slide-down-md">motion-preset-slide-down-md</span></button>
+                    <button>motion-preset-slide-down-lg<span class="motion-preset-slide-down-lg">motion-preset-slide-down-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">slide (up-right)</div>
+                <button>motion-preset-slide-up-right<span class="motion-preset-slide-up-right">motion-preset-slide-up-right</span></button>
+                <div class="group">
+                    <button>motion-preset-slide-up-right-sm<span class="motion-preset-slide-up-right-sm">motion-preset-slide-up-right-sm</span></button>
+                    <button>motion-preset-slide-up-right-md<span class="motion-preset-slide-up-right-md">motion-preset-slide-up-right-md</span></button>
+                    <button>motion-preset-slide-up-right-lg<span class="motion-preset-slide-up-right-lg">motion-preset-slide-up-right-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">slide (up-left)</div>
+                <button>motion-preset-slide-up-left<span class="motion-preset-slide-up-left">motion-preset-slide-up-left</span></button>
+                <div class="group">
+                    <button>motion-preset-slide-up-left-sm<span class="motion-preset-slide-up-left-sm">motion-preset-slide-up-left-sm</span></button>
+                    <button>motion-preset-slide-up-left-md<span class="motion-preset-slide-up-left-md">motion-preset-slide-up-left-md</span></button>
+                    <button>motion-preset-slide-up-left-lg<span class="motion-preset-slide-up-left-lg">motion-preset-slide-up-left-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">slide (down-left)</div>
+                <button>motion-preset-slide-down-left<span class="motion-preset-slide-down-left">motion-preset-slide-down-left</span></button>
+                <div class="group">
+                    <button>motion-preset-slide-down-left-sm<span class="motion-preset-slide-down-left-sm">motion-preset-slide-down-left-sm</span></button>
+                    <button>motion-preset-slide-down-left-md<span class="motion-preset-slide-down-left-md">motion-preset-slide-down-left-md</span></button>
+                    <button>motion-preset-slide-down-left-lg<span class="motion-preset-slide-down-left-lg">motion-preset-slide-down-left-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">slide (down-right)</div>
+                <button>motion-preset-slide-down-right<span class="motion-preset-slide-down-right">motion-preset-slide-down-right</span></button>
+                <div class="group">
+                    <button>motion-preset-slide-down-right-sm<span class="motion-preset-slide-down-right-sm">motion-preset-slide-down-right-sm</span></button>
+                    <button>motion-preset-slide-down-right-md<span class="motion-preset-slide-down-right-md">motion-preset-slide-down-right-md</span></button>
+                    <button>motion-preset-slide-down-right-lg<span class="motion-preset-slide-down-right-lg">motion-preset-slide-down-right-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">focus</div>
+                <button>motion-preset-focus<span class="motion-preset-focus">motion-preset-focus</span></button>
+                <div class="group">
+                    <button>motion-preset-focus-sm<span class="motion-preset-focus-sm">motion-preset-focus-sm</span></button>
+                    <button>motion-preset-focus-md<span class="motion-preset-focus-md">motion-preset-focus-md</span></button>
+                    <button>motion-preset-focus-lg<span class="motion-preset-focus-lg">motion-preset-focus-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">blur (right)</div>
+                <button>motion-preset-blur-right<span class="motion-preset-blur-right">motion-preset-blur-right</span></button>
+                <div class="group">
+                    <button>motion-preset-blur-right-sm<span class="motion-preset-blur-right-sm">motion-preset-blur-right-sm</span></button>
+                    <button>motion-preset-blur-right-md<span class="motion-preset-blur-right-md">motion-preset-blur-right-md</span></button>
+                    <button>motion-preset-blur-right-lg<span class="motion-preset-blur-right-lg">motion-preset-blur-right-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">blur (left)</div>
+                <button>motion-preset-blur-left<span class="motion-preset-blur-left">motion-preset-blur-left</span></button>
+                <div class="group">
+                    <button>motion-preset-blur-left-sm<span class="motion-preset-blur-left-sm">motion-preset-blur-left-sm</span></button>
+                    <button>motion-preset-blur-left-md<span class="motion-preset-blur-left-md">motion-preset-blur-left-md</span></button>
+                    <button>motion-preset-blur-left-lg<span class="motion-preset-blur-left-lg">motion-preset-blur-left-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">blur (up)</div>
+                <button>motion-preset-blur-up<span class="motion-preset-blur-up">motion-preset-blur-up</span></button>
+                <div class="group">
+                    <button>motion-preset-blur-up-sm<span class="motion-preset-blur-up-sm">motion-preset-blur-up-sm</span></button>
+                    <button>motion-preset-blur-up-md<span class="motion-preset-blur-up-md">motion-preset-blur-up-md</span></button>
+                    <button>motion-preset-blur-up-lg<span class="motion-preset-blur-up-lg">motion-preset-blur-up-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">blur (down)</div>
+                <button>motion-preset-blur-down<span class="motion-preset-blur-down">motion-preset-blur-down</span></button>
+                <div class="group">
+                    <button>motion-preset-blur-down-sm<span class="motion-preset-blur-down-sm">motion-preset-blur-down-sm</span></button>
+                    <button>motion-preset-blur-down-md<span class="motion-preset-blur-down-md">motion-preset-blur-down-md</span></button>
+                    <button>motion-preset-blur-down-lg<span class="motion-preset-blur-down-lg">motion-preset-blur-down-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">rebound</div>
+                <button>motion-preset-rebound<span class="motion-preset-rebound">motion-preset-rebound</span></button>
+                <div class="group">
+                    <button>motion-preset-rebound-right<span class="motion-preset-rebound-right">motion-preset-rebound-right</span></button>
+                    <button>motion-preset-rebound-left<span class="motion-preset-rebound-left">motion-preset-rebound-left</span></button>
+                    <button>motion-preset-rebound-up<span class="motion-preset-rebound-up">motion-preset-rebound-up</span></button>
+                    <button>motion-preset-rebound-down<span class="motion-preset-rebound-down">motion-preset-rebound-down</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">bounce</div>
+                <button>motion-preset-bounce<span class="motion-preset-bounce">motion-preset-bounce</span></button>
+                <hr>
+
+                <div class="subtitle">expand</div>
+                <button>motion-preset-expand<span class="motion-preset-expand">motion-preset-expand</span></button>
+                <hr>
+
+                <div class="subtitle">shrink</div>
+                <button>motion-preset-shrink<span class="motion-preset-shrink">motion-preset-shrink</span></button>
+                <hr>
+
+                <div class="subtitle">pop</div>
+                <button>motion-preset-pop<span class="motion-preset-pop">motion-preset-pop</span></button>
+                <hr>
+
+                <div class="subtitle">compress</div>
+                <button>motion-preset-compress<span class="motion-preset-compress">motion-preset-compress</span></button>
+                <hr>
+
+                <div class="subtitle">shake</div>
+                <button>motion-preset-shake<span class="motion-preset-shake">motion-preset-shake</span></button>
+                <hr>
+
+                <div class="subtitle">wiggle</div>
+                <button>motion-preset-wiggle<span class="motion-preset-wiggle">motion-preset-wiggle</span></button>
+                <hr>
+
+                <div class="subtitle">confetti</div>
+                <button>motion-preset-confetti<span class="motion-preset-confetti">motion-preset-confetti</span></button>
+                <hr>
+
+                <div class="subtitle">pulse</div>
+                <button>motion-preset-pulse<span class="motion-preset-pulse">motion-preset-pulse</span></button>
+                <div class="group">
+                    <button>motion-preset-pulse-sm<span class="motion-preset-pulse-sm">motion-preset-pulse-sm</span></button>
+                    <button>motion-preset-pulse-md<span class="motion-preset-pulse-md">motion-preset-pulse-md</span></button>
+                    <button>motion-preset-pulse-lg<span class="motion-preset-pulse-lg">motion-preset-pulse-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">wobble</div>
+                <button>motion-preset-wobble<span class="motion-preset-wobble">motion-preset-wobble</span></button>
+                <div class="group">
+                    <button>motion-preset-wobble-sm<span class="motion-preset-wobble-sm">motion-preset-wobble-sm</span></button>
+                    <button>motion-preset-wobble-md<span class="motion-preset-wobble-md">motion-preset-wobble-md</span></button>
+                    <button>motion-preset-wobble-lg<span class="motion-preset-wobble-lg">motion-preset-wobble-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">seesaw</div>
+                <button>motion-preset-seesaw<span class="motion-preset-seesaw">motion-preset-seesaw</span></button>
+                <div class="group">
+                    <button>motion-preset-seesaw-sm<span class="motion-preset-seesaw-sm">motion-preset-seesaw-sm</span></button>
+                    <button>motion-preset-seesaw-md<span class="motion-preset-seesaw-md">motion-preset-seesaw-md</span></button>
+                    <button>motion-preset-seesaw-lg<span class="motion-preset-seesaw-lg">motion-preset-seesaw-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">oscillate</div>
+                <button>motion-preset-oscillate<span class="motion-preset-oscillate">motion-preset-oscillate</span></button>
+                <div class="group">
+                    <button>motion-preset-oscillate-sm<span class="motion-preset-oscillate-sm">motion-preset-oscillate-sm</span></button>
+                    <button>motion-preset-oscillate-md<span class="motion-preset-oscillate-md">motion-preset-oscillate-md</span></button>
+                    <button>motion-preset-oscillate-lg<span class="motion-preset-oscillate-lg">motion-preset-oscillate-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">stretch</div>
+                <button>motion-preset-stretch<span class="motion-preset-stretch">motion-preset-stretch</span></button>
+                <div class="group">
+                    <button>motion-preset-stretch-sm<span class="motion-preset-stretch-sm">motion-preset-stretch-sm</span></button>
+                    <button>motion-preset-stretch-md<span class="motion-preset-stretch-md">motion-preset-stretch-md</span></button>
+                    <button>motion-preset-stretch-lg<span class="motion-preset-stretch-lg">motion-preset-stretch-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">float</div>
+                <button>motion-preset-float<span class="motion-preset-float">motion-preset-float</span></button>
+                <div class="group">
+                    <button>motion-preset-float-sm<span class="motion-preset-float-sm">motion-preset-float-sm</span></button>
+                    <button>motion-preset-float-md<span class="motion-preset-float-md">motion-preset-float-md</span></button>
+                    <button>motion-preset-float-lg<span class="motion-preset-float-lg">motion-preset-float-lg</span></button>
+                </div>
+                <hr>
+
+                <div class="subtitle">spin</div>
+                <button>motion-preset-spin<span class="motion-preset-spin">motion-preset-spin</span></button>
+                <hr>
+
+                <div class="subtitle">blink</div>
+                <button>motion-preset-blink<span class="motion-preset-blink">motion-preset-blink</span></button>
+                <hr>
+
+                <div class="subtitle">typewriter</div>
+                <button>motion-preset-typewriter-[29]<span class="motion-preset-typewriter-[29]">motion-preset-typewriter-[29]</span></button>
+                <hr>
+
+                <div class="subtitle">flomoji</div>
+                <button>motion-preset-flomoji-👉<span class="motion-preset-flomoji-👉">motion-preset-flomoji-👉</span></button>
+                <button>motion-preset-flomoji-🚀<span class="motion-preset-flomoji-🚀">motion-preset-flomoji-🚀</span></button>
+                <button>motion-preset-flomoji-👀<span class="motion-preset-flomoji-👀">motion-preset-flomoji-👀</span></button>
+                <button>motion-preset-flomoji-👍<span class="motion-preset-flomoji-👍">motion-preset-flomoji-👍</span></button>
+                <div class="group">
+                    <button>motion-preset-flomoji-[🎉]<span class="motion-preset-flomoji-[🎉]">motion-preset-flomoji-[🎉]</span></button>
+                    <button>motion-preset-flomoji-[🌟]<span class="motion-preset-flomoji-[🌟]">motion-preset-flomoji-[🌟]</span></button>
+                    <button>motion-preset-flomoji-[🎸]<span class="motion-preset-flomoji-[🎸]">motion-preset-flomoji-[🎸]</span></button>
+                    <button>motion-preset-flomoji-[Woah!]<span class="motion-preset-flomoji-[Woah!]">motion-preset-flomoji-[Woah!]</span></button>
+                </div>
+                <hr>
+
+            </div>
+
+
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Modifiers</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+                
+                
+                <div class="subtitle">motion-duration</div>
+                <button>motion-scale-in-150 motion-duration-75<span class="motion-scale-in-150 motion-duration-75">motion-scale-in-150 motion-duration-75</span></button>
+                <button>motion-translate-x-in-100 motion-duration-100<span class="motion-translate-x-in-100 motion-duration-100">motion-translate-x-in-100 motion-duration-100</span></button>
+                <button>motion-rotate-in-180 motion-duration-150<span class="motion-rotate-in-180 motion-duration-150">motion-rotate-in-180 motion-duration-150</span></button>
+                <button>motion-blur-in-md motion-duration-200<span class="motion-blur-in-md motion-duration-200">motion-blur-in-md motion-duration-200</span></button>
+                <button>motion-opacity-in-0 motion-duration-300<span class="motion-opacity-in-0 motion-duration-300">motion-opacity-in-0 motion-duration-300</span></button>
+                <button>motion-text-out-blue-500 motion-duration-500<span class="motion-text-out-blue-500 motion-duration-500">motion-text-out-blue-500 motion-duration-500</span></button>
+                <button>motion-background-out-red-500 motion-duration-700<span class="motion-background-out-red-500 motion-duration-700">motion-background-out-red-500 motion-duration-700</span></button>
+                <button>motion-grayscale-out-75 motion-duration-1000<span class="motion-grayscale-out-75 motion-duration-1000">motion-grayscale-out-75 motion-duration-1000</span></button>
+                <button>motion-preset-fade motion-duration-[1500ms]<span class="motion-preset-fade motion-duration-[1500ms]">motion-preset-fade motion-duration-[1500ms]</span></button>
+                <button>motion-preset-float motion-duration-[2000ms]<span class="motion-preset-float motion-duration-[2000ms]">motion-preset-float motion-duration-[2000ms]</span></button>
+                <button>motion-preset-spin motion-duration-[2500ms]<span class="motion-preset-spin motion-duration-[2500ms]">motion-preset-spin motion-duration-[2500ms]</span></button>
+                <hr>
+                <div class="subtitle">motion-delay</div>
+                <button>motion-scale-in-150 motion-delay-75<span class="motion-scale-in-150 motion-delay-75">motion-scale-in-150 motion-delay-75</span></button>
+                <button>motion-translate-x-in-100 motion-delay-100<span class="motion-translate-x-in-100 motion-delay-100">motion-translate-x-in-100 motion-delay-100</span></button>
+                <button>motion-rotate-in-180 motion-delay-150<span class="motion-rotate-in-180 motion-delay-150">motion-rotate-in-180 motion-delay-150</span></button>
+                <button>motion-blur-in-md motion-delay-200<span class="motion-blur-in-md motion-delay-200">motion-blur-in-md motion-delay-200</span></button>
+                <button>motion-opacity-in-0 motion-delay-300<span class="motion-opacity-in-0 motion-delay-300">motion-opacity-in-0 motion-delay-300</span></button>
+                <button>motion-text-out-blue-500 motion-delay-500<span class="motion-text-out-blue-500 motion-delay-500">motion-text-out-blue-500 motion-delay-500</span></button>
+                <button>motion-background-out-red-500 motion-delay-700<span class="motion-background-out-red-500 motion-delay-700">motion-background-out-red-500 motion-delay-700</span></button>
+                <button>motion-grayscale-out-75 motion-delay-1000<span class="motion-grayscale-out-75 motion-delay-1000">motion-grayscale-out-75 motion-delay-1000</span></button>
+                <button>motion-preset-blink motion-delay-[1500ms]<span class="motion-preset-blink motion-delay-[1500ms]">motion-preset-blink motion-delay-[1500ms]</span></button>
+                <button>motion-preset-stretch motion-delay-[2000ms]<span class="motion-preset-stretch motion-delay-[2000ms]">motion-preset-stretch motion-delay-[2000ms]</span></button>
+                <button>motion-preset-oscillate motion-delay-[2500ms]<span class="motion-preset-oscillate motion-delay-[2500ms]">motion-preset-oscillate motion-delay-[2500ms]</span></button>
+                <hr>
+                <div class="subtitle">motion-ease</div>
+                <button>motion-preset-slide-up motion-ease-linear<span class="motion-preset-slide-up motion-ease-linear">motion-preset-slide-up motion-ease-linear</span></button>
+                <button>motion-preset-slide-up motion-ease-in<span class="motion-preset-slide-up motion-ease-in">motion-preset-slide-up motion-ease-in</span></button>
+                <button>motion-preset-slide-up motion-ease-out<span class="motion-preset-slide-up motion-ease-out">motion-preset-slide-up motion-ease-out</span></button>
+                <button>motion-preset-slide-up motion-ease-in-out<span class="motion-preset-slide-up motion-ease-in-out">motion-preset-slide-up motion-ease-in-out</span></button>
+                <button>motion-preset-slide-up motion-ease-spring-smooth<span class="motion-preset-slide-up motion-ease-spring-smooth">motion-preset-slide-up motion-ease-spring-smooth</span></button>
+                <button>motion-preset-slide-up motion-ease-spring-snappy<span class="motion-preset-slide-up motion-ease-spring-snappy">motion-preset-slide-up motion-ease-spring-snappy</span></button>
+                <button>motion-preset-slide-up motion-ease-spring-bouncy<span class="motion-preset-slide-up motion-ease-spring-bouncy">motion-preset-slide-up motion-ease-spring-bouncy</span></button>
+                <button>motion-preset-slide-up motion-ease-spring-bouncier<span class="motion-preset-slide-up motion-ease-spring-bouncier">motion-preset-slide-up motion-ease-spring-bouncier</span></button>
+                <button>motion-preset-slide-up motion-ease-spring-bounciest<span class="motion-preset-slide-up motion-ease-spring-bounciest">motion-preset-slide-up motion-ease-spring-bounciest</span></button>
+                <button>motion-preset-slide-up motion-ease-bounce<span class="motion-preset-slide-up motion-ease-bounce">motion-preset-slide-up motion-ease-bounce</span></button>
+                <button>motion-preset-slide-up motion-ease-in-quad<span class="motion-preset-slide-up motion-ease-in-quad">motion-preset-slide-up motion-ease-in-quad</span></button>
+                <button>motion-preset-slide-up motion-ease-in-cubic<span class="motion-preset-slide-up motion-ease-in-cubic">motion-preset-slide-up motion-ease-in-cubic</span></button>
+                <button>motion-preset-slide-up motion-ease-in-quart<span class="motion-preset-slide-up motion-ease-in-quart">motion-preset-slide-up motion-ease-in-quart</span></button>
+                <button>motion-preset-slide-up motion-ease-in-back<span class="motion-preset-slide-up motion-ease-in-back">motion-preset-slide-up motion-ease-in-back</span></button>
+                <button>motion-preset-slide-up motion-ease-out-quad<span class="motion-preset-slide-up motion-ease-out-quad">motion-preset-slide-up motion-ease-out-quad</span></button>
+                <button>motion-preset-slide-up motion-ease-out-cubic<span class="motion-preset-slide-up motion-ease-out-cubic">motion-preset-slide-up motion-ease-out-cubic</span></button>
+                <button>motion-preset-slide-up motion-ease-out-quart<span class="motion-preset-slide-up motion-ease-out-quart">motion-preset-slide-up motion-ease-out-quart</span></button>
+                <button>motion-preset-slide-up motion-ease-out-back<span class="motion-preset-slide-up motion-ease-out-back">motion-preset-slide-up motion-ease-out-back</span></button>
+                
+                
+                <hr>
+                <div class="subtitle">motion-loop</div>
+                <button>motion-translate-y-loop-25<span class="motion-translate-y-loop-25">motion-translate-y-loop-25</span></button>
+                <button>motion-translate-y-loop-25 motion-loop-twice<span class="motion-translate-y-loop-25 motion-loop-twice">motion-translate-y-loop-25 motion-loop-twice</span></button>
+                <button>motion-translate-y-loop-25 motion-loop-once<span class="motion-translate-y-loop-25 motion-loop-once">motion-translate-y-loop-25 motion-loop-once</span></button>
+                <button>motion-translate-y-loop-25 motion-loop-[3]<span class="motion-translate-y-loop-25 motion-loop-[3]">motion-translate-y-loop-25 motion-loop-[3]</span></button>
+                <button>motion-translate-y-loop-25 motion-loop-infinite<span class="motion-translate-y-loop-25 motion-loop-infinite">motion-translate-y-loop-25 motion-loop-infinite</span></button>
+
+
+                <hr>
+                <div class="subtitle">Property Specific Modifiers</div>
+                <button>motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0<span class="motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0">motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0</span></button>
+                <button>motion-duration-1000/scale motion-scale-in-150 motion-blur-in-md<span class="motion-duration-1000/scale motion-scale-in-150 motion-blur-in-md">motion-duration-1000/scale motion-scale-in-150 motion-blur-in-md</span></button>
+                <button>motion-delay-300/translate motion-translate-x-in-100 motion-bg-in-blue-500<span class="motion-delay-300/translate motion-translate-x-in-100 motion-bg-in-blue-500">motion-delay-300/translate motion-translate-x-in-100 motion-bg-in-blue-500</span></button>
+                <button>motion-duration-700/blur motion-blur-in-lg motion-scale-in-75<span class="motion-duration-700/blur motion-blur-in-lg motion-scale-in-75">motion-duration-700/blur motion-blur-in-lg motion-scale-in-75</span></button>
+                <button>motion-delay-200/opacity motion-opacity-in-50 motion-translate-y-in-50<span class="motion-delay-200/opacity motion-opacity-in-50 motion-translate-y-in-50">motion-delay-200/opacity motion-opacity-in-50 motion-translate-y-in-50</span></button>
+                <button>motion-duration-500/background motion-bg-in-red-500 motion-rotate-in-90<span class="motion-duration-500/background motion-bg-in-red-500 motion-rotate-in-90">motion-duration-500/background motion-bg-in-red-500 motion-rotate-in-90</span></button>
+                <button>motion-delay-400/text motion-text-in-green-500 motion-grayscale-in-50<span class="motion-delay-400/text motion-text-in-green-500 motion-grayscale-in-50">motion-delay-400/text motion-text-in-green-500 motion-grayscale-in-50</span></button>
+            </div>
+
+            <button class="toggle-group text-slate-400 text-xs font-bold relative mb-1 !py-7 !px-8 w-full mt-2">Combining Animations</button>
+            <div class="big-group relative bg-white p-[10%] shadow-sm rounded-md">
+
+
+                <button>motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90 motion-blur-in-md motion-opacity-in-0<span class="motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90 motion-blur-in-md motion-opacity-in-0">motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90 motion-blur-in-md motion-opacity-in-0</span></button>
+                <button>motion-opacity-in-0 motion-translate-y-in-100 motion-scale-in-150 motion-rotate-in-180 motion-grayscale-in-75<span class="motion-opacity-in-0 motion-translate-y-in-100 motion-scale-in-150 motion-rotate-in-180 motion-grayscale-in-75">motion-opacity-in-0 motion-translate-y-in-100 motion-scale-in-150 motion-rotate-in-180 motion-grayscale-in-75</span></button>
+                <button>motion-scale-in-75 motion-rotate-in-180 motion-translate-x-in-100 motion-blur-in-lg motion-bg-in-blue-500<span class="motion-scale-in-75 motion-rotate-in-180 motion-translate-x-in-100 motion-blur-in-lg motion-bg-in-blue-500">motion-scale-in-75 motion-rotate-in-180 motion-translate-x-in-100 motion-blur-in-lg motion-bg-in-blue-500</span></button>
+                <button>motion-translate-x-in-100 motion-translate-y-in-50 motion-scale-in-125 motion-rotate-in-45 motion-text-in-purple-500<span class="motion-translate-x-in-100 motion-translate-y-in-50 motion-scale-in-125 motion-rotate-in-45 motion-text-in-purple-500">motion-translate-x-in-100 motion-translate-y-in-50 motion-scale-in-125 motion-rotate-in-45 motion-text-in-purple-500</span></button>
+                
+                <button>motion-preset-pop motion-preset-slide-up motion-preset-focus motion-delay-100<span class="motion-preset-pop motion-preset-slide-up motion-preset-focus motion-delay-100">motion-preset-pop motion-preset-slide-up motion-preset-focus motion-delay-100</span></button>
+                <button>motion-preset-shake motion-preset-blur-right motion-preset-stretch motion-delay-200<span class="motion-preset-shake motion-preset-blur-right motion-preset-stretch motion-delay-200">motion-preset-shake motion-preset-blur-right motion-preset-stretch motion-delay-200</span></button>
+                <button>motion-preset-wiggle motion-preset-slide-down motion-preset-blink motion-delay-150<span class="motion-preset-wiggle motion-preset-slide-down motion-preset-blink motion-delay-150">motion-preset-wiggle motion-preset-slide-down motion-preset-blink motion-delay-150</span></button>
+                
+                <button>motion-preset-pop motion-translate-y-loop-50 motion-scale-in-150 motion-rotate-in-360 motion-blur-in-xl<span class="motion-preset-pop motion-translate-y-loop-50 motion-scale-in-150 motion-rotate-in-360 motion-blur-in-xl">motion-preset-pop motion-translate-y-loop-50 motion-scale-in-150 motion-rotate-in-360 motion-blur-in-xl</span></button>
+                <button>motion-preset-compress motion-translate-x-loop-75 motion-scale-loop-125 motion-rotate-loop-180 motion-delay-100<span class="motion-preset-compress motion-translate-x-loop-75 motion-scale-loop-125 motion-rotate-loop-180 motion-delay-100">motion-preset-compress motion-translate-x-loop-75 motion-scale-loop-125 motion-rotate-loop-180 motion-delay-100</span></button>
+                
+                <button>motion-preset-stretch motion-scale-in-[250%] motion-rotate-in-[720deg] motion-blur-in-[15px] motion-grayscale-in-100<span class="motion-preset-stretch motion-scale-in-[250%] motion-rotate-in-[720deg] motion-blur-in-[15px] motion-grayscale-in-100">motion-preset-stretch motion-scale-in-[250%] motion-rotate-in-[720deg] motion-blur-in-[15px] motion-grayscale-in-100</span></button>
+                <button>motion-preset-oscillate motion-translate-x-in-[150%] motion-translate-y-in-[150%] motion-scale-in-[175%] motion-rotate-in-[1080deg]<span class="motion-preset-oscillate motion-translate-x-in-[150%] motion-translate-y-in-[150%] motion-scale-in-[175%] motion-rotate-in-[1080deg]">motion-preset-oscillate motion-translate-x-in-[150%] motion-translate-y-in-[150%] motion-scale-in-[175%] motion-rotate-in-[1080deg]</span></button>
+                <button>motion-preset-slide-up motion-preset-blur-up motion-scale-in-[300%] motion-rotate-loop-[360deg] motion-delay-150<span class="motion-preset-slide-up motion-preset-blur-up motion-scale-in-[300%] motion-rotate-loop-[360deg] motion-delay-150">motion-preset-slide-up motion-preset-blur-up motion-scale-in-[300%] motion-rotate-loop-[360deg] motion-delay-150</span></button>
+
+                <hr>
+            </div>
+
+        </aside>
+        <div class="col-span-2 flex items-center justify-center h-screen sticky top-0">
+            <div
+                id="demo"
+                class="w-[25%] h-[25%] flex items-center justify-center text-xs text-pink-400 font-bold mx-auto bg-pink-300/50 border border-pink-300 outline outline-4 outline-pink-300 rounded-lg p-2 text-center leading-none"
+            >
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const stylesheet = document.getElementById('stylesheet')
+        const switchToUnoCSS = document.getElementById('switch-to-unocss')
+        const switchToTailwind = document.getElementById('switch-to-tailwind')
+        const toggleGroups = document.querySelectorAll('.toggle-group')
+        const demo = document.getElementById('demo')
+
+        switchToUnoCSS.addEventListener('click', () => {
+            switchToUnoCSS.classList.add('active')
+            switchToTailwind.classList.remove('active')
+            stylesheet.href = '../unocss/uno.css'
+        })
+
+        switchToTailwind.addEventListener('click', () => {
+            switchToTailwind.classList.add('active')
+            switchToUnoCSS.classList.remove('active')
+            stylesheet.href = '../tailwind/tailwind.css'
+        })
+
+        // on aside button hover, get the class of span and add it to demo
+        const aside = document.querySelectorAll('.big-group button')
+        aside.forEach(button => {
+            button.addEventListener('mouseover', (e) => {
+                const className = e.target.querySelector('span').textContent
+
+                // Remove all motion classes
+                demo.classList.remove(...Array.from(demo.classList).filter(className => className.startsWith('motion-') || className.startsWith('-motion')))
+                
+                // Force a reflow to restart the animation
+                void demo.offsetWidth
+
+                // Set the inner text of demo to the class name
+                demo.innerText = className
+
+                // Add each class separately by splitting on spaces
+                className.split(' ').forEach(cls => {
+                    demo.classList.add(cls)
+                })
+            })
+        })
+
+        // toggle-groups, on click fint the next element and toggle hidden classs
+        toggleGroups.forEach(button => {
+            button.addEventListener('click', () => {
+                const nextElement = button.nextElementSibling
+                nextElement.classList.toggle('hidden')
+            })
+        })
+    </script>
+
+</body>
+</html>
