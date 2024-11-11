@@ -83,7 +83,6 @@ Adjust duration, spring, delay and loop modifiers
 <div class="motion-translate-y-in motion-ease-spring-bouncy">Bouncy</div>
 <div class="motion-translate-y-in motion-delay-300">300ms delay</div>
 <div class="motion-translate-y-loop-75 motion-loop-twice">Loop 2x</div>
-
 <div class="motion-translate-y-in motion-duration-2000 motion-ease-spring-bouncy">2000ms speed, bouncy</div>
 
 ```
