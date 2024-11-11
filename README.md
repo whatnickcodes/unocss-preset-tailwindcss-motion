@@ -272,7 +272,6 @@ motion-preset-pulse-(sm|md|lg)
 motion-preset-wobble
 motion-preset-wobble-(sm|md|lg)
 
-//Seesaw
 motion-preset-seesaw
 motion-preset-seesaw-(sm|md|lg)
 
