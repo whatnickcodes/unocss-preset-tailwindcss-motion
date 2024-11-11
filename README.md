@@ -239,28 +239,17 @@ motion-grayscale-loop-[0.875]/reset
 
 ##### Classics
 ```
-motion-preset-slide-down
-motion-preset-slide-down-(sm|md|lg)
-motion-preset-slide-up-right
-motion-preset-slide-up-right-(sm|md|lg)
-motion-preset-slide-up-left
-motion-preset-slide-up-left-(sm|md|lg)
-motion-preset-slide-down-left
-motion-preset-slide-down-left-(sm|md|lg)
-motion-preset-slide-down-right
-motion-preset-slide-down-right-(sm|md|lg)
+motion-preset-slide-<right|left|up|down>
+motion-preset-slide-<right|left|up|down>-(sm|md|lg)
+
+motion-preset-slide-<up-right|up-left|down-left|down-right>
+motion-preset-slide-<up-right|up-left|down-left|down-right>-(sm|md|lg)
 
 motion-preset-focus
 motion-preset-focus-(sm|md|lg)
 
-motion-preset-blur-right
-motion-preset-blur-right-(sm|md|lg)
-motion-preset-blur-left
-motion-preset-blur-left-(sm|md|lg)
-motion-preset-blur-up
-motion-preset-blur-up-(sm|md|lg)
-motion-preset-blur-down
-motion-preset-blur-down-(sm|md|lg)
+motion-preset-blur-<right|left|up|down>
+motion-preset-blur-<right|left|up|down>-(sm|md|lg)
 
 motion-preset-rebound
 motion-preset-rebound-(right|left|up|down)
