@@ -1157,7 +1157,7 @@ export const presetTailwindMotion = () => ({
             };
             
             return {
-                "--motion-origin-opacity": 0,
+                "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
                 "--motion-duration": durations[size] || durations.md,
                 "--motion-opacity-in-animation": opacityInAnimation,
                 animation: "var(--motion-all-loop-and-enter-animations)",
@@ -1176,7 +1176,7 @@ export const presetTailwindMotion = () => ({
             
             return {
                 [`--motion-origin-translate-${translateProperty}`]: `${sign}${distance[size] || distance.md}`,
-                "--motion-origin-opacity": 0,
+                "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
                 "--motion-opacity-in-animation": opacityInAnimation,
                 "--motion-translate-in-animation": translateInAnimation,
                 animation: "var(--motion-all-loop-and-enter-animations)", // Updated to match reference
@@ -1196,7 +1196,7 @@ export const presetTailwindMotion = () => ({
             return {
                 "--motion-origin-translate-x": `${signX}${distance[size] || distance.md}`,
                 "--motion-origin-translate-y": `${signY}${distance[size] || distance.md}`,
-                "--motion-origin-opacity": 0,
+                "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
                 "--motion-opacity-in-animation": opacityInAnimation,
                 "--motion-translate-in-animation": translateInAnimation,
                 animation: "var(--motion-all-loop-and-enter-animations)",
@@ -1212,7 +1212,7 @@ export const presetTailwindMotion = () => ({
             };
             return {
                 "--motion-origin-blur": blurSizes[size] || blurSizes.md,
-                "--motion-origin-opacity": 0,
+                "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
                 "--motion-opacity-in-animation": opacityInAnimation,
                 "--motion-filter-in-animation": filterInAnimation,
                 animation: "var(--motion-all-loop-and-enter-animations)",
@@ -1235,7 +1235,7 @@ export const presetTailwindMotion = () => ({
             return {
                 "--motion-origin-blur": blurSizes[size] || blurSizes.md,
                 [`--motion-origin-translate-${translateProperty}`]: `${sign}${distance[size] || distance.md}`,
-                "--motion-origin-opacity": 0,
+                "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
                 "--motion-opacity-in-animation": opacityInAnimation,
                 "--motion-filter-in-animation": filterInAnimation,
                 "--motion-translate-in-animation": translateInAnimation,
@@ -1263,7 +1263,7 @@ export const presetTailwindMotion = () => ({
                 ...directions[direction],
                 "--motion-translate-timing": "var(--motion-spring-bouncier)",
                 "--motion-translate-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-bouncier)"],
-                "--motion-origin-opacity": 0,
+                "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
                 "--motion-opacity-in-animation": opacityInAnimation,
                 "--motion-translate-in-animation": translateInAnimation,
                 animation: "var(--motion-all-loop-and-enter-animations)",
@@ -1275,7 +1275,7 @@ export const presetTailwindMotion = () => ({
             "--motion-duration": "300ms",
             "--motion-translate-timing": "var(--motion-bounce)",
             "--motion-translate-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-bounce)"],
-            "--motion-origin-opacity": 0,
+            "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
             "--motion-origin-translate-y": "-25%",
             "--motion-opacity-in-animation": opacityInAnimation,
             "--motion-translate-in-animation": translateInAnimation,
@@ -1286,7 +1286,7 @@ export const presetTailwindMotion = () => ({
         [/^motion-preset-expand$/, () => ({
             "--motion-origin-scale-x": "50%",
             "--motion-origin-scale-y": "50%",
-            "--motion-origin-opacity": 0,
+            "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
             "--motion-opacity-in-animation": opacityInAnimation,
             "--motion-scale-in-animation": scaleInAnimation,
             animation: "var(--motion-all-loop-and-enter-animations)",
@@ -1296,7 +1296,7 @@ export const presetTailwindMotion = () => ({
         [/^motion-preset-shrink$/, () => ({
             "--motion-origin-scale-x": "150%",
             "--motion-origin-scale-y": "150%",
-            "--motion-origin-opacity": 0,
+            "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
             "--motion-opacity-in-animation": opacityInAnimation,
             "--motion-scale-in-animation": scaleInAnimation,
             animation: "var(--motion-all-loop-and-enter-animations)",
@@ -1306,7 +1306,7 @@ export const presetTailwindMotion = () => ({
         [/^motion-preset-pop$/, () => ({
             "--motion-origin-scale-x": "50%",
             "--motion-origin-scale-y": "50%",
-            "--motion-origin-opacity": 0,
+            "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
             "--motion-scale-timing": "var(--motion-spring-bouncier)",
             "--motion-scale-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-bouncier)"],
             "--motion-opacity-in-animation": opacityInAnimation,
@@ -1318,7 +1318,7 @@ export const presetTailwindMotion = () => ({
         [/^motion-preset-compress$/, () => ({
             "--motion-origin-scale-x": "150%",
             "--motion-origin-scale-y": "150%",
-            "--motion-origin-opacity": 0,
+            "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
             "--motion-scale-timing": "var(--motion-spring-bouncier)",
             "--motion-scale-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-bouncier)"],
             "--motion-opacity-in-animation": opacityInAnimation,
@@ -1330,7 +1330,7 @@ export const presetTailwindMotion = () => ({
         [/^motion-preset-shake$/, () => ({
             "--motion-duration": "300ms",
             "--motion-origin-rotate": "15deg",
-            "--motion-origin-opacity": 0,
+            "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
             "--motion-rotate-timing": "var(--motion-spring-bounciest)", 
             "--motion-rotate-perceptual-duration-multiplier": springPerceptualMultipliers["var(--motion-spring-bounciest)"],
             "--motion-opacity-in-animation": opacityInAnimation,
@@ -1344,7 +1344,7 @@ export const presetTailwindMotion = () => ({
             "--motion-origin-rotate": "15deg",
             "--motion-origin-translate-x": "-25%",
             "--motion-origin-translate-y": "-10%",
-            "--motion-origin-opacity": 0,
+            "--motion-origin-opacity": 0.001, // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
             "--motion-timing": "var(--motion-spring-bounciest)",
             "--motion-perceptual-duration-multiplier": "5.285",
             "--motion-opacity-timing": "var(--motion-spring-smooth)",
@@ -1556,7 +1556,7 @@ export const presetTailwindMotion = () => ({
         // BLINK  
         [/^motion-preset-blink$/, () => {
             return {
-                '--motion-loop-opacity': '0',
+                '--motion-loop-opacity': '0.001', // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
                 '--motion-opacity-loop-animation': opacityLoopAnimation('mirror'),
                 'animation': 'var(--motion-all-loop-and-enter-animations)'
             };
