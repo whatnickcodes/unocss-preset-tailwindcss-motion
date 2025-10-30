@@ -315,7 +315,7 @@ export const presetTailwindMotion = () => ({
    
         // Default values for the animations...
         motionScale: {
-            0: '0',
+            0: '0.001', // Use 0.001 instead of 0 to avoid Lighthouse CLS false positives
             50: '.5',
             75: '.75',
             90: '.9',
@@ -328,7 +328,7 @@ export const presetTailwindMotion = () => ({
             DEFAULT: '0.5'
         },
         motionTranslate: {
-            0: '0%',
+            0: '0.001%', // Use 0.001% instead of 0% to avoid Lighthouse CLS false positives
             25: '25%',
             50: '50%',
             75: '75%',
@@ -337,7 +337,7 @@ export const presetTailwindMotion = () => ({
             DEFAULT: '25%',
         },
         motionRotate: {
-            0: '0deg',
+            0: '0.001deg', // Use 0.001deg instead of 0deg to avoid Lighthouse CLS false positives
             1: '1deg',
             2: '2deg',
             3: '3deg',
@@ -350,7 +350,7 @@ export const presetTailwindMotion = () => ({
         },
         motionBlur: {
             DEFAULT: '8px',
-            0: '0',
+            0: '0.001px', // Use 0.001px instead of 0 to avoid Lighthouse CLS false positives
             sm: '4px',
             md: '8px',
             lg: '12px',
@@ -360,7 +360,7 @@ export const presetTailwindMotion = () => ({
         },
         motionGrayscale: {
             DEFAULT: '100%',
-            0: '0',
+            0: '0.001%', // Use 0.001% instead of 0 to avoid Lighthouse CLS false positives
             25: '25%',
             50: '50%',
             75: '75%',

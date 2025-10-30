@@ -663,8 +663,8 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-in-0 {
-                    --motion-origin-scale-x: 0;
-                    --motion-origin-scale-y: 0;
+                    --motion-origin-scale-x: 0.001;
+                    --motion-origin-scale-y: 0.001;
                     --motion-scale-in-animation: motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
                     animation: var(--motion-all-loop-and-enter-animations);
                 }
@@ -787,7 +787,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-x-in-0 {
-                    --motion-origin-scale-x: 0;
+                    --motion-origin-scale-x: 0.001;
                     --motion-scale-in-animation: motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
                     animation: var(--motion-all-loop-and-enter-animations);
                 }
@@ -885,7 +885,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-y-in-0 {
-                    --motion-origin-scale-y: 0;
+                    --motion-origin-scale-y: 0.001;
                     --motion-scale-in-animation: motion-scale-in calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
                     animation: var(--motion-all-loop-and-enter-animations);
                 }
@@ -987,8 +987,8 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-out-0 {
-                    --motion-end-scale-x: 0;
-                    --motion-end-scale-y: 0;
+                    --motion-end-scale-x: 0.001;
+                    --motion-end-scale-y: 0.001;
                     --motion-scale-out-animation: motion-scale-out calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
                     animation: var(--motion-all-exit-animations);
                 }
@@ -1095,7 +1095,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-x-out-0 {
-                    --motion-end-scale-x: 0;
+                    --motion-end-scale-x: 0.001;
                     --motion-scale-out-animation: motion-scale-out calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
                     animation: var(--motion-all-exit-animations);
                 }
@@ -1193,7 +1193,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-y-out-0 {
-                    --motion-end-scale-y: 0;
+                    --motion-end-scale-y: 0.001;
                     --motion-scale-out-animation: motion-scale-out calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both;
                     animation: var(--motion-all-exit-animations);
                 }
@@ -1295,7 +1295,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-x-loop-0 {
-                    --motion-loop-scale-x: 0;
+                    --motion-loop-scale-x: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-mirror calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1303,7 +1303,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-x-loop-0\/mirror {
-                    --motion-loop-scale-x: 0;
+                    --motion-loop-scale-x: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-mirror calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1311,7 +1311,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-x-loop-0\/reset {
-                    --motion-loop-scale-x: 0;
+                    --motion-loop-scale-x: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-reset calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1399,7 +1399,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-y-loop-0 {
-                    --motion-loop-scale-y: 0;
+                    --motion-loop-scale-y: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-mirror calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1407,7 +1407,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-y-loop-0\/mirror {
-                    --motion-loop-scale-y: 0;
+                    --motion-loop-scale-y: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-mirror calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1415,7 +1415,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-y-loop-0\/reset {
-                    --motion-loop-scale-y: 0;
+                    --motion-loop-scale-y: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-reset calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1525,8 +1525,8 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-loop-0 {
-                    --motion-loop-scale-x: 0;
-                    --motion-loop-scale-y: 0;
+                    --motion-loop-scale-x: 0.001;
+                    --motion-loop-scale-y: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-mirror calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1534,8 +1534,8 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-loop-0\/mirror {
-                    --motion-loop-scale-x: 0;
-                    --motion-loop-scale-y: 0;
+                    --motion-loop-scale-x: 0.001;
+                    --motion-loop-scale-y: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-mirror calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1543,8 +1543,8 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-scale-loop-0\/reset {
-                    --motion-loop-scale-x: 0;
-                    --motion-loop-scale-y: 0;
+                    --motion-loop-scale-x: 0.001;
+                    --motion-loop-scale-y: 0.001;
                     --motion-scale-loop-animation: motion-scale-loop-reset calc(var(--motion-scale-duration) * var(--motion-scale-perceptual-duration-multiplier)) var(--motion-scale-timing) var(--motion-scale-delay) both var(--motion-scale-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -1725,7 +1725,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-translate-x-in-0 {
-                    --motion-origin-translate-x: 0%;
+                    --motion-origin-translate-x: 0.001%;
                     --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
                     animation: var(--motion-all-loop-and-enter-animations);
                 }
@@ -1823,7 +1823,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-translate-y-in-0 {
-                    --motion-origin-translate-y: 0%;
+                    --motion-origin-translate-y: 0.001%;
                     --motion-translate-in-animation: motion-translate-in calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
                     animation: var(--motion-all-loop-and-enter-animations);
                 }
@@ -1907,7 +1907,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-translate-x-out-0 {
-                    --motion-end-translate-x: 0%;
+                    --motion-end-translate-x: 0.001%;
                     --motion-translate-out-animation: motion-translate-out calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
                     animation: var(--motion-all-exit-animations);
                 }
@@ -1977,7 +1977,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-translate-y-out-0 {
-                    --motion-end-translate-y: 0%;
+                    --motion-end-translate-y: 0.001%;
                     --motion-translate-out-animation: motion-translate-out calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both;
                     animation: var(--motion-all-exit-animations);
                 }
@@ -2067,7 +2067,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-translate-x-loop-0 {
-                    --motion-loop-translate-x: 0%;
+                    --motion-loop-translate-x: 0.001%;
                     --motion-translate-loop-animation: motion-translate-loop-mirror calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both var(--motion-translate-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -2187,7 +2187,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-translate-y-loop-0 {
-                    --motion-loop-translate-y: 0%;
+                    --motion-loop-translate-y: 0.001%;
                     --motion-translate-loop-animation: motion-translate-loop-mirror calc(var(--motion-translate-duration) * var(--motion-translate-perceptual-duration-multiplier)) var(--motion-translate-timing) var(--motion-translate-delay) both var(--motion-translate-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -2307,7 +2307,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-rotate-in-0 {
-                    --motion-origin-rotate: 0deg;
+                    --motion-origin-rotate: 0.001deg;
                     --motion-rotate-in-animation: motion-rotate-in calc(var(--motion-rotate-duration) * var(--motion-rotate-perceptual-duration-multiplier)) var(--motion-rotate-timing) var(--motion-rotate-delay) both;
                     animation: var(--motion-all-loop-and-enter-animations);
                 }
@@ -2419,7 +2419,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-rotate-out-0 {
-                    --motion-end-rotate: 0deg;
+                    --motion-end-rotate: 0.001deg;
                     --motion-rotate-out-animation: motion-rotate-out calc(var(--motion-rotate-duration) * var(--motion-rotate-perceptual-duration-multiplier)) var(--motion-rotate-timing) var(--motion-rotate-delay) both;
                     animation: var(--motion-all-exit-animations);
                 }
@@ -2503,7 +2503,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
             
 
                 .motion-rotate-loop-0 {
-                    --motion-loop-rotate: 0deg;
+                    --motion-loop-rotate: 0.001deg;
                     --motion-rotate-loop-animation: motion-rotate-loop-mirror calc(var(--motion-rotate-duration) * var(--motion-rotate-perceptual-duration-multiplier)) var(--motion-rotate-timing) var(--motion-rotate-delay) both var(--motion-rotate-loop-count);
                     animation-composition: accumulate;
                     animation: var(--motion-all-loop-and-enter-animations);
@@ -2555,7 +2555,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-blur-in-\[15px\]{--motion-origin-blur:15px;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-in-\[2px\]{--motion-origin-blur:2px;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-in-\[4\.5px\]{--motion-origin-blur:4.5px;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
-.motion-blur-in-0{--motion-origin-blur:0;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
+.motion-blur-in-0{--motion-origin-blur:0.001px;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-in-2xl{--motion-origin-blur:24px;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-in-3xl{--motion-origin-blur:32px;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-in-lg{--motion-origin-blur:12px;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
@@ -2571,7 +2571,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-blur-out-\[0\.8rem\]{--motion-end-blur:0.8rem;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-blur-out-\[2px\]{--motion-end-blur:2px;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-blur-out-\[4\.5px\]{--motion-end-blur:4.5px;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
-.motion-blur-out-0{--motion-end-blur:0;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
+.motion-blur-out-0{--motion-end-blur:0.001px;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-blur-out-2xl{--motion-end-blur:24px;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-blur-out-3xl{--motion-end-blur:32px;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-blur-out-lg{--motion-end-blur:12px;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
@@ -2583,7 +2583,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-blur-loop-\[0\.8rem\]{--motion-loop-blur:0.8rem;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-loop-\[2px\]{--motion-loop-blur:2px;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-loop-\[4\.5px\]{--motion-loop-blur:4.5px;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
-.motion-blur-loop-0{--motion-loop-blur:0;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
+.motion-blur-loop-0{--motion-loop-blur:0.001px;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-loop-2xl{--motion-loop-blur:24px;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-loop-3xl{--motion-loop-blur:32px;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-blur-loop-lg,
@@ -2599,7 +2599,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-grayscale-in-\[0\.42\]{--motion-origin-grayscale:0.42;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-in-\[0\.875\]{--motion-origin-grayscale:0.875;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-in-\[33\%\]{--motion-origin-grayscale:33%;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
-.motion-grayscale-in-0{--motion-origin-grayscale:0;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
+.motion-grayscale-in-0{--motion-origin-grayscale:0.001%;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-in-100\<\/span\>\<\/button\>{--motion-origin-grayscale:100</span></button>;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-in-100\<span{--motion-origin-grayscale:100<span;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-in-25{--motion-origin-grayscale:25%;--motion-filter-in-animation:motion-filter-in calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-loop-and-enter-animations);}
@@ -2614,7 +2614,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-grayscale-out-\[0\.42\]{--motion-end-grayscale:0.42;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-grayscale-out-\[0\.875\]{--motion-end-grayscale:0.875;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-grayscale-out-\[33\%\]{--motion-end-grayscale:33%;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
-.motion-grayscale-out-0{--motion-end-grayscale:0;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
+.motion-grayscale-out-0{--motion-end-grayscale:0.001%;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-grayscale-out-25{--motion-end-grayscale:25%;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-grayscale-out-50{--motion-end-grayscale:50%;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
 .motion-grayscale-out-75{--motion-end-grayscale:75%;--motion-filter-out-animation:motion-filter-out calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both;animation:var(--motion-all-exit-animations);}
@@ -2623,7 +2623,7 @@ Make elements with the HTML hidden attribute stay hidden by default.
 .motion-grayscale-loop-\[0\.42\]{--motion-loop-grayscale:0.42;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-loop-\[0\.875\]{--motion-loop-grayscale:0.875;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-loop-\[33\%\]{--motion-loop-grayscale:33%;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
-.motion-grayscale-loop-0{--motion-loop-grayscale:0;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
+.motion-grayscale-loop-0{--motion-loop-grayscale:0.001%;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-loop-100\/reset{--motion-loop-grayscale:100%;--motion-filter-loop-animation:motion-filter-loop-reset calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
 .motion-grayscale-loop-25,
 .motion-grayscale-loop-25\/mirror{--motion-loop-grayscale:25%;--motion-filter-loop-animation:motion-filter-loop-mirror calc(var(--motion-filter-duration) * var(--motion-filter-perceptual-duration-multiplier)) var(--motion-filter-timing) var(--motion-filter-delay) both var(--motion-filter-loop-count);animation-composition:accumulate;animation:var(--motion-all-loop-and-enter-animations);}
