@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.0.2] - 2025-10-30
+## [4.0.3] - 2025-10-30
 
 ### Fixed
 - Fixed Lighthouse CLS (Cumulative Layout Shift) false positives by changing all zero values to near-zero values (0.001) in motion properties
