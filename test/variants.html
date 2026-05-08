@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Variants Lab</title>
+    <link rel="stylesheet" href="../unocss/uno.css">
+    <style>
+        :root {
+            --font-ui: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            --ink: #152033;
+            --muted: #64748b;
+            --line: #d8e1ee;
+            --panel: #ffffff;
+            --bg: #f7fafc;
+            --dark: #101827;
+            --accent: #2563eb;
+        }
+
+        * { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 74px;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-ui);
+            line-height: 1.45;
+        }
+
+        code { font-family: var(--font-mono); }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 10px clamp(16px, 4vw, 38px);
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(14px);
+        }
+
+        .topbar a,
+        .topbar button {
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #172033;
+            cursor: pointer;
+            font: 800 12px/1 var(--font-ui);
+            padding: 9px 11px;
+            text-decoration: none;
+        }
+
+        .topbar a[aria-current="page"] {
+            background: #101827;
+            color: #ffffff;
+        }
+
+        .topbar .spacer { flex: 1; }
+
+        .hero {
+            padding: 34px clamp(18px, 4vw, 44px) 28px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .kicker {
+            color: #db2777;
+            font: 900 12px/1 var(--font-ui);
+            letter-spacing: .12em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            color: #0f172a;
+            font-size: clamp(42px, 6vw, 82px);
+            line-height: .9;
+        }
+
+        .intro {
+            max-width: 920px;
+            margin: 14px 0 0;
+            color: #475569;
+            font-size: 17px;
+            font-weight: 650;
+        }
+
+        .jump-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .jump-list a {
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: #f8fafc;
+            color: #1f2a44;
+            font: 800 12px/1 var(--font-ui);
+            padding: 8px 10px;
+            text-decoration: none;
+        }
+
+        main {
+            display: grid;
+            gap: 34px;
+            padding: 24px clamp(18px, 4vw, 44px) 52px;
+        }
+
+        .section {
+            display: grid;
+            gap: 14px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        h2 {
+            margin: 0;
+            color: #111827;
+            font-size: clamp(28px, 3vw, 42px);
+            line-height: .95;
+        }
+
+        .count {
+            color: var(--muted);
+            font: 900 12px/1 var(--font-mono);
+            text-transform: uppercase;
+        }
+
+        .rows {
+            display: grid;
+            gap: 10px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: minmax(300px, 36%) minmax(220px, 24%) minmax(260px, 1fr);
+            min-height: 106px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background:
+                linear-gradient(90deg, rgba(15, 23, 42, .05) 1px, transparent 1px),
+                linear-gradient(rgba(15, 23, 42, .05) 1px, transparent 1px),
+                #f8fafc;
+            background-size: 18px 18px, 18px 18px, auto;
+        }
+
+        .class-cell {
+            display: grid;
+            align-content: start;
+            gap: 10px;
+            min-width: 0;
+            padding: 14px;
+            border-right: 1px solid #e1e8f2;
+            background: #ffffff;
+        }
+
+        .cell-label {
+            color: #64748b;
+            font: 900 11px/1 var(--font-ui);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .code-block {
+            min-width: 0;
+            max-height: 176px;
+            margin: 0;
+            overflow: auto;
+            border-radius: 7px;
+            background: #101827;
+            color: #ffffff61;
+            padding: 11px;
+            white-space: pre-wrap;
+        }
+
+        .code-block code {
+            color: inherit;
+            font: 650 11px/1.45 var(--font-mono);
+            overflow-wrap: anywhere;
+        }
+
+        .code-class {
+            display: inline-block;
+            margin: 1px 1px 1px 0;
+            padding: 1px 5px;
+            border-radius: 5px;
+            background: rgba(148, 163, 184, .16);
+            color: #dbeafe;
+            font-weight: 850;
+        }
+
+        .code-class--preset { background: rgba(37, 99, 235, .28); color: #bfdbfe; }
+        .code-class--step { background: rgba(245, 158, 11, .26); color: #fde68a; }
+        .code-class--modifier { background: rgba(16, 185, 129, .24); color: #bbf7d0; }
+        .code-class--group { background: rgba(168, 85, 247, .28); color: #e9d5ff; }
+        .code-class--variant { background: rgba(236, 72, 153, .24); color: #fbcfe8; }
+        .code-class--state { background: rgba(239, 68, 68, .22); color: #fecaca; }
+        .code-class--utility { background: rgba(20, 184, 166, .22); color: #ccfbf1; }
+        .code-class--loop { background: rgba(249, 115, 22, .24); color: #fed7aa; }
+
+        .expected-cell {
+            display: grid;
+            align-content: start;
+            gap: 10px;
+            min-width: 0;
+            padding: 14px;
+            border-right: 1px solid #e1e8f2;
+            background: #ffffff;
+        }
+
+        .expected-list {
+            display: grid;
+            gap: 6px;
+            margin: 0;
+            padding: 0 0 0 17px;
+            color: #334155;
+            font: 700 12px/1.35 var(--font-ui);
+        }
+
+        .preview-cell {
+            display: grid;
+            align-content: start;
+            gap: 8px;
+            min-width: 0;
+            padding: 14px;
+        }
+
+        .stage {
+            display: grid;
+            place-items: center;
+            min-width: 0;
+            min-height: 96px;
+            padding: 4px;
+        }
+
+        [data-motion-preview] {
+            position: relative;
+            display: grid;
+            place-items: center;
+            width: min(260px, calc(100% - 28px));
+            min-height: 62px;
+            overflow: hidden;
+            border: 1px solid #cad6e6;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #101827;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, .08);
+            font: 900 12px/1.15 var(--font-ui);
+            text-align: center;
+            transform-origin: center;
+            --speed: 650ms;
+            --wait: 180ms;
+        }
+
+        [data-motion-trigger] {
+            display: grid;
+            gap: 10px;
+            place-items: center;
+            width: min(520px, 100%);
+            min-height: 86px;
+            padding: 12px;
+            border: 1px dashed #b8c6d9;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .72);
+        }
+
+        [data-trigger-label] {
+            color: #475569;
+            font: 800 11px/1 var(--font-ui);
+            text-transform: uppercase;
+        }
+
+        [data-peer-line] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            width: min(560px, 100%);
+        }
+
+        .peer,
+        [data-control] {
+            min-height: 38px;
+            border: 1px solid #aebed2;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #172033;
+            font: 800 12px/1 var(--font-ui);
+            padding: 0 12px;
+        }
+
+        [data-dark-panel] {
+            display: grid;
+            gap: 9px;
+            place-items: center;
+            width: min(520px, 100%);
+            padding: 14px;
+            border-radius: 8px;
+            background: #111827;
+            color: #e5e7eb;
+        }
+
+        [data-list-demo] {
+            display: grid;
+            gap: 7px;
+            width: min(520px, 100%);
+        }
+
+        [data-list-demo] > div {
+            min-height: 44px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: #ffffff;
+            display: grid;
+            place-items: center;
+            font: 850 12px/1 var(--font-ui);
+        }
+
+        @media (max-width: 760px) {
+            .topbar {
+                align-items: stretch;
+                flex-wrap: wrap;
+            }
+
+            .topbar .spacer { display: none; }
+
+            .topbar a,
+            .topbar button {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .row {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .class-cell {
+                border-right: 0;
+                border-bottom: 1px solid #e1e8f2;
+            }
+
+            .expected-cell {
+                border-right: 0;
+                border-bottom: 1px solid #e1e8f2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="topbar" aria-label="Motion test pages">
+        <a href="step-path-torture.html">Step Path Lab</a>
+        <a href="individual-animations.html">Individual Animations</a>
+        <a href="variants.html" aria-current="page">Variants</a>
+        <a href="modifiers.html">Modifiers</a>
+        <a href="nested.html">Nested</a>
+        <a href="step-loops.html">Step Loops</a>
+        <a href="docs.html">Docs</a>
+        <span class="spacer"></span>
+        <button type="button" data-action="dark">Toggle Dark</button>
+        <button type="button" data-action="replay">Replay</button>
+    </nav>
+
+    <header class="hero">
+        <div class="kicker">Variant Matrix</div>
+        <h1>Variants Lab</h1>
+        <p class="intro">Tailwind-style state, parent, sibling, dark-mode, responsive, structural, and stacked variants applied to motion utilities.</p>
+        <div class="jump-list" id="jump-list"></div>
+    </header>
+
+    <main id="app"></main>
+
+    <script>
+        const sections = [
+            {
+                id: 'self',
+                title: 'Self State Variants',
+                cases: [
+                    { classes: 'hover:motion-preset-pulse-sm', trigger: 'self', hint: 'Hover the demo.' },
+                    { classes: 'hover:motion-preset-wobble-sm', trigger: 'self', hint: 'Hover the demo.' },
+                    { classes: 'focus:motion-preset-pop', trigger: 'focus', hint: 'Tab or click the button.' },
+                    { classes: 'focus-visible:motion-preset-slide-up-sm', trigger: 'focus', hint: 'Keyboard focus is the target.' },
+                    { classes: 'active:motion-preset-compress', trigger: 'button', hint: 'Hold click or tap.' },
+                    { classes: 'disabled:motion-opacity-in-50', trigger: 'disabled', hint: 'Disabled state should match immediately.' },
+                    { classes: 'hover:motion-bg-out-blue-500 hover:motion-text-out-white', trigger: 'self', hint: 'Hover drives color utilities.' },
+                    { classes: 'hover:motion-scale-loop-125 hover:motion-loop-twice', trigger: 'self', hint: 'Hover starts a bounded loop.' },
+                    { classes: 'focus:hover:motion-preset-pulse-sm', trigger: 'focus', hint: 'Focus, then hover the button.' },
+                ],
+            },
+            {
+                id: 'group',
+                title: 'Group Variants',
+                cases: [
+                    { classes: 'group-hover:motion-preset-pop', trigger: 'group', hint: 'Hover anywhere in the dashed group.' },
+                    { classes: 'group-hover:motion-preset-slide-right-sm', trigger: 'group', hint: 'Parent hover moves the child.' },
+                    { classes: 'group-hover:motion-bg-out-blue-500 group-hover:motion-text-out-white', trigger: 'group', hint: 'Parent hover controls child colors.' },
+                    { classes: 'group-focus:motion-preset-shake', trigger: 'groupFocus', hint: 'Focus the parent button.' },
+                    { classes: 'group-focus-within:motion-preset-blur-right-sm', trigger: 'groupFocusWithin', hint: 'Focus the input inside the group.' },
+                    { classes: 'group-active:motion-preset-compress', trigger: 'groupButton', hint: 'Hold click on the parent button.' },
+                    { classes: 'group-hover:motion-preset-pulse-xs group-hover:motion-loop-twice', trigger: 'group', hint: 'Parent hover starts child loop.' },
+                    { classes: 'dark:group-hover:motion-preset-wiggle', trigger: 'groupDark', hint: 'Dark mode plus group hover.' },
+                ],
+            },
+            {
+                id: 'peer',
+                title: 'Peer Variants',
+                cases: [
+                    { classes: 'peer-hover:motion-preset-slide-right-sm', trigger: 'peerHover', hint: 'Hover the peer button.' },
+                    { classes: 'peer-focus:motion-preset-pop', trigger: 'peerFocus', hint: 'Focus the peer input.' },
+                    { classes: 'peer-checked:motion-preset-expand', trigger: 'peerChecked', hint: 'Toggle the peer checkbox.' },
+                    { classes: 'peer-checked:motion-bg-out-green-500 peer-checked:motion-text-out-white', trigger: 'peerChecked', hint: 'Checked peer changes child color.' },
+                    { classes: 'peer-disabled:motion-opacity-in-25', trigger: 'peerDisabled', hint: 'Disabled peer should match immediately.' },
+                    { classes: 'peer-invalid:motion-preset-shake', trigger: 'peerInvalid', hint: 'Required empty input is invalid.' },
+                    { classes: 'peer-focus:motion-preset-pulse-sm peer-focus:motion-loop-twice', trigger: 'peerFocus', hint: 'Focus peer starts loop.' },
+                ],
+            },
+            {
+                id: 'dark',
+                title: 'Dark Mode Variants',
+                cases: [
+                    { classes: 'dark:motion-bg-out-blue-500 dark:motion-text-out-white', trigger: 'dark', hint: 'Root .dark is on by default.' },
+                    { classes: 'dark:motion-preset-pulse-sm', trigger: 'dark', hint: 'Dark mode can trigger loop presets.' },
+                    { classes: 'dark:hover:motion-preset-pop', trigger: 'darkSelf', hint: 'Dark mode plus hover.' },
+                    { classes: 'dark:focus:motion-preset-shake', trigger: 'darkFocus', hint: 'Dark mode plus focus.' },
+                    { classes: 'dark:group-hover:motion-preset-slide-up-sm', trigger: 'groupDark', hint: 'Dark mode plus parent hover.' },
+                    { classes: 'dark:peer-checked:motion-preset-expand', trigger: 'peerCheckedDark', hint: 'Dark mode plus checked peer.' },
+                ],
+            },
+            {
+                id: 'responsive',
+                title: 'Responsive And Stacked Variants',
+                cases: [
+                    { classes: 'sm:motion-preset-slide-up-sm', trigger: 'self', hint: 'Active at small screens and up.' },
+                    { classes: 'md:motion-preset-slide-right-sm', trigger: 'self', hint: 'Active at medium screens and up.' },
+                    { classes: 'lg:motion-preset-pop', trigger: 'self', hint: 'Active at large screens and up.' },
+                    { classes: 'xl:motion-preset-pulse-sm', trigger: 'self', hint: 'Active at extra-large screens and up.' },
+                    { classes: 'md:hover:motion-preset-wobble-sm', trigger: 'self', hint: 'Responsive plus hover.' },
+                    { classes: 'lg:dark:hover:motion-preset-shake', trigger: 'darkSelf', hint: 'Responsive plus dark plus hover.' },
+                    { classes: 'md:group-hover:motion-preset-slide-left-sm', trigger: 'group', hint: 'Responsive plus group hover.' },
+                    { classes: 'lg:peer-checked:motion-preset-expand', trigger: 'peerChecked', hint: 'Responsive plus peer checked.' },
+                ],
+            },
+            {
+                id: 'structural',
+                title: 'Structural Variants',
+                cases: [
+                    { classes: 'first:motion-preset-slide-right-sm', trigger: 'list', hint: 'Only the first item should animate.' },
+                    { classes: 'last:motion-preset-slide-left-sm', trigger: 'list', hint: 'Only the last item should animate.' },
+                    { classes: 'odd:motion-bg-out-blue-500 odd:motion-text-out-white', trigger: 'list', hint: 'Odd children should match.' },
+                    { classes: 'even:motion-preset-pop', trigger: 'list', hint: 'Even children should match.' },
+                    { classes: 'first:motion-preset-pop last:motion-preset-shake odd:motion-bg-out-blue-500', trigger: 'list', hint: 'Multiple structural variants together.' },
+                ],
+            },
+        ];
+
+        const app = document.getElementById('app');
+        const jumpList = document.getElementById('jump-list');
+
+        function escapeHTML(value) {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('"', '&quot;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;');
+        }
+
+        function classKind(token) {
+            const parts = token.split(':');
+            const base = parts.at(-1);
+            const prefixes = parts.slice(0, -1);
+
+            if (/^step-\d+$/.test(prefixes.at(0) || '')) return 'step';
+            if (token === 'motion-group') return 'group';
+            if (/^(group|peer|dark)$/.test(token) || prefixes.length) return /^step-\d+$/.test(prefixes.at(0) || '') ? 'step' : 'variant';
+            if (/^(wait|still|pause|play|motion-paused|motion-running)$/.test(base)) return 'state';
+            if (/^motion-repeat/.test(base)) return 'loop';
+            if (/^motion-preset-/.test(base)) return 'preset';
+            if (/^motion-(duration|delay|ease|gap|overlap|loop)/.test(base)) return 'modifier';
+            if (/^motion-(scale|translate|rotate|opacity|blur|grayscale|bg|text)-/.test(base)) return 'utility';
+            if (/loop|pulse|spin|blink|float|oscillate|wobble|seesaw|stretch/.test(base)) return 'loop';
+            return 'other';
+        }
+
+        function highlightClasses(classValue) {
+            return classValue
+                .split(/\s+/)
+                .filter(Boolean)
+                .map((token) => `<span class="code-class code-class--${classKind(token)}">${escapeHTML(token)}</span>`)
+                .join(' ');
+        }
+
+        function highlightCode(source) {
+            return escapeHTML(source).replace(/class=&quot;([^&]*)&quot;/g, (_, classes) => `class=&quot;${highlightClasses(classes)}&quot;`);
+        }
+
+        function labelFor(classes) {
+            return classes.split(/\s+/)[0]
+                .replace(/^.*:/, '')
+                .replace(/^motion-preset-/, '')
+                .replace(/^motion-/, '')
+                .replaceAll('-', ' ');
+        }
+
+        function preview(classes, text = labelFor(classes), extra = '') {
+            return `<div data-motion-preview class="${escapeHTML(classes)}" ${extra}>${escapeHTML(text)}</div>`;
+        }
+
+        function renderStage(test) {
+            const classes = test.classes;
+            switch (test.trigger) {
+                case 'focus':
+                    return preview(classes, 'focus me', 'tabindex="0"');
+                case 'button':
+                    return `<button data-motion-preview data-control class="${escapeHTML(classes)}" type="button">hold active</button>`;
+                case 'disabled':
+                    return `<button data-motion-preview data-control class="${escapeHTML(classes)}" type="button" disabled>disabled</button>`;
+                case 'group':
+                    return `<div data-motion-trigger class="group"><span data-trigger-label>hover group</span>${preview(classes, 'child')}</div>`;
+                case 'groupFocus':
+                    return `<button data-motion-trigger data-control class="group" type="button"><span data-trigger-label>focus parent</span>${preview(classes, 'child')}</button>`;
+                case 'groupFocusWithin':
+                    return `<label data-motion-trigger class="group"><span data-trigger-label>focus input</span><input data-control placeholder="inside group">${preview(classes, 'child')}</label>`;
+                case 'groupButton':
+                    return `<button data-motion-trigger data-control class="group" type="button"><span data-trigger-label>hold parent</span>${preview(classes, 'child')}</button>`;
+                case 'groupDark':
+                    return `<div data-motion-trigger data-dark-panel class="group"><span data-trigger-label>dark + group hover</span>${preview(classes, 'child')}</div>`;
+                case 'peerHover':
+                    return `<div data-peer-line><button class="peer" type="button">hover peer</button>${preview(classes, 'target')}</div>`;
+                case 'peerFocus':
+                    return `<div data-peer-line><input data-control class="peer" placeholder="focus peer">${preview(classes, 'target')}</div>`;
+                case 'peerChecked':
+                    return `<label data-peer-line><input class="peer" type="checkbox"> ${preview(classes, 'target')}</label>`;
+                case 'peerCheckedDark':
+                    return `<label data-peer-line data-dark-panel><input class="peer" type="checkbox"> ${preview(classes, 'target')}</label>`;
+                case 'peerDisabled':
+                    return `<div data-peer-line><button class="peer" type="button" disabled>disabled peer</button>${preview(classes, 'target')}</div>`;
+                case 'peerInvalid':
+                    return `<div data-peer-line><input data-control class="peer" required placeholder="required">${preview(classes, 'target')}</div>`;
+                case 'dark':
+                    return `<div data-dark-panel>${preview(classes, 'dark target')}</div>`;
+                case 'darkSelf':
+                    return `<div data-dark-panel>${preview(classes, 'hover dark')}</div>`;
+                case 'darkFocus':
+                    return `<div data-dark-panel>${preview(classes, 'focus dark', 'tabindex="0"')}</div>`;
+                case 'list':
+                    return `<div data-list-demo>
+                        <div class="${escapeHTML(classes)}">item 1</div>
+                        <div class="${escapeHTML(classes)}">item 2</div>
+                        <div class="${escapeHTML(classes)}">item 3</div>
+                        <div class="${escapeHTML(classes)}">item 4</div>
+                    </div>`;
+                default:
+                    return preview(classes);
+            }
+        }
+
+        function renderCode(test) {
+            const classes = test.classes;
+            switch (test.trigger) {
+                case 'focus':
+                    return `<div class="${classes}" tabindex="0">focus me</div>`;
+                case 'button':
+                    return `<button class="${classes}" type="button">hold active</button>`;
+                case 'disabled':
+                    return `<button class="${classes}" type="button" disabled>disabled</button>`;
+                case 'group':
+                    return `<div class="group">
+  <div class="${classes}">child</div>
+</div>`;
+                case 'groupFocus':
+                    return `<button class="group" type="button">
+  <div class="${classes}">child</div>
+</button>`;
+                case 'groupFocusWithin':
+                    return `<label class="group">
+  <input placeholder="inside group">
+  <div class="${classes}">child</div>
+</label>`;
+                case 'groupButton':
+                    return `<button class="group" type="button">
+  <div class="${classes}">child</div>
+</button>`;
+                case 'groupDark':
+                    return `<div class="dark group">
+  <div class="${classes}">child</div>
+</div>`;
+                case 'peerHover':
+                    return `<button class="peer" type="button">hover peer</button>
+<div class="${classes}">target</div>`;
+                case 'peerFocus':
+                    return `<input class="peer" placeholder="focus peer">
+<div class="${classes}">target</div>`;
+                case 'peerChecked':
+                    return `<input class="peer" type="checkbox">
+<div class="${classes}">target</div>`;
+                case 'peerCheckedDark':
+                    return `<div class="dark">
+  <input class="peer" type="checkbox">
+  <div class="${classes}">target</div>
+</div>`;
+                case 'peerDisabled':
+                    return `<button class="peer" type="button" disabled>disabled peer</button>
+<div class="${classes}">target</div>`;
+                case 'peerInvalid':
+                    return `<input class="peer" required placeholder="required">
+<div class="${classes}">target</div>`;
+                case 'dark':
+                case 'darkSelf':
+                case 'darkFocus':
+                    return `<div class="dark">
+  <div class="${classes}">${labelFor(classes)}</div>
+</div>`;
+                case 'list':
+                    return `<div>
+  <div class="${classes}">item 1</div>
+  <div class="${classes}">item 2</div>
+  <div class="${classes}">item 3</div>
+  <div class="${classes}">item 4</div>
+</div>`;
+                default:
+                    return `<div class="${classes}">${labelFor(classes)}</div>`;
+            }
+        }
+
+        function expectationsFor(test) {
+            const bullets = [test.hint];
+            const triggerExpectations = {
+                self: 'The motion should wait for the demo state instead of running on page load.',
+                focus: 'The target should animate only when it receives focus.',
+                button: 'The active animation should only show while the button is pressed.',
+                disabled: 'The disabled selector should match immediately without user input.',
+                group: 'The child should respond to the parent .group state.',
+                groupFocus: 'The child should respond when the parent button is focused.',
+                groupFocusWithin: 'The child should respond when focus is inside the parent group.',
+                groupButton: 'The child should respond while the parent button is active.',
+                groupDark: 'Dark mode and the parent .group state must both match.',
+                peerHover: 'The target should respond to the previous peer hover state.',
+                peerFocus: 'The target should respond to the previous peer focus state.',
+                peerChecked: 'The target should respond when the previous peer is checked.',
+                peerCheckedDark: 'Dark mode and the checked peer state must both match.',
+                peerDisabled: 'The target should respond to the previous disabled peer.',
+                peerInvalid: 'The target should respond to the invalid required peer input.',
+                dark: 'The root .dark class should make the dark variant active.',
+                darkSelf: 'Dark mode must be active, then the target state should trigger motion.',
+                darkFocus: 'Dark mode must be active, then focus should trigger motion.',
+                list: 'Only elements matching the structural selector should receive the utility.',
+            };
+
+            if (triggerExpectations[test.trigger]) bullets.push(triggerExpectations[test.trigger]);
+            if (/motion-(bg|text)-/.test(test.classes)) bullets.push('Color utilities should change the visual color, not hide the element.');
+            if (/loop|pulse|wobble|shake/.test(test.classes)) bullets.push('Looping or repeat-like motion should stay tied to the matched variant state.');
+            if (/^(sm|md|lg|xl):/.test(test.classes)) bullets.push('Responsive prefixes should only apply at their configured breakpoint and up.');
+
+            return bullets.filter((bullet, index, list) => list.indexOf(bullet) === index);
+        }
+
+        function renderExpected(test) {
+            return `<ul class="expected-list">${expectationsFor(test).map((bullet) => `<li>${escapeHTML(bullet)}</li>`).join('')}</ul>`;
+        }
+
+        function renderRow(test) {
+            const stage = renderStage(test).trim();
+            const code = renderCode(test);
+            return `
+                <article class="row">
+                    <div class="class-cell">
+                        <div class="cell-label">Code</div>
+                        <pre class="code-block"><code>${highlightCode(code)}</code></pre>
+                    </div>
+                    <div class="expected-cell">
+                        <div class="cell-label">Expected</div>
+                        ${renderExpected(test)}
+                    </div>
+                    <div class="preview-cell">
+                        <div class="cell-label">Preview</div>
+                        <div class="stage">${stage}</div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderSection(section) {
+            return `
+                <section class="section" id="${escapeHTML(section.id)}">
+                    <div class="section-head">
+                        <h2>${escapeHTML(section.title)}</h2>
+                        <div class="count">${section.cases.length} checks</div>
+                    </div>
+                    <div class="rows">${section.cases.map(renderRow).join('')}</div>
+                </section>
+            `;
+        }
+
+        jumpList.innerHTML = sections.map((section) => `<a href="#${escapeHTML(section.id)}">${escapeHTML(section.title)} ${section.cases.length}</a>`).join('');
+        app.innerHTML = sections.map(renderSection).join('');
+
+        document.querySelector('[data-action="dark"]').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        document.querySelector('[data-action="replay"]').addEventListener('click', () => {
+            document.querySelectorAll('[data-motion-preview], [data-list-demo] > div').forEach((node) => {
+                const clone = node.cloneNode(true);
+                node.replaceWith(clone);
+            });
+        });
+    </script>
+</body>
+</html>

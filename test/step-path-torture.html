@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step Path Torture Lab</title>
+    <link rel="stylesheet" href="../unocss/uno.css">
+    <style>
+    :root {
+        --font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+
+    body {
+        margin: 0;
+        background: #0f172a;
+    }
+
+    .lab-nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 54px;
+        padding: 10px clamp(16px, 4vw, 40px);
+        background: rgba(16, 24, 39, 0.95);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        color: #e5edf8;
+        backdrop-filter: blur(12px);
+    }
+
+    .lab-nav a {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 7px;
+        background: rgba(255, 255, 255, 0.06);
+        color: inherit;
+        font: 700 12px/1 var(--font-heading);
+        padding: 9px 11px;
+        text-decoration: none;
+    }
+
+    .lab-nav a[aria-current="page"] {
+        background: #ffffff;
+        color: #0f172a;
+    }
+
+    @media (max-width: 560px) {
+        .lab-nav {
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .lab-nav a {
+            flex: 1 1 auto;
+            text-align: center;
+        }
+    }
+
+    .motion-trips {
+        background: #0f172a;
+        color: #e5e7eb;
+        min-height: 100vh;
+        padding: clamp(24px, 5vw, 72px);
+    }
+
+    .motion-trips * {
+        box-sizing: border-box;
+    }
+
+    .trip-header {
+        max-width: 1180px;
+        margin: 0 auto clamp(24px, 4vw, 48px);
+    }
+
+    .trip-kicker {
+        color: #fbbf24;
+        font: 800 12px/1 var(--font-heading);
+        letter-spacing: 0.12em;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .trip-title {
+        color: #ffffff;
+        font-size: clamp(42px, 8vw, 110px);
+        line-height: 0.78;
+        margin: 0 0 18px;
+        max-width: 900px;
+    }
+
+    .trip-intro {
+        color: #cbd5e1;
+        font: 500 clamp(15px, 2vw, 20px)/1.45 var(--font-body);
+        max-width: 780px;
+    }
+
+    .trip-grid {
+        display: grid;
+        gap: 18px;
+        margin: 0 auto;
+        max-width: 1180px;
+    }
+
+    .trip-case {
+        background: #f8fafc;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        color: #0f172a;
+        display: grid;
+        gap: 0;
+        grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+        overflow: hidden;
+    }
+
+    .trip-copy {
+        display: grid;
+        gap: 14px;
+        padding: clamp(18px, 3vw, 28px);
+    }
+
+    .trip-case h2 {
+        color: #0f172a;
+        font-size: clamp(24px, 3vw, 34px);
+        line-height: 0.9;
+        margin: 0;
+    }
+
+    .trip-code {
+        background: #111827;
+        border-radius: 6px;
+        color: #ffffff61;
+        font: 500 12px/1.45 var(--font-mono);
+        margin: 0;
+        max-width: 100%;
+        overflow-x: auto;
+        padding: 14px;
+        white-space: pre-wrap;
+    }
+
+    .code-class {
+        display: inline-block;
+        margin: 1px 1px 1px 0;
+        padding: 1px 5px;
+        border-radius: 5px;
+        background: rgba(148, 163, 184, 0.16);
+        color: #dbeafe;
+        font-weight: 850;
+    }
+
+    .code-class--preset { background: rgba(37, 99, 235, 0.28); color: #bfdbfe; }
+    .code-class--step { background: rgba(245, 158, 11, 0.26); color: #fde68a; }
+    .code-class--modifier { background: rgba(16, 185, 129, 0.24); color: #bbf7d0; }
+    .code-class--group { background: rgba(168, 85, 247, 0.28); color: #e9d5ff; }
+    .code-class--variant { background: rgba(236, 72, 153, 0.24); color: #fbcfe8; }
+    .code-class--state { background: rgba(239, 68, 68, 0.22); color: #fecaca; }
+    .code-class--utility { background: rgba(20, 184, 166, 0.22); color: #ccfbf1; }
+    .code-class--loop { background: rgba(249, 115, 22, 0.24); color: #fed7aa; }
+
+    .trip-copy ul {
+        background: transparent;
+        border: 0;
+        display: grid;
+        gap: 6px;
+        list-style: disc;
+        margin: 0;
+        padding: 0 0 0 18px;
+    }
+
+    .trip-copy li {
+        border: 0;
+        color: #334155;
+        font: 600 13px/1.35 var(--font-body);
+        margin: 0;
+        padding: 0;
+    }
+
+    .trip-copy li::before {
+        content: none;
+    }
+
+    .trip-preview {
+        align-items: center;
+        background:
+            linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(251, 191, 36, 0.18)),
+            #e2e8f0;
+        border-left: 1px solid #cbd5e1;
+        display: flex;
+        justify-content: center;
+        min-height: 240px;
+        overflow: hidden;
+        padding: 28px;
+        position: relative;
+    }
+
+    .trip-stage {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+        min-height: 170px;
+        width: 100%;
+    }
+
+    .trip-column {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        justify-content: center;
+    }
+
+    .trip-nest {
+        align-items: center;
+        border: 2px dashed rgba(15, 23, 42, 0.35);
+        border-radius: 8px;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        padding: 18px;
+    }
+
+    .trip-box,
+    .trip-dot,
+    .trip-pill,
+    .trip-card,
+    .trip-word {
+        align-items: center;
+        display: inline-flex;
+        justify-content: center;
+        text-align: center;
+        transform-origin: center;
+        will-change: opacity, translate, rotate, scale, filter;
+    }
+
+    .trip-box {
+        background: #2563eb;
+        border: 3px solid #0f172a;
+        border-radius: 8px;
+        box-shadow: 6px 6px 0 #fbbf24;
+        color: #ffffff;
+        font: 900 28px/1 var(--font-heading);
+        height: 74px;
+        width: 74px;
+    }
+
+    .trip-box.alt {
+        background: #059669;
+        box-shadow: 6px 6px 0 #38bdf8;
+    }
+
+    .trip-box.hot {
+        background: #e11d48;
+        box-shadow: 6px 6px 0 #fbbf24;
+    }
+
+    .trip-dot {
+        background: #f97316;
+        border: 3px solid #0f172a;
+        border-radius: 999px;
+        color: #111827;
+        font: 900 18px/1 var(--font-heading);
+        height: 56px;
+        width: 56px;
+    }
+
+    .trip-pill {
+        background: #111827;
+        border: 2px solid #fbbf24;
+        border-radius: 999px;
+        color: #f8fafc;
+        font: 900 17px/1 var(--font-heading);
+        min-width: 120px;
+        padding: 16px 22px;
+        text-transform: uppercase;
+    }
+
+    .trip-card {
+        background: #ffffff;
+        border: 3px solid #0f172a;
+        border-radius: 8px;
+        box-shadow: 8px 8px 0 #2563eb;
+        color: #0f172a;
+        flex-direction: column;
+        font: 800 16px/1.15 var(--font-heading);
+        min-height: 92px;
+        padding: 18px;
+        width: 150px;
+    }
+
+    .trip-word {
+        color: #0f172a;
+        font: 900 clamp(28px, 4vw, 54px)/0.85 var(--font-heading);
+        text-transform: uppercase;
+    }
+
+    .trip-label {
+        color: #475569;
+        display: block;
+        font: 800 11px/1 var(--font-heading);
+        letter-spacing: 0.1em;
+        margin-top: 8px;
+        text-transform: uppercase;
+    }
+
+    .trip-lane {
+        align-items: center;
+        background: rgba(15, 23, 42, 0.08);
+        border-radius: 8px;
+        display: flex;
+        gap: 14px;
+        min-height: 120px;
+        padding: 18px;
+        width: 100%;
+    }
+
+    .trip-spacer {
+        flex: 1;
+    }
+
+    .ad-frame {
+        align-items: center;
+        aspect-ratio: 6 / 5;
+        background: #fff7ed;
+        border: 3px solid #0f172a;
+        border-radius: 8px;
+        box-shadow: 8px 8px 0 #14b8a6;
+        color: #111827;
+        display: grid;
+        gap: 10px;
+        grid-template-rows: auto 1fr auto;
+        align-content: center;
+        justify-items: center;
+        max-width: 320px;
+        overflow: hidden;
+        padding: 16px;
+        position: relative;
+        width: min(100%, 320px);
+    }
+
+    .ad-frame.dark {
+        background: #111827;
+        color: #f8fafc;
+    }
+
+    .ad-brand,
+    .ad-copy,
+    .ad-cta,
+    .ad-offer,
+    .ad-price,
+    .ad-product,
+    .ad-badge {
+        transform-origin: center;
+        will-change: opacity, translate, rotate, scale, filter;
+    }
+
+    .ad-brand {
+        align-items: center;
+        align-self: start;
+        color: #0f172a;
+        display: inline-flex;
+        font: 900 18px/1 var(--font-heading);
+        justify-self: start;
+        letter-spacing: 0.08em;
+        min-height: 24px;
+        text-transform: uppercase;
+    }
+
+    .ad-frame.dark .ad-brand {
+        color: #fbbf24;
+    }
+
+    .ad-product {
+        align-items: center;
+        align-self: center;
+        background: #2563eb;
+        border: 3px solid #0f172a;
+        border-radius: 8px;
+        box-shadow: 6px 6px 0 #fbbf24;
+        color: #ffffff;
+        display: flex;
+        font: 900 42px/1 var(--font-heading);
+        height: 92px;
+        justify-content: center;
+        width: 92px;
+    }
+
+    .ad-offer,
+    .ad-price {
+        align-items: center;
+        color: #be123c;
+        display: inline-flex;
+        font: 900 30px/1 var(--font-heading);
+        justify-content: center;
+        max-width: 240px;
+        min-height: 40px;
+        overflow-wrap: anywhere;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .ad-copy {
+        color: #334155;
+        font: 900 20px/1.08 var(--font-heading);
+        max-width: 220px;
+        overflow-wrap: anywhere;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .ad-frame.dark .ad-copy {
+        color: #e5e7eb;
+    }
+
+    .ad-cta {
+        background: #0f172a;
+        border: 2px solid #fbbf24;
+        border-radius: 999px;
+        color: #ffffff;
+        font: 900 14px/1 var(--font-heading);
+        padding: 12px 18px;
+        text-transform: uppercase;
+    }
+
+    .ad-badge {
+        align-items: center;
+        background: #f97316;
+        border: 3px solid #0f172a;
+        border-radius: 999px;
+        color: #111827;
+        display: flex;
+        font: 900 18px/1 var(--font-heading);
+        height: 62px;
+        justify-content: center;
+        position: absolute;
+        right: 16px;
+        top: 54px;
+        width: 62px;
+    }
+
+    @media (max-width: 480px) {
+        .ad-frame {
+            gap: 6px;
+            padding: 12px;
+        }
+
+        .ad-brand {
+            font-size: 16px;
+            min-height: 22px;
+        }
+
+        .ad-product {
+            font-size: 34px;
+            height: 74px;
+            width: 74px;
+        }
+
+        .ad-offer,
+        .ad-price {
+            font-size: 26px;
+            min-height: 34px;
+        }
+
+        .ad-copy {
+            font-size: 18px;
+        }
+
+        .ad-cta {
+            padding: 10px 14px;
+        }
+
+        .ad-badge {
+            height: 54px;
+            right: 12px;
+            top: 46px;
+            width: 54px;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .trip-case {
+            grid-template-columns: 1fr;
+        }
+
+        .trip-preview {
+            border-left: 0;
+            border-top: 1px solid #cbd5e1;
+        }
+    }
+</style>
+</head>
+<body>
+<nav class="lab-nav" aria-label="Motion test pages">
+    <a href="step-path-torture.html" aria-current="page">Step Path Lab</a>
+    <a href="individual-animations.html">Individual Animations</a>
+    <a href="variants.html">Variants</a>
+    <a href="modifiers.html">Modifiers</a>
+    <a href="nested.html">Nested</a>
+    <a href="step-loops.html">Step Loops</a>
+    <a href="docs.html">Docs</a>
+</nav>
+
+<section class="motion-trips">
+    <header class="trip-header">
+        <p class="trip-kicker">Motion trips check</p>
+        <h1 class="trip-title">Step path torture lab</h1>
+        <p class="trip-intro">Every card has the HTML, the expected behavior, and the live preview. Scroll cards into view to let the existing <code>wait</code> helper release the animations.</p>
+    </header>
+
+    <div class="trip-grid">
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>01. Your nested pattern</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;h1 class="step-1:motion-preset-slide-up-lg step-3:motion-preset-expand step-4:motion-preset-expand"&gt;Hello&lt;/h1&gt;
+  &lt;h1 class="step-2:motion-preset-slide-up-lg"&gt;World&lt;/h1&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Scope makes both headings share one clock.</li>
+                    <li>The first heading slides, waits through step 2, then grows twice.</li>
+                    <li>The second heading only runs the step 2 slide.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait motion-group">
+                <div class="trip-column">
+                    <div class="trip-word step-1:motion-preset-slide-up-lg step-3:motion-preset-expand step-4:motion-preset-expand">Hello</div>
+                    <div class="trip-word step-2:motion-preset-slide-up-lg">World</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>02. Triple slide path</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-slide-up-lg step-2:motion-preset-slide-up-lg step-3:motion-preset-slide-up-lg"&gt;UP&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Same element, same translate family, three steps.</li>
+                    <li>Each step starts from the previous translate end.</li>
+                    <li>It should climb higher instead of replaying from zero.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box step-1:motion-preset-slide-up-lg step-2:motion-preset-slide-up-lg step-3:motion-preset-slide-up-lg">UP</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>03. Box path</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-slide-up-lg step-2:motion-preset-slide-right-lg step-3:motion-preset-slide-down-lg step-4:motion-preset-slide-left-lg"&gt;BOX&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Translate should accumulate through four different directions.</li>
+                    <li>The element draws a rough square path.</li>
+                    <li>Opacity should only behave like an entrance once.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box alt step-1:motion-preset-slide-up-lg step-2:motion-preset-slide-right-lg step-3:motion-preset-slide-down-lg step-4:motion-preset-slide-left-lg">BOX</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>04. Expand, expand, expand</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-expand step-2:motion-preset-expand step-3:motion-preset-expand"&gt;GROW&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>This is the new scale path check.</li>
+                    <li>Each expand adds another scale delta.</li>
+                    <li>It should intentionally get bigger and bigger.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-pill step-1:motion-preset-expand step-2:motion-preset-expand step-3:motion-preset-expand">Grow</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>05. Shrink path</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-shrink step-2:motion-preset-shrink step-3:motion-preset-shrink"&gt;SMOL&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Same scale-chain system, opposite direction.</li>
+                    <li>Each shrink removes scale from the current state.</li>
+                    <li>This is a sanity check for negative scale deltas.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-pill step-1:motion-preset-shrink step-2:motion-preset-shrink step-3:motion-preset-shrink">Smol</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>06. Pop, compress, expand</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-pop step-2:motion-preset-compress step-3:motion-preset-expand"&gt;POP&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>All three are scale-driven presets.</li>
+                    <li>The scale chain should survive spring timing changes.</li>
+                    <li>Watch for jump cuts between the presets.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box hot step-1:motion-preset-pop step-2:motion-preset-compress step-3:motion-preset-expand">POP</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>07. Raw scale axes</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-scale-x-in-50 step-2:motion-scale-y-in-50 step-3:motion-scale-in-150"&gt;AXIS&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Raw scale utilities should join the same chain as presets.</li>
+                    <li>X and Y axis values should not wipe each other out.</li>
+                    <li>Final step should grow both axes from the current state.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box step-1:motion-scale-x-in-50 step-2:motion-scale-y-in-50 step-3:motion-scale-in-150">AX</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>08. Negative raw transforms</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:-motion-translate-x-in-100 step-2:motion-translate-y-in-100 step-3:-motion-rotate-in-90"&gt;-X&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Negative variant should not double-negate animation values.</li>
+                    <li>Translate and rotate should each chain independently.</li>
+                    <li>This checks the negative marker path.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box alt step-1:-motion-translate-x-in-100 step-2:motion-translate-y-in-100 step-3:-motion-rotate-in-90">-X</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>09. Same-step combo</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-slide-up step-1:motion-preset-slide-right step-1:motion-preset-expand"&gt;ONE&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Same step, different transform families.</li>
+                    <li>Slide X, slide Y, and scale should run together.</li>
+                    <li>This should feel like one composite entrance.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box hot step-1:motion-preset-slide-up step-1:motion-preset-slide-right step-1:motion-preset-expand">1</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>10. Rebound path</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-rebound-left step-2:motion-preset-rebound-left step-3:motion-preset-rebound-up"&gt;R&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Rebound used to miss the slide-only path matcher.</li>
+                    <li>Now it should chain because the generated utility sets translate.</li>
+                    <li>Spring timing should not break the accumulated position.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-dot step-1:motion-preset-rebound-left step-2:motion-preset-rebound-left step-3:motion-preset-rebound-up">R</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>11. Blur slide repeat</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-blur-up step-2:motion-preset-blur-up step-3:motion-preset-blur-right"&gt;BLUR&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Blur-direction presets are filter plus translate.</li>
+                    <li>Translate should path through all three steps.</li>
+                    <li>Later steps should not keep refading/reblurring from scratch.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-pill step-1:motion-preset-blur-up step-2:motion-preset-blur-up step-3:motion-preset-blur-right">Blur</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>12. Repeated focus stays stable</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-focus step-2:motion-preset-focus step-3:motion-preset-focus"&gt;FOCUS&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Focus has filter and opacity, but no transform path family.</li>
+                    <li>Step 1 should fade and focus from blur.</li>
+                    <li>Steps 2 and 3 should stay visible and sharp unless an explicit out step happens.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-word step-1:motion-preset-focus step-2:motion-preset-focus step-3:motion-preset-focus">Focus</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>13. Scoped sibling timing</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;div class="step-1:motion-duration-[1600ms] step-1:motion-preset-slide-up"&gt;A&lt;/div&gt;
+  &lt;div class="step-2:motion-preset-pop"&gt;B&lt;/div&gt;
+  &lt;div class="step-3:motion-preset-slide-left"&gt;C&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Children share the scope clock.</li>
+                    <li>B should wait for A's long step 1 duration.</li>
+                    <li>C should wait for B, not for its own isolated clock.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait motion-group">
+                <div class="trip-stage">
+                    <div class="trip-box step-1:motion-duration-[1600ms] step-1:motion-preset-slide-up">A</div>
+                    <div class="trip-box alt step-2:motion-preset-pop">B</div>
+                    <div class="trip-box hot step-3:motion-preset-slide-left">C</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>14. Unscoped siblings</h2>
+                <pre class="trip-code"><code>&lt;div&gt;
+  &lt;div class="step-1:motion-duration-[1600ms] step-1:motion-preset-slide-up"&gt;A&lt;/div&gt;
+  &lt;div class="step-2:motion-preset-pop"&gt;B&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>No motion-group on purpose.</li>
+                    <li>A and B compute timelines independently.</li>
+                    <li>B should use the default missing step 1 timing, not A's 1600ms.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-stage">
+                    <div class="trip-box step-1:motion-duration-[1600ms] step-1:motion-preset-slide-up">A</div>
+                    <div class="trip-box alt step-2:motion-preset-pop">B</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>15. Nested scope inside outer scope</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;div class="step-1:motion-preset-slide-right"&gt;Outer&lt;/div&gt;
+  &lt;div class="motion-group step-2:motion-duration-200"&gt;
+    &lt;div class="step-2:motion-preset-pop"&gt;Inner A&lt;/div&gt;
+    &lt;div class="step-3:motion-preset-slide-up"&gt;Inner B&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Nested scopes should remain readable and not explode vars.</li>
+                    <li>Inner scope sets its own short step 2 duration.</li>
+                    <li>Useful check for inherited versus local step timing.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait motion-group">
+                <div class="trip-column">
+                    <div class="trip-pill step-1:motion-preset-slide-right">Outer</div>
+                    <div class="trip-nest motion-group step-2:motion-duration-200">
+                        <div class="trip-dot step-2:motion-preset-pop">A</div>
+                        <div class="trip-dot step-3:motion-preset-slide-up">B</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>16. Scoped then unnested</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;div class="step-1:motion-preset-slide-up"&gt;Scoped A&lt;/div&gt;
+  &lt;div class="step-2:motion-preset-expand"&gt;Scoped B&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="step-3:motion-preset-slide-up"&gt;Outside&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>The outside item is not part of the scope.</li>
+                    <li>It still has its own step 3 delay chain.</li>
+                    <li>This mirrors the nested versus unnested confusion case.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-column">
+                    <div class="trip-nest motion-group">
+                        <div class="trip-dot step-1:motion-preset-slide-up">A</div>
+                        <div class="trip-dot step-2:motion-preset-expand">B</div>
+                    </div>
+                    <div class="trip-pill step-3:motion-preset-slide-up">Outside</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>17. Gap and overlap</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;div class="step-1:motion-preset-slide-up step-1:motion-duration-1000"&gt;1&lt;/div&gt;
+  &lt;div class="step-2:motion-overlap-300 step-2:motion-preset-pop"&gt;2&lt;/div&gt;
+  &lt;div class="step-3:motion-gap-500 step-3:motion-preset-slide-left"&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Step 2 starts before step 1 fully finishes.</li>
+                    <li>Step 3 waits extra after step 2.</li>
+                    <li>Checks offsets with scoped timing.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait motion-group">
+                <div class="trip-stage">
+                    <div class="trip-dot step-1:motion-preset-slide-up step-1:motion-duration-1000">1</div>
+                    <div class="trip-dot step-2:motion-overlap-300 step-2:motion-preset-pop">2</div>
+                    <div class="trip-dot step-3:motion-gap-500 step-3:motion-preset-slide-left">3</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>18. Skip steps hard</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-slide-up step-5:motion-preset-expand"&gt;SKIP&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>There are no step 2, 3, or 4 utilities on the element.</li>
+                    <li>Step 5 should start after step 1 without default empty-slot delay.</li>
+                    <li>Scale should compose if another scale step appears later.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-pill step-1:motion-preset-slide-up step-5:motion-preset-expand">Skip</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>19. Conflict same axis</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-slide-up step-1:motion-preset-slide-down step-2:motion-preset-slide-right"&gt;WHO&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>This intentionally sets opposite Y values in the same slot.</li>
+                    <li>One Y value will win by generated CSS order.</li>
+                    <li>This is a break test, not a recommended pattern.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box hot step-1:motion-preset-slide-up step-1:motion-preset-slide-down step-2:motion-preset-slide-right">?</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>20. Loop after path</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-expand step-2:motion-preset-slide-up step-3:motion-preset-pulse-md"&gt;LOOP&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Entry steps create path state first.</li>
+                    <li>Pulse should loop around the expanded scale, not reset to scale 1.</li>
+                    <li>The loop should stay anchored at the slid-up position.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-pill step-1:motion-preset-expand step-2:motion-preset-slide-up step-3:motion-preset-pulse-md">Loop</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>21. Exit then re-enter</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-slide-up step-2:motion-opacity-out-0 step-3:motion-preset-expand"&gt;BACK&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Step 2 exits opacity only.</li>
+                    <li>Because opacity explicitly went out, step 3 is allowed to fade back in.</li>
+                    <li>Final state should be visible and expanded.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-card step-1:motion-preset-slide-up step-2:motion-opacity-out-0 step-3:motion-preset-expand">Back</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>22. Color then expand</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-bg-out-blue-700 step-2:motion-text-out-white step-3:motion-preset-expand"&gt;COLOR&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Out color utilities should commit visible color state.</li>
+                    <li>The future expand should not make the element start small.</li>
+                    <li>Step 3 should expand from the current full-size state after color changes finish.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-card step-1:motion-bg-out-blue-700 step-2:motion-text-out-white step-3:motion-preset-expand">Color</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>23. Many families at once</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-expand step-2:motion-preset-slide-up step-2:motion-rotate-in-180 step-3:motion-preset-blur-right step-4:motion-preset-compress step-5:motion-preset-expand"&gt;MAX&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>This stacks scale, translate, rotate, filter, and opacity.</li>
+                    <li>Transform families should each keep their own path state.</li>
+                    <li>Use this to spot weird jumps between unrelated families.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box step-1:motion-preset-expand step-2:motion-preset-slide-up step-2:motion-rotate-in-180 step-3:motion-preset-blur-right step-4:motion-preset-compress step-5:motion-preset-expand">MAX</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>24. Filter exit then re-enter</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-blur-right step-2:motion-blur-out-lg step-3:motion-preset-blur-right"&gt;CLEAR&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Step 1 focuses in while sliding right.</li>
+                    <li>Step 2 explicitly blurs out.</li>
+                    <li>Step 3 should be allowed to focus back to clear instead of staying blurred.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-pill step-1:motion-preset-blur-right step-2:motion-blur-out-lg step-3:motion-preset-blur-right">Clear</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>25. Repeated fade stays visible</h2>
+                <pre class="trip-code"><code>&lt;div class="step-1:motion-preset-fade step-2:motion-preset-fade step-3:motion-preset-fade"&gt;FADE&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Step 1 should fade in normally.</li>
+                    <li>Later fade-in steps should not blink back to hidden.</li>
+                    <li>An explicit opacity-out step is required before a later fade-in replays.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-word step-1:motion-preset-fade step-2:motion-preset-fade step-3:motion-preset-fade">Fade</div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>26. Ad product, offer, CTA</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;div class="step-1:motion-preset-slide-down-sm"&gt;NOVA&lt;/div&gt;
+  &lt;div class="step-1:motion-preset-expand step-3:motion-preset-slide-up"&gt;A&lt;/div&gt;
+  &lt;div class="step-2:motion-preset-slide-up"&gt;30% OFF&lt;/div&gt;
+  &lt;button class="step-4:motion-preset-pop step-5:motion-preset-pulse-sm"&gt;Shop Now&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Brand and product enter together in step 1.</li>
+                    <li>The offer owns step 2 while the product holds.</li>
+                    <li>The same product moves again in step 3, then the CTA pops and pulses.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="motion-group ad-frame">
+                    <div class="ad-brand step-1:motion-preset-slide-down-sm">NOVA</div>
+                    <div class="ad-product step-1:motion-preset-expand step-3:motion-preset-slide-up">A</div>
+                    <div class="ad-offer step-2:motion-preset-slide-up">30% OFF</div>
+                    <button class="ad-cta step-4:motion-preset-pop step-5:motion-preset-pulse-sm">Shop Now</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>27. Non-contiguous product steps</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group dark"&gt;
+  &lt;div class="step-1:motion-preset-expand step-3:motion-preset-slide-up"&gt;P&lt;/div&gt;
+  &lt;div class="step-2:motion-preset-blur-right"&gt;Built for speed&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>The product uses step 1 and step 3, with no step 2 class.</li>
+                    <li>The copy owns step 2 while the product holds its step 1 state.</li>
+                    <li>Step 3 should still apply to the product after the copy finishes.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="motion-group ad-frame dark">
+                    <div class="ad-product step-1:motion-preset-expand step-3:motion-preset-slide-up">P</div>
+                    <div class="ad-copy step-2:motion-preset-blur-right">Built for speed</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>28. Skipped ad slots</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;div class="step-1:motion-preset-slide-left"&gt;ACME&lt;/div&gt;
+  &lt;div class="step-3:motion-preset-pop"&gt;$19&lt;/div&gt;
+  &lt;button class="step-5:motion-preset-pulse-sm"&gt;Buy Now&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>Only steps 1, 3, and 5 are used.</li>
+                    <li>Empty slots should collapse unless a gap or active step exists.</li>
+                    <li>The CTA follows the previous active step instead of waiting through skipped numbers.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="motion-group ad-frame">
+                    <div class="ad-brand step-1:motion-preset-slide-left">ACME</div>
+                    <div class="ad-price step-3:motion-preset-pop">$19</div>
+                    <button class="ad-cta step-5:motion-preset-pulse-sm">Buy Now</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>29. Product path between copy</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;div class="step-1:motion-preset-slide-up step-3:motion-preset-slide-right step-5:motion-preset-expand"&gt;C&lt;/div&gt;
+  &lt;div class="step-2:motion-preset-pop"&gt;NEW&lt;/div&gt;
+  &lt;div class="step-4:motion-preset-slide-up"&gt;Fresh drop&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>The product owns steps 1, 3, and 5.</li>
+                    <li>The badge and copy fill steps 2 and 4.</li>
+                    <li>The product path should continue across sibling-owned steps.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="motion-group ad-frame">
+                    <div class="ad-product step-1:motion-preset-slide-up step-3:motion-preset-slide-right step-5:motion-preset-expand">C</div>
+                    <div class="ad-badge step-2:motion-preset-pop">NEW</div>
+                    <div class="ad-copy step-4:motion-preset-slide-up">Fresh drop</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>30. Copy swap ad</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group dark"&gt;
+  &lt;div class="step-1:motion-preset-fade step-3:motion-opacity-out-0"&gt;New kit&lt;/div&gt;
+  &lt;div class="step-4:motion-preset-slide-up step-5:motion-preset-expand"&gt;Deal&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>The first message fades in, then explicitly exits on step 3.</li>
+                    <li>The offer enters later after the exit.</li>
+                    <li>Explicit opacity-out should make the later entrance legal.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="motion-group ad-frame dark">
+                    <div class="ad-copy step-1:motion-preset-fade step-3:motion-opacity-out-0">New kit</div>
+                    <div class="ad-offer step-4:motion-preset-slide-up step-5:motion-preset-expand">Deal</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>31. Product disappears and returns</h2>
+                <pre class="trip-code"><code>&lt;div class="motion-group"&gt;
+  &lt;div class="step-1:motion-preset-expand step-2:motion-opacity-out-0 step-4:motion-preset-slide-up"&gt;R&lt;/div&gt;
+  &lt;div class="step-3:motion-preset-pop"&gt;WAIT&lt;/div&gt;
+  &lt;button class="step-5:motion-preset-pop"&gt;Claim&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>The product enters, exits, then re-enters after another element owns step 3.</li>
+                    <li>Step 4 should fade the product back in because step 2 explicitly exited it.</li>
+                    <li>The CTA waits until step 5.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="motion-group ad-frame">
+                    <div class="ad-product step-1:motion-preset-expand step-2:motion-opacity-out-0 step-4:motion-preset-slide-up">R</div>
+                    <div class="ad-badge step-3:motion-preset-pop">WAIT</div>
+                    <button class="ad-cta step-5:motion-preset-pop">Claim</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="trip-case">
+            <div class="trip-copy">
+                <h2>32. Wait sanity</h2>
+                <pre class="trip-code"><code>&lt;div class="wait"&gt;
+  &lt;div class="step-1:motion-preset-slide-up step-2:motion-preset-expand"&gt;WAIT&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                <ul>
+                    <li>The parent wait class should pause all descendant animations.</li>
+                    <li>The helper should remove wait when the preview hits the viewport.</li>
+                    <li>No generated selector should contain broken placeholder values.</li>
+                </ul>
+            </div>
+            <div class="trip-preview wait">
+                <div class="trip-box alt step-1:motion-preset-slide-up step-2:motion-preset-expand">WAIT</div>
+            </div>
+        </article>
+    </div>
+</section>
+<script>
+    function escapeHTML(value) {
+        return String(value)
+            .replaceAll('&', '&amp;')
+            .replaceAll('"', '&quot;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;');
+    }
+
+    function classKind(token) {
+        const parts = token.split(':');
+        const base = parts.at(-1);
+        const prefixes = parts.slice(0, -1);
+
+        if (/^step-\d+$/.test(prefixes.at(0) || '')) return 'step';
+        if (token === 'motion-group') return 'group';
+        if (/^(group|peer|dark)$/.test(token) || prefixes.length) return /^step-\d+$/.test(prefixes.at(0) || '') ? 'step' : 'variant';
+        if (/^(wait|still|pause|play|motion-paused|motion-running)$/.test(base)) return 'state';
+        if (/^motion-repeat/.test(base)) return 'loop';
+        if (/^motion-preset-/.test(base)) return 'preset';
+        if (/^motion-(duration|delay|ease|gap|overlap|loop)/.test(base)) return 'modifier';
+        if (/^motion-(scale|translate|rotate|opacity|blur|grayscale|bg|text)-/.test(base)) return 'utility';
+        if (/loop|pulse|spin|blink|float|oscillate|wobble|seesaw|stretch/.test(base)) return 'loop';
+        return 'other';
+    }
+
+    function highlightClasses(classValue) {
+        return classValue
+            .split(/\s+/)
+            .filter(Boolean)
+            .map((token) => `<span class="code-class code-class--${classKind(token)}">${escapeHTML(token)}</span>`)
+            .join(' ');
+    }
+
+    function highlightCode(source) {
+        return escapeHTML(source).replace(/class=&quot;([^&]*)&quot;/g, (_, classes) => `class=&quot;${highlightClasses(classes)}&quot;`);
+    }
+
+    document.querySelectorAll('.trip-code code').forEach((code) => {
+        code.innerHTML = highlightCode(code.textContent);
+    });
+
+    const waitObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.remove('wait');
+            waitObserver.unobserve(entry.target);
+        });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.2 });
+
+    document.querySelectorAll('.wait').forEach((element) => waitObserver.observe(element));
+</script>
+</body>
+</html>

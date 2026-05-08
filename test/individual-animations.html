@@ -1,0 +1,1709 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Motion Lab</title>
+    <link rel="stylesheet" href="../unocss/uno.css">
+    <style>
+        :root {
+            --font-ui: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            --ink: #172033;
+            --muted: #627089;
+            --panel: #ffffff;
+            --line: #d9e2ef;
+            --soft: #f3f6fb;
+            --bg: #f8fafc;
+            --nav: #101827;
+            --accent: #2563eb;
+            --accent-2: #db2777;
+            --good: #059669;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-ui);
+            line-height: 1.45;
+        }
+
+        code,
+        .mono {
+            font-family: var(--font-mono);
+        }
+
+        .lab-nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 10px clamp(16px, 4vw, 40px);
+            background: color-mix(in srgb, var(--nav) 94%, transparent);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            color: #e5edf8;
+            backdrop-filter: blur(12px);
+        }
+
+        .lab-nav a,
+        .lab-nav button {
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.06);
+            color: inherit;
+            cursor: pointer;
+            font: 700 12px/1 var(--font-ui);
+            padding: 9px 11px;
+            text-decoration: none;
+        }
+
+        .lab-nav a[aria-current="page"] {
+            background: #ffffff;
+            color: #0f172a;
+        }
+
+        .lab-nav .spacer {
+            flex: 1;
+        }
+
+        .hero {
+            padding: clamp(28px, 7vw, 72px) clamp(16px, 4vw, 40px) clamp(22px, 4vw, 40px);
+            background:
+                linear-gradient(135deg, rgba(37, 99, 235, 0.12), transparent 44%),
+                linear-gradient(135deg, #ffffff, #edf2f7);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero-inner,
+        main {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .kicker {
+            color: var(--accent-2);
+            font: 900 12px/1 var(--font-ui);
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 920px;
+            margin: 0;
+            color: #0f172a;
+            font-size: clamp(44px, 7vw, 96px);
+            letter-spacing: 0;
+            line-height: 0.86;
+        }
+
+        .intro {
+            max-width: 760px;
+            margin: 18px 0 0;
+            color: #46556b;
+            font-size: clamp(16px, 2vw, 21px);
+            font-weight: 550;
+        }
+
+        .jump-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 22px;
+        }
+
+        .jump-list a {
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.76);
+            color: #1f2a44;
+            font: 800 12px/1 var(--font-ui);
+            padding: 8px 10px;
+            text-decoration: none;
+        }
+
+        main {
+            display: grid;
+            gap: 26px;
+            padding: clamp(18px, 4vw, 40px);
+        }
+
+        .section {
+            display: grid;
+            gap: 14px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            gap: 14px;
+            justify-content: space-between;
+        }
+
+        .section h2 {
+            margin: 0;
+            color: #111827;
+            font-size: clamp(24px, 3vw, 36px);
+            line-height: 0.95;
+        }
+
+        .section-count {
+            color: var(--muted);
+            font: 800 12px/1 var(--font-mono);
+            text-transform: uppercase;
+        }
+
+        .cards {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        .case {
+            display: grid;
+            gap: 12px;
+            min-width: 0;
+            overflow: hidden;
+            padding: 16px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+        }
+
+        .case-head {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .case h3 {
+            margin: 0;
+            color: #111827;
+            font-size: 16px;
+            line-height: 1.05;
+        }
+
+        .case-note {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .samples {
+            display: grid;
+            gap: 9px;
+            grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+            align-items: stretch;
+        }
+
+        .sample-wrap {
+            min-width: 0;
+            overflow: visible;
+            padding: 8px;
+            border: 1px solid #e4ebf5;
+            border-radius: 7px;
+            background:
+                linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+                linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+                #f8fafc;
+            background-size: 16px 16px;
+        }
+
+        [data-motion-preview] {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 72px;
+            padding: 8px;
+            overflow: visible;
+            border-radius: 7px;
+            background: #ffffff;
+            border: 1px solid #d7e0ec;
+            color: #0f172a;
+            font: 900 11px/1.15 var(--font-ui);
+            text-align: center;
+            transform-origin: center;
+            --speed: 650ms;
+            --wait: 160ms;
+            --slow: 1200ms;
+            --curve: cubic-bezier(.22, 1, .36, 1);
+        }
+
+        [data-motion-preview][data-kind~="color"] {
+            color: #ffffff;
+            background: #172033;
+        }
+
+        [data-motion-preview][data-kind~="looping"] {
+            min-height: 86px;
+        }
+
+        [data-motion-preview][data-kind~="typewriter"] {
+            display: inline-grid;
+            justify-self: center;
+            min-height: auto;
+            width: max-content;
+            min-width: 0;
+        }
+
+        details {
+            border-top: 1px solid var(--line);
+            padding-top: 10px;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #344256;
+            font: 800 12px/1 var(--font-ui);
+        }
+
+        pre {
+            max-height: 190px;
+            margin: 10px 0 0;
+            overflow: auto;
+            border-radius: 7px;
+            background: #101827;
+            color: #ffffff61;
+            padding: 12px;
+            font: 600 11px/1.45 var(--font-mono);
+            white-space: pre-wrap;
+        }
+
+        @media (max-width: 720px) {
+            .lab-nav {
+                align-items: stretch;
+                flex-wrap: wrap;
+            }
+
+            .lab-nav .spacer {
+                display: none;
+            }
+
+            .lab-nav a,
+            .lab-nav button {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .section-head {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .cards {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 76px;
+        }
+
+        .lab-layout {
+            display: grid;
+            grid-template-columns: 318px minmax(0, 1fr);
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            align-self: start;
+            display: grid;
+            grid-template-rows: auto auto minmax(0, 1fr);
+            height: 100vh;
+            overflow: hidden;
+            background: #101827;
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            color: #dbe7f6;
+        }
+
+        .side-head {
+            display: grid;
+            gap: 12px;
+            padding: 20px 18px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .side-kicker {
+            color: #93c5fd;
+            font: 900 11px/1 var(--font-ui);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .side-title {
+            margin: 0;
+            color: #ffffff;
+            font-size: 26px;
+            line-height: 0.95;
+        }
+
+        .stats {
+            display: grid;
+            gap: 8px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .stat {
+            display: grid;
+            gap: 3px;
+            min-width: 0;
+            padding: 9px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat strong {
+            color: #ffffff;
+            font: 900 17px/1 var(--font-mono);
+        }
+
+        .stat span {
+            color: #9fb0c6;
+            font: 800 10px/1 var(--font-ui);
+            text-transform: uppercase;
+        }
+
+        .filter-wrap {
+            padding: 12px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .filter-input {
+            width: 100%;
+            min-height: 38px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            font: 700 13px/1 var(--font-ui);
+            outline: none;
+            padding: 0 11px;
+        }
+
+        .filter-input::placeholder {
+            color: #8ea0b8;
+        }
+
+        .side-nav {
+            overflow: auto;
+            padding: 12px;
+        }
+
+        .side-section {
+            display: grid;
+            gap: 6px;
+            padding: 7px 0 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .side-section:last-child {
+            border-bottom: 0;
+        }
+
+        .side-section-link,
+        .side-group-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            min-width: 0;
+            border-radius: 6px;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .side-section-link {
+            padding: 8px;
+            color: #ffffff;
+            font: 900 12px/1 var(--font-ui);
+            text-transform: uppercase;
+        }
+
+        .side-section-link:hover,
+        .side-group-link:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .side-section-link span,
+        .side-group-link span {
+            flex: 0 0 auto;
+            color: #93c5fd;
+            font: 800 10px/1 var(--font-mono);
+        }
+
+        .side-group-link {
+            padding: 6px 8px 6px 18px;
+            color: #bccbe0;
+            font: 750 12px/1.15 var(--font-ui);
+        }
+
+        .workspace {
+            min-width: 0;
+        }
+
+        .workspace .lab-nav {
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom-color: var(--line);
+            color: #172033;
+            backdrop-filter: blur(14px);
+        }
+
+        .workspace .lab-nav a,
+        .workspace .lab-nav button {
+            border-color: #cbd5e1;
+            background: #ffffff;
+            color: #172033;
+        }
+
+        .workspace .lab-nav a[aria-current="page"] {
+            background: #101827;
+            color: #ffffff;
+        }
+
+        .workspace .hero {
+            padding: 34px clamp(20px, 4vw, 44px) 26px;
+            background: #ffffff;
+        }
+
+        .workspace .hero-inner,
+        .workspace main {
+            max-width: none;
+        }
+
+        .workspace h1 {
+            max-width: none;
+            font-size: clamp(38px, 5vw, 72px);
+            line-height: 0.9;
+        }
+
+        .workspace .intro {
+            max-width: 980px;
+            margin-top: 14px;
+            font-size: 17px;
+        }
+
+        .coverage-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .coverage-strip a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: #f8fafc;
+            color: #1f2a44;
+            font: 800 12px/1 var(--font-ui);
+            padding: 8px 10px;
+            text-decoration: none;
+        }
+
+        .coverage-strip span {
+            color: #64748b;
+            font-family: var(--font-mono);
+        }
+
+        .workspace main {
+            gap: 36px;
+            padding: 22px clamp(20px, 4vw, 44px) 48px;
+        }
+
+        .workspace .section {
+            gap: 16px;
+        }
+
+        .section:target,
+        .case:target {
+            outline: 3px solid rgba(37, 99, 235, 0.32);
+            outline-offset: 3px;
+        }
+
+        .section-map {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .section-map a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: #ffffff;
+            color: #243044;
+            font: 800 12px/1 var(--font-ui);
+            padding: 8px 10px;
+            text-decoration: none;
+        }
+
+        .section-map span {
+            color: #64748b;
+            font-family: var(--font-mono);
+        }
+
+        .workspace .cards {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .workspace .case {
+            box-shadow: none;
+        }
+
+        .workspace .case-head {
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .workspace .case h3 {
+            font-size: 19px;
+        }
+
+        .workspace .samples {
+            grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+        }
+
+        .sample-wrap[hidden],
+        .case[hidden],
+        .section[hidden] {
+            display: none !important;
+        }
+
+        .workspace .samples {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 8px;
+        }
+
+        .sample-head {
+            display: grid;
+            grid-template-columns: minmax(300px, 38%) minmax(220px, 24%) minmax(240px, 1fr);
+            gap: 0;
+            color: #64748b;
+            font: 900 11px/1 var(--font-ui);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .sample-head span {
+            padding: 0 14px 8px;
+        }
+
+        .workspace .sample-wrap {
+            display: grid;
+            grid-template-columns: minmax(300px, 38%) minmax(220px, 24%) minmax(240px, 1fr);
+            align-items: stretch;
+            min-height: 118px;
+            padding: 0;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+                linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+                #f8fafc;
+            background-size: 18px 18px, 18px 18px, auto;
+        }
+
+        .workspace .sample-wrap:hover {
+            border-color: #b8c6d9;
+        }
+
+        .workspace .sample-code {
+            min-width: 0;
+            margin: 0;
+            padding: 12px 14px;
+            border-right: 1px solid #e1e8f2;
+            background: #101827;
+            color: #ffffff61;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+
+        .workspace .sample-code code {
+            color: inherit;
+            font: 650 11px/1.45 var(--font-mono);
+            overflow-wrap: anywhere;
+        }
+
+        .code-class {
+            display: inline-block;
+            margin: 1px 1px 1px 0;
+            padding: 1px 5px;
+            border-radius: 5px;
+            background: rgba(148, 163, 184, 0.16);
+            color: #dbeafe;
+            font-weight: 850;
+        }
+
+        .code-class--preset { background: rgba(37, 99, 235, 0.28); color: #bfdbfe; }
+        .code-class--step { background: rgba(245, 158, 11, 0.26); color: #fde68a; }
+        .code-class--modifier { background: rgba(16, 185, 129, 0.24); color: #bbf7d0; }
+        .code-class--group { background: rgba(168, 85, 247, 0.28); color: #e9d5ff; }
+        .code-class--variant { background: rgba(236, 72, 153, 0.24); color: #fbcfe8; }
+        .code-class--state { background: rgba(239, 68, 68, 0.22); color: #fecaca; }
+        .code-class--utility { background: rgba(20, 184, 166, 0.22); color: #ccfbf1; }
+        .code-class--loop { background: rgba(249, 115, 22, 0.24); color: #fed7aa; }
+
+        .workspace .expected-list {
+            display: grid;
+            align-content: center;
+            gap: 6px;
+            min-width: 0;
+            margin: 0;
+            padding: 12px 14px 12px 30px;
+            border-right: 1px solid #e1e8f2;
+            background: #ffffff;
+            color: #203049;
+            font: 700 12px/1.35 var(--font-ui);
+        }
+
+        .workspace .sample-preview {
+            display: grid;
+            place-items: center;
+            min-width: 0;
+            padding: 12px;
+        }
+
+        .workspace [data-motion-preview] {
+            align-self: center;
+            justify-self: center;
+            width: min(280px, calc(100% - 44px));
+            min-height: 58px;
+            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+        }
+
+        .workspace [data-motion-preview][data-kind~="looping"] {
+            min-height: 68px;
+        }
+
+        .workspace [data-motion-preview][data-kind~="typewriter"] {
+            width: max-content;
+            max-width: calc(100% - 44px);
+        }
+
+        @media (max-width: 1080px) {
+            .lab-layout {
+                display: block;
+            }
+
+            .sidebar {
+                position: relative;
+                height: auto;
+                overflow: visible;
+            }
+
+            .side-head {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .side-nav {
+                display: flex;
+                gap: 10px;
+                overflow-x: auto;
+                padding: 10px 12px 14px;
+            }
+
+            .side-section {
+                flex: 0 0 240px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                padding: 6px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            html {
+                scroll-padding-top: 126px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .workspace .samples {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .sample-head {
+                display: none;
+            }
+
+            .workspace .sample-wrap {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 0;
+                min-height: 190px;
+                background:
+                    linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+                    linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+                    #f8fafc;
+                background-size: 18px 18px;
+            }
+
+            .workspace .sample-code {
+                border-right: 0;
+                border-bottom: 1px solid #e1e8f2;
+                padding: 10px 12px;
+            }
+
+            .workspace .expected-list {
+                border-right: 0;
+                border-bottom: 1px solid #e1e8f2;
+            }
+
+            .workspace [data-motion-preview] {
+                width: min(260px, calc(100% - 28px));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lab-layout">
+        <aside class="sidebar">
+            <div class="side-head">
+                <div>
+                    <div class="side-kicker">Motion Index</div>
+                    <h1 class="side-title">Individual Motion Lab</h1>
+                </div>
+                <div class="stats">
+                    <div class="stat"><strong id="total-sections">0</strong><span>Sections</span></div>
+                    <div class="stat"><strong id="total-groups">0</strong><span>Groups</span></div>
+                    <div class="stat"><strong id="total-samples">0</strong><span>Classes</span></div>
+                </div>
+            </div>
+            <div class="filter-wrap">
+                <input class="filter-input" id="filter-input" type="search" placeholder="Filter classes" autocomplete="off">
+            </div>
+            <nav class="side-nav" id="side-nav" aria-label="Animation families"></nav>
+        </aside>
+
+        <div class="workspace">
+            <nav class="lab-nav" aria-label="Motion test pages">
+                <a href="step-path-torture.html">Step Path Lab</a>
+                <a href="individual-animations.html" aria-current="page">Individual Animations</a>
+                <a href="variants.html">Variants</a>
+                <a href="modifiers.html">Modifiers</a>
+                <a href="nested.html">Nested</a>
+                <a href="step-loops.html">Step Loops</a>
+                <a href="docs.html">Docs</a>
+                <span class="spacer"></span>
+                <button type="button" data-action="replay">Replay</button>
+            </nav>
+
+            <header class="hero">
+                <div class="hero-inner">
+                    <div class="kicker">Motion Trips Check</div>
+                    <h1>Individual Motion Lab</h1>
+                    <p class="intro">Current coverage matrix for single utilities, presets, modifiers, variants, arbitrary values, and combination stress cases.</p>
+                    <div class="coverage-strip" id="jump-list"></div>
+                </div>
+            </header>
+
+            <main id="app"></main>
+        </div>
+    </div>
+
+    <script>
+        const sections = [
+            {
+                id: 'scale',
+                title: 'Scale Utilities',
+                groups: [
+                    {
+                        title: 'scale in',
+                        cases: [
+                            'motion-scale-in',
+                            'motion-scale-in-0',
+                            'motion-scale-in-50',
+                            'motion-scale-in-75',
+                            'motion-scale-in-90',
+                            'motion-scale-in-95',
+                            'motion-scale-in-100',
+                            'motion-scale-in-105',
+                            'motion-scale-in-110',
+                            'motion-scale-in-125',
+                            'motion-scale-in-150',
+                            'motion-scale-in-[0.82]',
+                            'motion-scale-in-[1.337]',
+                            'motion-scale-in-[2.5]',
+                        ],
+                    },
+                    {
+                        title: 'scale out',
+                        cases: [
+                            'motion-scale-out',
+                            'motion-scale-out-0',
+                            'motion-scale-out-50',
+                            'motion-scale-out-75',
+                            'motion-scale-out-90',
+                            'motion-scale-out-95',
+                            'motion-scale-out-100',
+                            'motion-scale-out-105',
+                            'motion-scale-out-110',
+                            'motion-scale-out-125',
+                            'motion-scale-out-150',
+                            'motion-scale-out-[0.82]',
+                            'motion-scale-out-[1.337]',
+                            'motion-scale-out-[2.5]',
+                        ],
+                    },
+                    {
+                        title: 'scale loop',
+                        cases: [
+                            'motion-scale-loop',
+                            'motion-scale-loop-0',
+                            'motion-scale-loop-50',
+                            'motion-scale-loop-75',
+                            'motion-scale-loop-100',
+                            'motion-scale-loop-125',
+                            'motion-scale-loop-150',
+                            'motion-scale-loop-[1.337]',
+                            'motion-scale-loop-50/mirror',
+                            'motion-scale-loop-75/reset',
+                            'motion-scale-loop-[1.5]/mirror',
+                            'motion-scale-loop-[2.5]/reset',
+                        ],
+                    },
+                    {
+                        title: 'scale axis in',
+                        cases: [
+                            'motion-scale-x-in',
+                            'motion-scale-x-in-0',
+                            'motion-scale-x-in-50',
+                            'motion-scale-x-in-75',
+                            'motion-scale-x-in-125',
+                            'motion-scale-x-in-[1.337]',
+                            'motion-scale-y-in',
+                            'motion-scale-y-in-0',
+                            'motion-scale-y-in-50',
+                            'motion-scale-y-in-75',
+                            'motion-scale-y-in-125',
+                            'motion-scale-y-in-[1.25]',
+                        ],
+                    },
+                    {
+                        title: 'scale axis out',
+                        cases: [
+                            'motion-scale-x-out',
+                            'motion-scale-x-out-50',
+                            'motion-scale-x-out-150',
+                            'motion-scale-x-out-[0.82]',
+                            'motion-scale-y-out',
+                            'motion-scale-y-out-50',
+                            'motion-scale-y-out-150',
+                            'motion-scale-y-out-[0.82]',
+                        ],
+                    },
+                    {
+                        title: 'scale axis loops',
+                        cases: [
+                            'motion-scale-x-loop',
+                            'motion-scale-x-loop-50',
+                            'motion-scale-x-loop-75/mirror',
+                            'motion-scale-x-loop-[1.5]/reset',
+                            'motion-scale-y-loop',
+                            'motion-scale-y-loop-50',
+                            'motion-scale-y-loop-75/mirror',
+                            'motion-scale-y-loop-[1.5]/reset',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'translate',
+                title: 'Translate Utilities',
+                groups: [
+                    {
+                        title: 'translate x in',
+                        cases: [
+                            'motion-translate-x-in',
+                            'motion-translate-x-in-0',
+                            'motion-translate-x-in-25',
+                            'motion-translate-x-in-50',
+                            'motion-translate-x-in-75',
+                            'motion-translate-x-in-100',
+                            'motion-translate-x-in-150',
+                            'motion-translate-x-in-[42px]',
+                            'motion-translate-x-in-[13rem]',
+                            'motion-translate-x-in-[27vw]',
+                            '-motion-translate-x-in-50',
+                            'motion-translate-x-in-[-15rem]',
+                            '-motion-translate-x-in-[42px]',
+                        ],
+                    },
+                    {
+                        title: 'translate y in',
+                        cases: [
+                            'motion-translate-y-in',
+                            'motion-translate-y-in-0',
+                            'motion-translate-y-in-25',
+                            'motion-translate-y-in-50',
+                            'motion-translate-y-in-75',
+                            'motion-translate-y-in-100',
+                            'motion-translate-y-in-150',
+                            'motion-translate-y-in-[23px]',
+                            'motion-translate-y-in-[7.5em]',
+                            'motion-translate-y-in-[88vh]',
+                            '-motion-translate-y-in-75',
+                            'motion-translate-y-in-[-42vh]',
+                            '-motion-translate-y-in-[65px]',
+                        ],
+                    },
+                    {
+                        title: 'translate out',
+                        cases: [
+                            'motion-translate-x-out',
+                            'motion-translate-x-out-25',
+                            'motion-translate-x-out-100',
+                            'motion-translate-x-out-[42px]',
+                            '-motion-translate-x-out-50',
+                            'motion-translate-x-out-[-15rem]',
+                            'motion-translate-y-out',
+                            'motion-translate-y-out-75',
+                            'motion-translate-y-out-150',
+                            'motion-translate-y-out-[88vh]',
+                            '-motion-translate-y-out-75',
+                            'motion-translate-y-out-[-42vh]',
+                        ],
+                    },
+                    {
+                        title: 'translate loops',
+                        cases: [
+                            'motion-translate-x-loop',
+                            'motion-translate-x-loop-25',
+                            'motion-translate-x-loop-100',
+                            'motion-translate-x-loop-[42px]',
+                            '-motion-translate-x-loop-50',
+                            'motion-translate-x-loop-25/mirror',
+                            'motion-translate-x-loop-50/reset',
+                            'motion-translate-y-loop',
+                            'motion-translate-y-loop-50',
+                            '-motion-translate-y-loop-150',
+                            'motion-translate-y-loop-[88vh]/mirror',
+                            'motion-translate-y-loop-[-42vh]/reset',
+                        ],
+                    },
+                    {
+                        title: 'combined translate',
+                        cases: [
+                            'motion-translate-loop-25',
+                            'motion-translate-loop-75/mirror',
+                            'motion-translate-loop-[42px]/reset',
+                            'motion-translate-loop-[-15rem]/mirror',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'rotate',
+                title: 'Rotate Utilities',
+                groups: [
+                    {
+                        title: 'rotate in',
+                        cases: [
+                            'motion-rotate-in',
+                            'motion-rotate-in-0',
+                            'motion-rotate-in-1',
+                            'motion-rotate-in-2',
+                            'motion-rotate-in-3',
+                            'motion-rotate-in-6',
+                            'motion-rotate-in-12',
+                            'motion-rotate-in-45',
+                            'motion-rotate-in-90',
+                            'motion-rotate-in-180',
+                            'motion-rotate-in-[42deg]',
+                            '-motion-rotate-in-45',
+                            'motion-rotate-in-[-15deg]',
+                        ],
+                    },
+                    {
+                        title: 'rotate out',
+                        cases: [
+                            'motion-rotate-out',
+                            'motion-rotate-out-0',
+                            'motion-rotate-out-45',
+                            'motion-rotate-out-90',
+                            'motion-rotate-out-180',
+                            'motion-rotate-out-[42deg]',
+                            '-motion-rotate-out-90',
+                            'motion-rotate-out-[-15deg]',
+                        ],
+                    },
+                    {
+                        title: 'rotate loop',
+                        cases: [
+                            'motion-rotate-loop',
+                            'motion-rotate-loop-0',
+                            'motion-rotate-loop-45',
+                            'motion-rotate-loop-90',
+                            'motion-rotate-loop-180',
+                            'motion-rotate-loop-[360deg]',
+                            '-motion-rotate-loop-90',
+                            'motion-rotate-loop-45/mirror',
+                            'motion-rotate-loop-90/reset',
+                            'motion-rotate-loop-[42deg]/mirror',
+                            'motion-rotate-loop-[-15deg]/reset',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'filter-opacity',
+                title: 'Filter And Opacity Utilities',
+                groups: [
+                    {
+                        title: 'blur',
+                        cases: [
+                            'motion-blur-in',
+                            'motion-blur-in-0',
+                            'motion-blur-in-sm',
+                            'motion-blur-in-md',
+                            'motion-blur-in-lg',
+                            'motion-blur-in-xl',
+                            'motion-blur-in-2xl',
+                            'motion-blur-in-3xl',
+                            'motion-blur-in-[2px]',
+                            'motion-blur-in-[4.5px]',
+                            'motion-blur-out',
+                            'motion-blur-out-lg',
+                            'motion-blur-out-[0.8rem]',
+                            'motion-blur-loop',
+                            'motion-blur-loop-md/reset',
+                            'motion-blur-loop-xl/mirror',
+                            'motion-blur-loop-[15px]/reset',
+                        ],
+                    },
+                    {
+                        title: 'grayscale',
+                        cases: [
+                            'motion-grayscale-in',
+                            'motion-grayscale-in-0',
+                            'motion-grayscale-in-25',
+                            'motion-grayscale-in-50',
+                            'motion-grayscale-in-75',
+                            'motion-grayscale-in-100',
+                            'motion-grayscale-in-[0.42]',
+                            'motion-grayscale-out',
+                            'motion-grayscale-out-50',
+                            'motion-grayscale-out-[33%]',
+                            'motion-grayscale-loop',
+                            'motion-grayscale-loop-75/mirror',
+                            'motion-grayscale-loop-[0.875]/reset',
+                        ],
+                    },
+                    {
+                        title: 'opacity',
+                        cases: [
+                            'motion-opacity-in',
+                            'motion-opacity-in-0',
+                            'motion-opacity-in-25',
+                            'motion-opacity-in-50',
+                            'motion-opacity-in-75',
+                            'motion-opacity-in-100',
+                            'motion-opacity-in-[0.42]',
+                            'motion-opacity-out',
+                            'motion-opacity-out-0',
+                            'motion-opacity-out-50',
+                            'motion-opacity-out-[33%]',
+                            'motion-opacity-loop',
+                            'motion-opacity-loop-25/mirror',
+                            'motion-opacity-loop-[0.875]/reset',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'color',
+                title: 'Color Utilities',
+                groups: [
+                    {
+                        title: 'background color',
+                        color: true,
+                        cases: [
+                            'motion-bg-in',
+                            'motion-bg-in-red-500',
+                            'motion-bg-in-blue-500',
+                            'motion-bg-in-green-500',
+                            'motion-bg-in-yellow-500',
+                            'motion-bg-in-purple-500',
+                            'motion-bg-in-[#ff5733]',
+                            'motion-bg-in-[rgb(100,200,50)]',
+                            'motion-bg-in-[hsl(200,50%,75%)]',
+                            'motion-bg-out',
+                            'motion-bg-out-red-500',
+                            'motion-bg-out-blue-500',
+                            'motion-bg-out-[#ff5733]',
+                            'motion-bg-loop',
+                            'motion-bg-loop-red-500/mirror',
+                            'motion-bg-loop-blue-500/reset',
+                            'motion-bg-loop-[rgb(100,200,50)]/mirror',
+                        ],
+                    },
+                    {
+                        title: 'text color',
+                        color: true,
+                        cases: [
+                            'motion-text-in',
+                            'motion-text-in-red-500',
+                            'motion-text-in-blue-500',
+                            'motion-text-in-green-500',
+                            'motion-text-in-yellow-500',
+                            'motion-text-in-purple-500',
+                            'motion-text-in-[#ff5733]',
+                            'motion-text-in-[rgb(100,200,50)]',
+                            'motion-text-in-[hsl(200,50%,75%)]',
+                            'motion-text-out',
+                            'motion-text-out-red-500',
+                            'motion-text-out-blue-500',
+                            'motion-text-out-[#ff5733]',
+                            'motion-text-loop',
+                            'motion-text-loop-red-500/mirror',
+                            'motion-text-loop-blue-500/reset',
+                            'motion-text-loop-[#0000ff]/reset',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'presets',
+                title: 'Preset Animations',
+                groups: [
+                    {
+                        title: 'fade and slide sizes',
+                        cases: [
+                            'motion-preset-fade',
+                            'motion-preset-fade-xs',
+                            'motion-preset-fade-sm',
+                            'motion-preset-fade-md',
+                            'motion-preset-fade-lg',
+                            'motion-preset-fade-[1200ms]',
+                            'motion-preset-slide-right',
+                            'motion-preset-slide-right-xs',
+                            'motion-preset-slide-right-sm',
+                            'motion-preset-slide-right-md',
+                            'motion-preset-slide-right-lg',
+                            'motion-preset-slide-left',
+                            'motion-preset-slide-up',
+                            'motion-preset-slide-up-xs',
+                            'motion-preset-slide-up-sm',
+                            'motion-preset-slide-up-md',
+                            'motion-preset-slide-up-lg',
+                            'motion-preset-slide-up-[10px]',
+                            'motion-preset-slide-up-[3rem]',
+                            'motion-preset-slide-up-[2%]',
+                            'motion-preset-slide-down',
+                        ],
+                    },
+                    {
+                        title: 'corner slides',
+                        cases: [
+                            'motion-preset-slide-up-right',
+                            'motion-preset-slide-up-right-xs',
+                            'motion-preset-slide-up-right-sm',
+                            'motion-preset-slide-up-right-md',
+                            'motion-preset-slide-up-right-lg',
+                            'motion-preset-slide-up-left',
+                            'motion-preset-slide-down-left',
+                            'motion-preset-slide-down-right',
+                            'motion-preset-slide-down-right-[18%]',
+                        ],
+                    },
+                    {
+                        title: 'focus and blur presets',
+                        cases: [
+                            'motion-preset-focus',
+                            'motion-preset-focus-xs',
+                            'motion-preset-focus-sm',
+                            'motion-preset-focus-md',
+                            'motion-preset-focus-lg',
+                            'motion-preset-focus-[2px]',
+                            'motion-preset-blur-right',
+                            'motion-preset-blur-right-xs',
+                            'motion-preset-blur-right-sm',
+                            'motion-preset-blur-right-md',
+                            'motion-preset-blur-right-lg',
+                            'motion-preset-blur-right-[3px]',
+                            'motion-preset-blur-left',
+                            'motion-preset-blur-up',
+                            'motion-preset-blur-down',
+                        ],
+                    },
+                    {
+                        title: 'classic one-shots',
+                        cases: [
+                            'motion-preset-rebound',
+                            'motion-preset-rebound-right',
+                            'motion-preset-rebound-left',
+                            'motion-preset-rebound-up',
+                            'motion-preset-rebound-down',
+                            'motion-preset-bounce',
+                            'motion-preset-expand',
+                            'motion-preset-shrink',
+                            'motion-preset-pop',
+                            'motion-preset-compress',
+                            'motion-preset-shake',
+                            'motion-preset-wiggle',
+                            'motion-preset-confetti',
+                        ],
+                    },
+                    {
+                        title: 'loop presets',
+                        cases: [
+                            'motion-preset-pulse',
+                            'motion-preset-pulse-xs',
+                            'motion-preset-pulse-sm',
+                            'motion-preset-pulse-md',
+                            'motion-preset-pulse-lg',
+                            'motion-preset-pulse-[1.05]',
+                            'motion-preset-wobble',
+                            'motion-preset-wobble-xs',
+                            'motion-preset-wobble-sm',
+                            'motion-preset-wobble-md',
+                            'motion-preset-wobble-lg',
+                            'motion-preset-wobble-[20%]',
+                            'motion-preset-seesaw',
+                            'motion-preset-seesaw-xs',
+                            'motion-preset-seesaw-sm',
+                            'motion-preset-seesaw-md',
+                            'motion-preset-seesaw-lg',
+                            'motion-preset-seesaw-[2deg]',
+                            'motion-preset-oscillate',
+                            'motion-preset-oscillate-xs',
+                            'motion-preset-oscillate-sm',
+                            'motion-preset-oscillate-md',
+                            'motion-preset-oscillate-lg',
+                            'motion-preset-oscillate-[20%]',
+                            'motion-preset-stretch',
+                            'motion-preset-stretch-xs',
+                            'motion-preset-stretch-sm',
+                            'motion-preset-stretch-md',
+                            'motion-preset-stretch-lg',
+                            'motion-preset-float',
+                            'motion-preset-float-xs',
+                            'motion-preset-float-sm',
+                            'motion-preset-float-md',
+                            'motion-preset-float-lg',
+                            'motion-preset-float-[200%]',
+                            'motion-preset-spin',
+                            'motion-preset-blink',
+                        ],
+                    },
+                    {
+                        title: 'fun presets',
+                        cases: [
+                            'motion-preset-typewriter-[13]',
+                            'motion-preset-flomoji-👉',
+                            'motion-preset-flomoji-🚀',
+                            'motion-preset-flomoji-👀',
+                            'motion-preset-flomoji-👍',
+                            'motion-preset-flomoji-[🎉]',
+                            'motion-preset-flomoji-[🌟]',
+                            'motion-preset-flomoji-[🎸]',
+                            'motion-preset-flomoji-[💥]',
+                            'motion-preset-flomoji-[WOW]',
+                            'motion-preset-flomoji-[SALE]',
+                            'motion-preset-flomoji-[GO]',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'modifiers',
+                title: 'Modifiers And Variants',
+                groups: [
+                    {
+                        title: 'duration',
+                        cases: [
+                            'motion-scale-in-150 motion-duration',
+                            'motion-scale-in-150 motion-duration-75',
+                            'motion-translate-x-in-100 motion-duration-100',
+                            'motion-rotate-in-180 motion-duration-150',
+                            'motion-blur-in-md motion-duration-200',
+                            'motion-opacity-in-0 motion-duration-300',
+                            'motion-text-out-blue-500 motion-duration-500',
+                            'motion-bg-out-red-500 motion-duration-700',
+                            'motion-grayscale-out-75 motion-duration-1000',
+                            'motion-preset-fade motion-duration-1500',
+                            'motion-preset-float motion-duration-2000',
+                            'motion-preset-spin motion-duration-2500',
+                            'motion-preset-slide-up motion-duration-5000',
+                            'motion-preset-slide-up motion-duration-1s',
+                            'motion-preset-slide-up motion-duration-[var(--speed)]',
+                        ],
+                    },
+                    {
+                        title: 'delay',
+                        cases: [
+                            'motion-scale-in-150 motion-delay',
+                            'motion-scale-in-150 motion-delay-75',
+                            'motion-translate-x-in-100 motion-delay-100',
+                            'motion-rotate-in-180 motion-delay-150',
+                            'motion-blur-in-md motion-delay-200',
+                            'motion-opacity-in-0 motion-delay-300',
+                            'motion-text-out-blue-500 motion-delay-500',
+                            'motion-bg-out-red-500 motion-delay-700',
+                            'motion-grayscale-out-75 motion-delay-1000',
+                            'motion-preset-blink motion-delay-1500',
+                            'motion-preset-stretch motion-delay-2000',
+                            'motion-preset-oscillate motion-delay-2500',
+                            'motion-preset-slide-up motion-delay-1s',
+                            'motion-preset-slide-up motion-delay-[var(--wait)]',
+                        ],
+                    },
+                    {
+                        title: 'easing',
+                        cases: [
+                            'motion-preset-slide-up motion-ease',
+                            'motion-preset-slide-up motion-ease-linear',
+                            'motion-preset-slide-up motion-ease-in',
+                            'motion-preset-slide-up motion-ease-out',
+                            'motion-preset-slide-up motion-ease-in-out',
+                            'motion-preset-slide-up motion-ease-spring-smooth',
+                            'motion-preset-slide-up motion-ease-spring-snappy',
+                            'motion-preset-slide-up motion-ease-spring-bouncy',
+                            'motion-preset-slide-up motion-ease-spring-bouncier',
+                            'motion-preset-slide-up motion-ease-spring-bounciest',
+                            'motion-preset-slide-up motion-ease-bounce',
+                            'motion-preset-slide-up motion-ease-in-quad',
+                            'motion-preset-slide-up motion-ease-in-cubic',
+                            'motion-preset-slide-up motion-ease-in-quart',
+                            'motion-preset-slide-up motion-ease-in-back',
+                            'motion-preset-slide-up motion-ease-out-quad',
+                            'motion-preset-slide-up motion-ease-out-cubic',
+                            'motion-preset-slide-up motion-ease-out-quart',
+                            'motion-preset-slide-up motion-ease-out-back',
+                            'motion-preset-slide-up motion-ease-in-out-quad',
+                            'motion-preset-slide-up motion-ease-in-out-cubic',
+                            'motion-preset-slide-up motion-ease-in-out-quart',
+                            'motion-preset-slide-up motion-ease-in-out-back',
+                            'motion-preset-slide-up motion-ease-[var(--curve)]',
+                        ],
+                    },
+                    {
+                        title: 'loop count',
+                        cases: [
+                            'motion-translate-y-loop-25 motion-loop',
+                            'motion-translate-y-loop-25 motion-loop-infinite',
+                            'motion-translate-y-loop-25 motion-loop-once',
+                            'motion-translate-y-loop-25 motion-loop-twice',
+                            'motion-translate-y-loop-25 motion-loop-[3]',
+                            'motion-scale-loop-125 motion-loop-twice/scale',
+                            'motion-rotate-loop-180 motion-loop-[4]/rotate',
+                            'motion-opacity-loop-25 motion-loop-once/opacity',
+                            'motion-bg-loop-blue-500 motion-loop-twice/background',
+                            'motion-text-loop-red-500 motion-loop-[3]/text',
+                        ],
+                    },
+                    {
+                        title: 'property-specific modifiers',
+                        cases: [
+                            'motion-delay-500/rotate motion-rotate-in-180 motion-opacity-in-0',
+                            'motion-duration-1000/scale motion-scale-in-150 motion-blur-in-md',
+                            'motion-delay-300/translate motion-translate-x-in-100 motion-bg-in-blue-500',
+                            'motion-duration-700/blur motion-blur-in-lg motion-scale-in-75',
+                            'motion-delay-200/opacity motion-opacity-in-50 motion-translate-y-in-50',
+                            'motion-duration-500/background motion-bg-in-red-500 motion-rotate-in-90',
+                            'motion-delay-400/text motion-text-in-green-500 motion-grayscale-in-50',
+                            'motion-ease-spring-bouncy/scale motion-scale-in-150 motion-opacity-in-0',
+                            'motion-ease-out-back/translate motion-translate-y-in-100 motion-opacity-in-0',
+                        ],
+                    },
+                    {
+                        title: 'state and variants',
+                        cases: [
+                            'wait motion-preset-spin',
+                            'still motion-preset-spin',
+                            'pause motion-preset-spin',
+                            'play motion-preset-spin',
+                            'motion-paused motion-preset-spin',
+                            'motion-running motion-preset-spin',
+                            'hover:motion-preset-pulse-sm',
+                            'focus:motion-preset-pop',
+                            'active:motion-preset-shrink',
+                            'md:motion-preset-slide-right-sm',
+                            'motion-repeat motion-repeat-delay-500 motion-repeat-count-twice motion-group',
+                            'motion-repeat motion-repeat-delay-[1.2s] motion-repeat-count-[3] motion-group',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'combos',
+                title: 'Combination Stress Cases',
+                groups: [
+                    {
+                        title: 'single element combos',
+                        cases: [
+                            'motion-scale-in-75 motion-translate-y-in-100 motion-rotate-in-90 motion-blur-in-md motion-opacity-in-0',
+                            'motion-opacity-in-0 motion-translate-y-in-100 motion-scale-in-150 motion-rotate-in-180 motion-grayscale-in-75',
+                            'motion-scale-in-75 motion-rotate-in-180 motion-translate-x-in-100 motion-blur-in-lg motion-bg-in-blue-500',
+                            'motion-translate-x-in-100 motion-translate-y-in-50 motion-scale-in-125 motion-rotate-in-45 motion-text-in-purple-500',
+                            'motion-preset-pop motion-preset-slide-up motion-preset-focus motion-delay-100',
+                            'motion-preset-shake motion-preset-blur-right motion-preset-stretch motion-delay-200',
+                            'motion-preset-wiggle motion-preset-slide-down motion-preset-blink motion-delay-150',
+                            'motion-preset-pop motion-translate-y-loop-50 motion-scale-in-150 motion-rotate-in-[360deg] motion-blur-in-xl',
+                            'motion-preset-compress motion-translate-x-loop-75 motion-scale-loop-125 motion-rotate-loop-180 motion-delay-100',
+                            'motion-preset-stretch motion-scale-in-[250%] motion-rotate-in-[720deg] motion-blur-in-[15px] motion-grayscale-in-100',
+                            'motion-preset-oscillate motion-translate-x-in-[150%] motion-translate-y-in-[150%] motion-scale-in-[175%] motion-rotate-in-[1080deg]',
+                            'motion-preset-slide-up motion-preset-blur-up motion-scale-in-[300%] motion-rotate-loop-[360deg] motion-delay-150',
+                        ],
+                    },
+                ],
+            },
+        ];
+
+        const app = document.getElementById('app');
+        const jumpList = document.getElementById('jump-list');
+        const sideNav = document.getElementById('side-nav');
+        const filterInput = document.getElementById('filter-input');
+        const totalSections = document.getElementById('total-sections');
+        const totalGroups = document.getElementById('total-groups');
+        const totalSamples = document.getElementById('total-samples');
+
+        function escapeHTML(value) {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('"', '&quot;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;');
+        }
+
+        function classKind(token) {
+            const parts = token.split(':');
+            const base = parts.at(-1);
+            const prefixes = parts.slice(0, -1);
+
+            if (/^step-\d+$/.test(prefixes.at(0) || '')) return 'step';
+            if (token === 'motion-group') return 'group';
+            if (/^(group|peer|dark)$/.test(token) || prefixes.length) return /^step-\d+$/.test(prefixes.at(0) || '') ? 'step' : 'variant';
+            if (/^(wait|still|pause|play|motion-paused|motion-running)$/.test(base)) return 'state';
+            if (/^motion-repeat/.test(base)) return 'loop';
+            if (/^motion-preset-/.test(base)) return 'preset';
+            if (/^motion-(duration|delay|ease|gap|overlap|loop)/.test(base)) return 'modifier';
+            if (/^motion-(scale|translate|rotate|opacity|blur|grayscale|bg|text)-/.test(base)) return 'utility';
+            if (/loop|pulse|spin|blink|float|oscillate|wobble|seesaw|stretch/.test(base)) return 'loop';
+            return 'other';
+        }
+
+        function highlightClasses(classValue) {
+            return classValue
+                .split(/\s+/)
+                .filter(Boolean)
+                .map((token) => `<span class="code-class code-class--${classKind(token)}">${escapeHTML(token)}</span>`)
+                .join(' ');
+        }
+
+        function highlightCode(source) {
+            return escapeHTML(source).replace(/class=&quot;([^&]*)&quot;/g, (_, classes) => `class=&quot;${highlightClasses(classes)}&quot;`);
+        }
+
+        function slugify(value) {
+            return String(value)
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '');
+        }
+
+        function groupId(section, group, index) {
+            return `${section.id}-${String(index + 1).padStart(2, '0')}-${slugify(group.title)}`;
+        }
+
+        function labelFor(className) {
+            const first = className.split(/\s+/)[0] || className;
+            return first
+                .replace(/^hover:|^focus:|^active:|^md:/, '')
+                .replace(/^motion-preset-/, '')
+                .replace(/^motion-/, '')
+                .replace(/-\[/, ' [')
+                .replaceAll('-', ' ')
+                .replaceAll('/', ' / ');
+        }
+
+        function previewKindFor(className, group) {
+            const kinds = [];
+            if (group.color || /motion-(bg|text)-/.test(className)) kinds.push('color');
+            if (/loop|spin|blink|pulse|wobble|seesaw|oscillate|stretch|float|repeat/.test(className)) kinds.push('looping');
+            if (/typewriter/.test(className)) kinds.push('typewriter');
+            return kinds.join(' ');
+        }
+
+        function codeFor(className) {
+            const label = labelFor(className);
+            const tabindex = /focus:/.test(className) ? ' tabindex="0"' : '';
+            return `<div class="${className}"${tabindex}>${label}</div>`;
+        }
+
+        function expectedFor(className, group) {
+            const bullets = [];
+
+            if (/^hover:/.test(className)) bullets.push('Runs only while the preview is hovered.');
+            if (/^focus:|focus:/.test(className)) bullets.push('Runs when the preview receives focus.');
+            if (/^active:/.test(className)) bullets.push('Runs while the preview is pressed.');
+            if (/^(sm|md|lg|xl):/.test(className)) bullets.push('Only applies at the matching responsive breakpoint and up.');
+            if (/wait\b/.test(className)) bullets.push('Wait should pause motion until the class is removed.');
+            if (/(still|pause|motion-paused)/.test(className)) bullets.push('The animation should be held instead of visibly running.');
+            if (/(play|motion-running)/.test(className)) bullets.push('The animation should be allowed to run.');
+            if (/motion-repeat/.test(className)) bullets.push('Repeat markers configure delay/count for the JS repeat helper.');
+            if (/motion-group/.test(className)) bullets.push('Group marker should share step timing with children when step classes are present.');
+
+            if (/motion-(bg|text)-/.test(className) || group.color) bullets.push('Color should change visibly without layout shift.');
+            if (/opacity|fade/.test(className)) bullets.push('Opacity should animate without leaving the element stuck hidden.');
+            if (/blur|grayscale/.test(className)) bullets.push('Filter should animate and settle cleanly.');
+            if (/scale|expand|shrink|pop|compress/.test(className)) bullets.push('Scale should transform from the intended start value to the final state.');
+            if (/translate|slide|rebound|float|oscillate/.test(className)) bullets.push('Translate should move in the expected direction and settle cleanly.');
+            if (/rotate|spin|wiggle|wobble|shake|seesaw/.test(className)) bullets.push('Rotation should use the expected arc without snapping.');
+            if (/loop|pulse|blink|stretch|float|oscillate|spin/.test(className)) bullets.push('Looping motion should obey its loop token or default behavior.');
+            if (/duration/.test(className)) bullets.push('Duration modifier should change speed only.');
+            if (/delay/.test(className)) bullets.push('Delay modifier should postpone the start only.');
+            if (/ease/.test(className)) bullets.push('Ease modifier should change the curve only.');
+            if (/\[[^\]]+\]/.test(className)) bullets.push('Arbitrary bracket value should compile and apply.');
+            if (/flomoji/.test(className)) bullets.push('Flomoji content should render as the emoji or bracket text.');
+            if (bullets.length === 0) bullets.push('The utility should visibly run and finish in its normal final state.');
+
+            return bullets.slice(0, 4).filter((bullet, index, list) => list.indexOf(bullet) === index);
+        }
+
+        function renderExpected(className, group) {
+            return `<ul class="expected-list">${expectedFor(className, group).map((bullet) => `<li>${escapeHTML(bullet)}</li>`).join('')}</ul>`;
+        }
+
+        function renderSample(className, group) {
+            const label = labelFor(className);
+            const tabindex = /focus:/.test(className) ? ' tabindex="0"' : '';
+            return `
+                <div class="sample-wrap" data-class="${escapeHTML(className.toLowerCase())}">
+                    <pre class="sample-code"><code>${highlightCode(codeFor(className))}</code></pre>
+                    ${renderExpected(className, group)}
+                    <div class="sample-preview">
+                        <div data-motion-preview data-kind="${escapeHTML(previewKindFor(className, group))}" class="${escapeHTML(className)}"${tabindex}>${escapeHTML(label)}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGroup(group, section, index) {
+            const id = groupId(section, group, index);
+            return `
+                <article class="case wait" id="${escapeHTML(id)}" data-group="${escapeHTML(group.title.toLowerCase())}">
+                    <div class="case-head">
+                        <h3>${escapeHTML(group.title)}</h3>
+                        <span class="case-note">${group.cases.length} checks</span>
+                    </div>
+                    <div class="sample-head" aria-hidden="true">
+                        <span>Code</span>
+                        <span>Expected</span>
+                        <span>Preview</span>
+                    </div>
+                    <div class="samples">
+                        ${group.cases.map((className) => renderSample(className, group)).join('')}
+                    </div>
+                    <details>
+                        <summary>Class list</summary>
+                        <pre><code>${escapeHTML(group.cases.join('\n'))}</code></pre>
+                    </details>
+                </article>
+            `;
+        }
+
+        function renderSection(section) {
+            const count = section.groups.reduce((total, group) => total + group.cases.length, 0);
+            const groupLinks = section.groups
+                .map((group, index) => `<a href="#${escapeHTML(groupId(section, group, index))}">${escapeHTML(group.title)} <span>${group.cases.length}</span></a>`)
+                .join('');
+            return `
+                <section class="section" id="${escapeHTML(section.id)}">
+                    <div class="section-head">
+                        <h2>${escapeHTML(section.title)}</h2>
+                        <div class="section-count">${count} classes</div>
+                    </div>
+                    <div class="section-map">${groupLinks}</div>
+                    <div class="cards">
+                        ${section.groups.map((group, index) => renderGroup(group, section, index)).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderSideNav() {
+            return sections.map((section) => {
+                const count = section.groups.reduce((total, group) => total + group.cases.length, 0);
+                const groups = section.groups
+                    .map((group, index) => `<a class="side-group-link" href="#${escapeHTML(groupId(section, group, index))}">${escapeHTML(group.title)} <span>${group.cases.length}</span></a>`)
+                    .join('');
+                return `
+                    <div class="side-section">
+                        <a class="side-section-link" href="#${escapeHTML(section.id)}">${escapeHTML(section.title)} <span>${count}</span></a>
+                        ${groups}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        const groupCount = sections.reduce((total, section) => total + section.groups.length, 0);
+        const sampleCount = sections.reduce((total, section) => total + section.groups.reduce((sum, group) => sum + group.cases.length, 0), 0);
+        totalSections.textContent = sections.length;
+        totalGroups.textContent = groupCount;
+        totalSamples.textContent = sampleCount;
+
+        jumpList.innerHTML = sections
+            .map((section) => {
+                const count = section.groups.reduce((total, group) => total + group.cases.length, 0);
+                return `<a href="#${escapeHTML(section.id)}">${escapeHTML(section.title)} <span>${count}</span></a>`;
+            })
+            .join('');
+        sideNav.innerHTML = renderSideNav();
+
+        app.innerHTML = sections.map(renderSection).join('');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.remove('wait');
+                observer.unobserve(entry.target);
+            });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+        document.querySelectorAll('.case.wait').forEach((card) => observer.observe(card));
+
+        function filterClasses() {
+            const query = filterInput.value.trim().toLowerCase();
+            document.querySelectorAll('.sample-wrap').forEach((sample) => {
+                sample.hidden = query.length > 0 && !sample.dataset.class.includes(query);
+            });
+            document.querySelectorAll('.case').forEach((card) => {
+                const hasVisibleSample = Boolean(card.querySelector('.sample-wrap:not([hidden])'));
+                const groupMatches = card.dataset.group.includes(query);
+                card.hidden = query.length > 0 && !hasVisibleSample && !groupMatches;
+            });
+            document.querySelectorAll('.section').forEach((section) => {
+                section.hidden = query.length > 0 && !section.querySelector('.case:not([hidden])');
+            });
+        }
+
+        function replay() {
+            document.querySelectorAll('[data-motion-preview]').forEach((node) => {
+                const clone = node.cloneNode(true);
+                node.replaceWith(clone);
+            });
+        }
+
+        filterInput.addEventListener('input', filterClasses);
+        document.querySelector('[data-action="replay"]').addEventListener('click', replay);
+    </script>
+</body>
+</html>

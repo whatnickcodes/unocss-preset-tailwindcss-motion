@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Nested Lab</title>
+    <link rel="stylesheet" href="../unocss/uno.css">
+    <style>
+        :root {
+            --font-ui: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            --ink: #162033;
+            --muted: #64748b;
+            --line: #d8e1ee;
+            --bg: #f7fafc;
+        }
+
+        * { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 74px;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-ui);
+            line-height: 1.45;
+        }
+
+        code { font-family: var(--font-mono); }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 10px clamp(16px, 4vw, 38px);
+            background: rgba(255, 255, 255, .92);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(14px);
+        }
+
+        .topbar a,
+        .topbar button {
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #172033;
+            cursor: pointer;
+            font: 800 12px/1 var(--font-ui);
+            padding: 9px 11px;
+            text-decoration: none;
+        }
+
+        .topbar a[aria-current="page"] {
+            background: #101827;
+            color: #ffffff;
+        }
+
+        .topbar .spacer { flex: 1; }
+
+        .hero {
+            padding: 34px clamp(18px, 4vw, 44px) 28px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .kicker {
+            color: #7c3aed;
+            font: 900 12px/1 var(--font-ui);
+            letter-spacing: .12em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            color: #0f172a;
+            font-size: clamp(42px, 6vw, 82px);
+            line-height: .9;
+        }
+
+        .intro {
+            max-width: 980px;
+            margin: 14px 0 0;
+            color: #475569;
+            font-size: 17px;
+            font-weight: 650;
+        }
+
+        .jump-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .jump-list a {
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: #f8fafc;
+            color: #1f2a44;
+            font: 800 12px/1 var(--font-ui);
+            padding: 8px 10px;
+            text-decoration: none;
+        }
+
+        main {
+            display: grid;
+            gap: 34px;
+            padding: 24px clamp(18px, 4vw, 44px) 52px;
+        }
+
+        .section {
+            display: grid;
+            gap: 14px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        h2 {
+            margin: 0;
+            color: #111827;
+            font-size: clamp(28px, 3vw, 42px);
+            line-height: .95;
+        }
+
+        .count {
+            color: var(--muted);
+            font: 900 12px/1 var(--font-mono);
+            text-transform: uppercase;
+        }
+
+        .rows {
+            display: grid;
+            gap: 10px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: minmax(330px, 38%) minmax(250px, 24%) minmax(300px, 1fr);
+            min-height: 132px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background:
+                linear-gradient(90deg, rgba(15, 23, 42, .05) 1px, transparent 1px),
+                linear-gradient(rgba(15, 23, 42, .05) 1px, transparent 1px),
+                #f8fafc;
+            background-size: 18px 18px, 18px 18px, auto;
+        }
+
+        .class-cell,
+        .expected-cell {
+            display: grid;
+            align-content: start;
+            gap: 10px;
+            min-width: 0;
+            padding: 14px;
+            border-right: 1px solid #e1e8f2;
+            background: #ffffff;
+        }
+
+        .cell-label {
+            color: #64748b;
+            font: 900 11px/1 var(--font-ui);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .code-block {
+            min-width: 0;
+            max-height: 220px;
+            margin: 0;
+            overflow: auto;
+            border-radius: 7px;
+            background: #101827;
+            color: #ffffff61;
+            padding: 11px;
+            white-space: pre-wrap;
+        }
+
+        .code-block code {
+            color: inherit;
+            font: 650 11px/1.45 var(--font-mono);
+            overflow-wrap: anywhere;
+        }
+
+        .code-class {
+            display: inline-block;
+            margin: 1px 1px 1px 0;
+            padding: 1px 5px;
+            border-radius: 5px;
+            background: rgba(148, 163, 184, .16);
+            color: #dbeafe;
+            font-weight: 850;
+        }
+
+        .code-class--preset { background: rgba(37, 99, 235, .28); color: #bfdbfe; }
+        .code-class--step { background: rgba(245, 158, 11, .26); color: #fde68a; }
+        .code-class--modifier { background: rgba(16, 185, 129, .24); color: #bbf7d0; }
+        .code-class--group { background: rgba(168, 85, 247, .28); color: #e9d5ff; }
+        .code-class--variant { background: rgba(236, 72, 153, .24); color: #fbcfe8; }
+        .code-class--state { background: rgba(239, 68, 68, .22); color: #fecaca; }
+        .code-class--utility { background: rgba(20, 184, 166, .22); color: #ccfbf1; }
+        .code-class--loop { background: rgba(249, 115, 22, .24); color: #fed7aa; }
+
+        .expected-list {
+            display: grid;
+            gap: 6px;
+            margin: 0;
+            padding: 0 0 0 17px;
+            color: #334155;
+            font: 700 12px/1.35 var(--font-ui);
+        }
+
+        .preview-cell {
+            display: grid;
+            align-content: start;
+            gap: 8px;
+            min-width: 0;
+            padding: 14px;
+        }
+
+        [data-stage] {
+            display: grid;
+            place-items: center;
+            min-width: 0;
+            min-height: 160px;
+            overflow: hidden;
+            padding: 14px;
+        }
+
+        [data-frame] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            width: min(560px, 100%);
+            min-height: 108px;
+            padding: 16px;
+            border: 1px dashed #b8c6d9;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .78);
+            transform-origin: center;
+            --speed: 650ms;
+            --wait: 180ms;
+            --curve: cubic-bezier(.22, 1, .36, 1);
+        }
+
+        [data-frame][data-stack] {
+            display: grid;
+            gap: 12px;
+            place-items: center;
+        }
+
+        [data-frame].dark,
+        [data-frame] .dark {
+            background: #111827;
+            color: #e5e7eb;
+        }
+
+        [data-box] {
+            display: grid;
+            place-items: center;
+            min-width: 58px;
+            min-height: 58px;
+            padding: 10px 12px;
+            border: 1px solid #cad6e6;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #101827;
+            box-shadow: 0 8px 18px rgba(15, 23, 42, .08);
+            font: 900 12px/1.15 var(--font-ui);
+            text-align: center;
+            transform-origin: center;
+            --speed: 650ms;
+            --wait: 180ms;
+            --curve: cubic-bezier(.22, 1, .36, 1);
+        }
+
+        [data-box][data-wide] {
+            min-width: 120px;
+        }
+
+        [data-box][data-product] {
+            min-width: 76px;
+            min-height: 76px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 22px;
+        }
+
+        [data-box][data-muted] {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        @media (max-width: 820px) {
+            .topbar {
+                align-items: stretch;
+                flex-wrap: wrap;
+            }
+
+            .topbar .spacer { display: none; }
+
+            .topbar a,
+            .topbar button {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .row {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .class-cell,
+            .expected-cell {
+                border-right: 0;
+                border-bottom: 1px solid #e1e8f2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="topbar" aria-label="Motion test pages">
+        <a href="step-path-torture.html">Step Path Lab</a>
+        <a href="individual-animations.html">Individual Animations</a>
+        <a href="variants.html">Variants</a>
+        <a href="modifiers.html">Modifiers</a>
+        <a href="nested.html" aria-current="page">Nested</a>
+        <a href="step-loops.html">Step Loops</a>
+        <a href="docs.html">Docs</a>
+        <span class="spacer"></span>
+        <button type="button" data-action="replay">Replay</button>
+    </nav>
+
+    <header class="hero">
+        <div class="kicker">Nested Matrix</div>
+        <h1>Nested Lab</h1>
+        <p class="intro">Nested regular motion, nested step clocks, same-group sparse steps, and weird step paths like one element using step 1 and step 5 while siblings own the middle slots.</p>
+        <div class="jump-list" id="jump-list"></div>
+    </header>
+
+    <main id="app"></main>
+
+    <script>
+        const sections = [
+            {
+                id: 'regular-nesting',
+                title: 'Regular Nested Motion',
+                cases: [
+                    {
+                        title: 'Parent slide, child pop',
+                        code: `<div class="motion-preset-slide-up">
+  <div class="motion-preset-pop">Child</div>
+</div>`,
+                        preview: `<div data-frame data-stack class="motion-preset-slide-up">
+  <div data-box class="motion-preset-pop">Child</div>
+</div>`,
+                        expected: [
+                            'The parent slides up while the child pops inside it.',
+                            'Nested transforms should visually compose instead of one wiping the other.',
+                            'Both animations should finish visible.',
+                        ],
+                    },
+                    {
+                        title: 'Parent rotate, child scale',
+                        code: `<div class="motion-rotate-in-45">
+  <div class="motion-scale-in-150">Scale</div>
+</div>`,
+                        preview: `<div data-frame class="motion-rotate-in-45">
+  <div data-box class="motion-scale-in-150">Scale</div>
+</div>`,
+                        expected: [
+                            'The outer wrapper rotates in.',
+                            'The child scales independently inside the rotated coordinate space.',
+                            'Neither transform family should reset the other.',
+                        ],
+                    },
+                    {
+                        title: 'Nested filter and opacity',
+                        code: `<div class="motion-preset-blur-up">
+  <div class="motion-opacity-in-0">Fade</div>
+</div>`,
+                        preview: `<div data-frame class="motion-preset-blur-up">
+  <div data-box class="motion-opacity-in-0">Fade</div>
+</div>`,
+                        expected: [
+                            'The parent blur/translate entrance should clear.',
+                            'The child should fade in without staying hidden.',
+                            'Filter and opacity should not leak into sibling state.',
+                        ],
+                    },
+                    {
+                        title: 'Nested loops',
+                        code: `<div class="motion-preset-float motion-loop-twice">
+  <div class="motion-preset-pulse-sm motion-loop-twice">Pulse</div>
+</div>`,
+                        preview: `<div data-frame class="motion-preset-float motion-loop-twice">
+  <div data-box class="motion-preset-pulse-sm motion-loop-twice">Pulse</div>
+</div>`,
+                        expected: [
+                            'The parent float loop and child pulse loop should both run.',
+                            'Loop counts should stay local to their own element.',
+                            'The child pulse should remain anchored inside the floating parent.',
+                        ],
+                    },
+                    {
+                        title: 'Group hover nested regular',
+                        code: `<div class="group">
+  <div class="group-hover:motion-preset-slide-right-sm">
+    <div class="group-hover:motion-preset-pop">Hover</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame data-stack class="group">
+  <div data-box data-wide class="group-hover:motion-preset-slide-right-sm">
+    <div data-box data-muted class="group-hover:motion-preset-pop">Hover</div>
+  </div>
+</div>`,
+                        expected: [
+                            'Hovering the parent group should animate both nested targets.',
+                            'The child pop should not require its own group wrapper.',
+                            'Variant prefixes should survive nesting.',
+                        ],
+                    },
+                    {
+                        title: 'Dark nested regular',
+                        code: `<div class="dark">
+  <div class="dark:motion-bg-out-blue-500 dark:motion-text-out-white">
+    <div class="dark:motion-preset-pulse-sm">Dark</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame data-stack class="dark">
+  <div data-box data-wide class="dark:motion-bg-out-blue-500 dark:motion-text-out-white">
+    <div data-box data-muted class="dark:motion-preset-pulse-sm">Dark</div>
+  </div>
+</div>`,
+                        expected: [
+                            'The dark ancestor should activate both nested dark variants.',
+                            'Color utilities should apply to the outer target.',
+                            'The child pulse should still run in the dark subtree.',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'same-group-step-weirdness',
+                title: 'Same Group Step Weirdness',
+                cases: [
+                    {
+                        title: 'Same element owns step 1 and step 5',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-slide-up step-5:motion-preset-expand">A</div>
+  <div class="step-2:motion-preset-pop">B</div>
+  <div class="step-3:motion-preset-slide-left">C</div>
+  <div class="step-4:motion-preset-fade">D</div>
+</div>`,
+                        preview: `<div data-frame class="motion-group">
+  <div data-box data-product class="step-1:motion-preset-slide-up step-5:motion-preset-expand">A</div>
+  <div data-box class="step-2:motion-preset-pop">B</div>
+  <div data-box class="step-3:motion-preset-slide-left">C</div>
+  <div data-box class="step-4:motion-preset-fade">D</div>
+</div>`,
+                        expected: [
+                            'A slides on step 1, then holds through steps 2, 3, and 4.',
+                            'A expands on step 5 from its post-slide state.',
+                            'B, C, and D fill the middle slots without resetting A.',
+                        ],
+                    },
+                    {
+                        title: 'Sparse element plus empty slots',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-expand step-5:motion-preset-slide-up">Sparse</div>
+</div>`,
+                        preview: `<div data-frame class="motion-group">
+  <div data-box data-wide class="step-1:motion-preset-expand step-5:motion-preset-slide-up">Sparse</div>
+</div>`,
+                        expected: [
+                            'The element expands in step 1.',
+                            'Steps 2 through 4 are empty and should collapse to no reserved time.',
+                            'The same element slides on step 5 without jumping back to scale 1.',
+                        ],
+                    },
+                    {
+                        title: 'Same element step 1, 3, and 5 path',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-slide-up step-3:motion-preset-slide-right step-5:motion-preset-slide-up">Path</div>
+  <div class="step-2:motion-preset-pop">2</div>
+  <div class="step-4:motion-preset-pop">4</div>
+</div>`,
+                        preview: `<div data-frame class="motion-group">
+  <div data-box data-product class="step-1:motion-preset-slide-up step-3:motion-preset-slide-right step-5:motion-preset-slide-up">Path</div>
+  <div data-box class="step-2:motion-preset-pop">2</div>
+  <div data-box class="step-4:motion-preset-pop">4</div>
+</div>`,
+                        expected: [
+                            'The path element moves on odd-numbered steps only.',
+                            'Sibling steps should not break its accumulated translate path.',
+                            'Step 5 should continue from the step 3 position.',
+                        ],
+                    },
+                    {
+                        title: 'Step 1 expand, step 5 loop anchor',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-expand step-5:motion-preset-pulse-md">Loop</div>
+  <div class="step-2:motion-preset-slide-up">Middle</div>
+</div>`,
+                        preview: `<div data-frame class="motion-group">
+  <div data-box data-product class="step-1:motion-preset-expand step-5:motion-preset-pulse-md">Loop</div>
+  <div data-box class="step-2:motion-preset-slide-up">Middle</div>
+</div>`,
+                        expected: [
+                            'The element expands during step 1.',
+                            'The later pulse should loop around the expanded scale.',
+                            'The step 2 sibling should not reset the loop anchor.',
+                        ],
+                    },
+                    {
+                        title: 'Explicit exit allows later return',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-fade step-3:motion-opacity-out-0 step-5:motion-preset-expand">Return</div>
+  <div class="step-2:motion-preset-pop">2</div>
+  <div class="step-4:motion-preset-slide-up">4</div>
+</div>`,
+                        preview: `<div data-frame class="motion-group">
+  <div data-box data-product class="step-1:motion-preset-fade step-3:motion-opacity-out-0 step-5:motion-preset-expand">Return</div>
+  <div data-box class="step-2:motion-preset-pop">2</div>
+  <div data-box class="step-4:motion-preset-slide-up">4</div>
+</div>`,
+                        expected: [
+                            'The first element fades in, explicitly exits on step 3, then returns on step 5.',
+                            'The later entrance is legal because opacity had an explicit out step.',
+                            'Middle sibling steps should not strand it invisible.',
+                        ],
+                    },
+                    {
+                        title: 'Same slot conflict plus future step',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-slide-up step-1:motion-preset-slide-down step-5:motion-preset-expand">Conflict</div>
+</div>`,
+                        preview: `<div data-frame class="motion-group">
+  <div data-box data-wide class="step-1:motion-preset-slide-up step-1:motion-preset-slide-down step-5:motion-preset-expand">Conflict</div>
+</div>`,
+                        expected: [
+                            'This is a break test: two Y motions fight inside step 1.',
+                            'Generated CSS order decides which same-slot translate wins.',
+                            'Step 5 should still run after the conflict instead of disappearing.',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'nested-step-groups',
+                title: 'Nested Step Groups',
+                cases: [
+                    {
+                        title: 'Inner group has its own sparse clock',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-slide-up">Outer</div>
+  <div class="motion-group">
+    <div class="step-1:motion-preset-pop step-5:motion-preset-expand">Inner</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame data-stack class="motion-group">
+  <div data-box class="step-1:motion-preset-slide-up">Outer</div>
+  <div data-frame class="motion-group">
+    <div data-box data-product class="step-1:motion-preset-pop step-5:motion-preset-expand">Inner</div>
+  </div>
+</div>`,
+                        expected: [
+                            'The outer group runs its own step 1.',
+                            'The nested motion-group gives the inner element its own step timeline.',
+                            'The inner element should pop, skip empty slots, then expand naturally.',
+                        ],
+                    },
+                    {
+                        title: 'No inner group means shared outer clock',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-slide-up">Outer</div>
+  <div>
+    <div class="step-1:motion-preset-pop step-5:motion-preset-expand">Inner</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame data-stack class="motion-group">
+  <div data-box class="step-1:motion-preset-slide-up">Outer</div>
+  <div data-frame>
+    <div data-box data-product class="step-1:motion-preset-pop step-5:motion-preset-expand">Inner</div>
+  </div>
+</div>`,
+                        expected: [
+                            'The inner element participates in the outer group timeline.',
+                            'Outer and inner step 1 should start together.',
+                            'The inner step 5 should follow the previous active shared step without empty-slot delay.',
+                        ],
+                    },
+                    {
+                        title: 'Nested group plus outer late step',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-slide-left step-5:motion-preset-expand">Outer</div>
+  <div class="motion-group">
+    <div class="step-2:motion-preset-pop step-4:motion-preset-slide-up">Inner</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame data-stack class="motion-group">
+  <div data-box data-product class="step-1:motion-preset-slide-left step-5:motion-preset-expand">Outer</div>
+  <div data-frame class="motion-group">
+    <div data-box class="step-2:motion-preset-pop step-4:motion-preset-slide-up">Inner</div>
+  </div>
+</div>`,
+                        expected: [
+                            'The outer element owns step 1 and step 5 on the outer clock.',
+                            'The inner group owns its step 2 and step 4 independently.',
+                            'The two clocks should remain readable and not multiply delays unexpectedly.',
+                        ],
+                    },
+                    {
+                        title: 'Scoped timing modifier inside nested group',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-duration-1000 step-1:motion-preset-slide-up">Outer</div>
+  <div class="motion-group">
+    <div class="step-1:motion-duration-200 step-1:motion-preset-pop step-5:motion-preset-expand">Fast</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame data-stack class="motion-group">
+  <div data-box data-wide class="step-1:motion-duration-1000 step-1:motion-preset-slide-up">Outer</div>
+  <div data-frame class="motion-group">
+    <div data-box class="step-1:motion-duration-200 step-1:motion-preset-pop step-5:motion-preset-expand">Fast</div>
+  </div>
+</div>`,
+                        expected: [
+                            'Outer step 1 uses a slow duration.',
+                            'Inner step 1 uses its own fast duration.',
+                            'The inner timing modifier should not mutate the outer group clock.',
+                        ],
+                    },
+                ],
+            },
+            {
+                id: 'mixed-regular-step',
+                title: 'Mixed Regular And Step Nesting',
+                cases: [
+                    {
+                        title: 'Regular parent, stepped child',
+                        code: `<div class="motion-preset-slide-up">
+  <div class="motion-group">
+    <div class="step-1:motion-preset-pop step-5:motion-preset-expand">Child</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame data-stack class="motion-preset-slide-up">
+  <div data-frame class="motion-group">
+    <div data-box data-product class="step-1:motion-preset-pop step-5:motion-preset-expand">Child</div>
+  </div>
+</div>`,
+                        expected: [
+                            'The parent regular animation runs immediately.',
+                            'The child follows the nested step clock.',
+                            'Regular parent transforms should compose with stepped child transforms.',
+                        ],
+                    },
+                    {
+                        title: 'Stepped parent, regular child',
+                        code: `<div class="motion-group">
+  <div class="step-1:motion-preset-slide-up step-5:motion-preset-expand">
+    <div class="motion-preset-pop">Child</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame class="motion-group">
+  <div data-box data-product class="step-1:motion-preset-slide-up step-5:motion-preset-expand">
+    <div data-box data-muted class="motion-preset-pop">Child</div>
+  </div>
+</div>`,
+                        expected: [
+                            'The parent follows the step 1 to step 5 path.',
+                            'The child regular pop should happen on its own normal animation timing.',
+                            'The child should stay visually inside the stepped parent.',
+                        ],
+                    },
+                    {
+                        title: 'Variant trigger with stepped child',
+                        code: `<div class="group motion-group">
+  <div class="step-1:motion-preset-slide-up group-hover:motion-preset-pulse-sm">Hover</div>
+  <div class="step-5:motion-preset-expand">Late</div>
+</div>`,
+                        preview: `<div data-frame class="group motion-group">
+  <div data-box data-wide class="step-1:motion-preset-slide-up group-hover:motion-preset-pulse-sm">Hover</div>
+  <div data-box class="step-5:motion-preset-expand">Late</div>
+</div>`,
+                        expected: [
+                            'Step timing should still run inside a group-hover capable parent.',
+                            'Hovering the group should add the pulse without resetting the step path.',
+                            'The late sibling should run after earlier active steps, not after empty slots.',
+                        ],
+                    },
+                    {
+                        title: 'Wait parent over nested group',
+                        code: `<div class="wait">
+  <div class="motion-group">
+    <div class="step-1:motion-preset-slide-up step-5:motion-preset-expand">Wait</div>
+  </div>
+</div>`,
+                        preview: `<div data-frame class="wait">
+  <div data-frame class="motion-group">
+    <div data-box data-product class="step-1:motion-preset-slide-up step-5:motion-preset-expand">Wait</div>
+  </div>
+</div>`,
+                        expected: [
+                            'The parent wait class should pause the nested group until removed.',
+                            'After wait is removed, step 1 and step 5 should run normally.',
+                            'Wait should affect descendants without needing wait on every child.',
+                        ],
+                    },
+                ],
+            },
+        ];
+
+        const app = document.getElementById('app');
+        const jumpList = document.getElementById('jump-list');
+
+        function escapeHTML(value) {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('"', '&quot;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;');
+        }
+
+        function classKind(token) {
+            const parts = token.split(':');
+            const base = parts.at(-1);
+            const prefixes = parts.slice(0, -1);
+
+            if (/^step-\d+$/.test(prefixes.at(0) || '')) return 'step';
+            if (token === 'motion-group') return 'group';
+            if (/^(group|peer|dark)$/.test(token) || prefixes.length) return /^step-\d+$/.test(prefixes.at(0) || '') ? 'step' : 'variant';
+            if (/^(wait|still|pause|play|motion-paused|motion-running)$/.test(base)) return 'state';
+            if (/^motion-repeat/.test(base)) return 'loop';
+            if (/^motion-preset-/.test(base)) return 'preset';
+            if (/^motion-(duration|delay|ease|gap|overlap|loop)/.test(base)) return 'modifier';
+            if (/^motion-(scale|translate|rotate|opacity|blur|grayscale|bg|text)-/.test(base)) return 'utility';
+            if (/loop|pulse|spin|blink|float|oscillate|wobble|seesaw|stretch/.test(base)) return 'loop';
+            return 'other';
+        }
+
+        function highlightClasses(classValue) {
+            return classValue
+                .split(/\s+/)
+                .filter(Boolean)
+                .map((token) => `<span class="code-class code-class--${classKind(token)}">${escapeHTML(token)}</span>`)
+                .join(' ');
+        }
+
+        function highlightCode(source) {
+            return escapeHTML(source).replace(/class=&quot;([^&]*)&quot;/g, (_, classes) => `class=&quot;${highlightClasses(classes)}&quot;`);
+        }
+
+        function renderExpected(test) {
+            return `<ul class="expected-list">${test.expected.map((bullet) => `<li>${escapeHTML(bullet)}</li>`).join('')}</ul>`;
+        }
+
+        function renderRow(test) {
+            return `
+                <article class="row wait">
+                    <div class="class-cell">
+                        <div class="cell-label">Code</div>
+                        <pre class="code-block"><code>${highlightCode(test.code)}</code></pre>
+                    </div>
+                    <div class="expected-cell">
+                        <div class="cell-label">Expected</div>
+                        ${renderExpected(test)}
+                    </div>
+                    <div class="preview-cell">
+                        <div class="cell-label">Preview</div>
+                        <div data-stage>${test.preview}</div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderSection(section) {
+            return `
+                <section class="section" id="${escapeHTML(section.id)}">
+                    <div class="section-head">
+                        <h2>${escapeHTML(section.title)}</h2>
+                        <div class="count">${section.cases.length} checks</div>
+                    </div>
+                    <div class="rows">${section.cases.map(renderRow).join('')}</div>
+                </section>
+            `;
+        }
+
+        jumpList.innerHTML = sections.map((section) => `<a href="#${escapeHTML(section.id)}">${escapeHTML(section.title)} ${section.cases.length}</a>`).join('');
+        app.innerHTML = sections.map(renderSection).join('');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.remove('wait');
+                entry.target.querySelectorAll('.wait').forEach((element) => element.classList.remove('wait'));
+                observer.unobserve(entry.target);
+            });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+        document.querySelectorAll('.row.wait').forEach((row) => observer.observe(row));
+
+        document.querySelector('[data-action="replay"]').addEventListener('click', () => {
+            document.querySelectorAll('[data-stage] > *').forEach((node) => {
+                const clone = node.cloneNode(true);
+                node.replaceWith(clone);
+            });
+        });
+    </script>
+</body>
+</html>

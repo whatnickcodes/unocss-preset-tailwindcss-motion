@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Step Loops Lab</title>
+    <link rel="stylesheet" href="../unocss/uno.css">
+    <style>
+        :root {
+            --font-ui: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            --ink: #172033;
+            --muted: #64748b;
+            --line: #d8e1ee;
+            --bg: #f7fafc;
+            --panel: #ffffff;
+            --nav: #101827;
+            --accent: #2563eb;
+            --hot: #db2777;
+        }
+
+        * { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 76px;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-ui);
+            line-height: 1.45;
+        }
+
+        code { font-family: var(--font-mono); }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 10px clamp(16px, 4vw, 38px);
+            background: rgba(255, 255, 255, .94);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(14px);
+        }
+
+        .topbar a,
+        .topbar button {
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #172033;
+            cursor: pointer;
+            font: 800 12px/1 var(--font-ui);
+            padding: 9px 11px;
+            text-decoration: none;
+        }
+
+        .topbar a[aria-current="page"] {
+            background: #101827;
+            color: #ffffff;
+        }
+
+        .topbar .spacer { flex: 1; }
+
+        .hero {
+            padding: 38px clamp(18px, 4vw, 44px) 30px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero-inner,
+        main {
+            max-width: 1420px;
+            margin: 0 auto;
+        }
+
+        .kicker {
+            color: var(--hot);
+            font: 900 12px/1 var(--font-ui);
+            letter-spacing: .12em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 1040px;
+            margin: 0;
+            color: #0f172a;
+            font-size: clamp(44px, 7vw, 92px);
+            line-height: .86;
+        }
+
+        .intro {
+            max-width: 920px;
+            margin: 16px 0 0;
+            color: #475569;
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 650;
+        }
+
+        .jump-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .jump-list a {
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            background: #f8fafc;
+            color: #1f2a44;
+            font: 850 12px/1 var(--font-ui);
+            padding: 8px 10px;
+            text-decoration: none;
+        }
+
+        main {
+            display: grid;
+            gap: 18px;
+            padding: 24px clamp(18px, 4vw, 44px) 54px;
+        }
+
+        .case {
+            display: grid;
+            grid-template-columns: minmax(320px, .88fr) minmax(260px, .55fr) minmax(360px, 1fr);
+            min-height: 260px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background:
+                linear-gradient(90deg, rgba(15, 23, 42, .045) 1px, transparent 1px),
+                linear-gradient(rgba(15, 23, 42, .045) 1px, transparent 1px),
+                #f8fafc;
+            background-size: 18px 18px, 18px 18px, auto;
+        }
+
+        .case-cell {
+            display: grid;
+            align-content: start;
+            gap: 12px;
+            min-width: 0;
+            padding: 16px;
+            border-right: 1px solid #e1e8f2;
+            background: #ffffff;
+        }
+
+        .case-cell:last-child {
+            border-right: 0;
+            background: transparent;
+        }
+
+        .cell-label {
+            color: #64748b;
+            font: 950 11px/1 var(--font-ui);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            color: #0f172a;
+            font-size: clamp(22px, 3vw, 34px);
+            line-height: .95;
+        }
+
+        .case-note {
+            margin: 0;
+            color: #475569;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .code-block {
+            min-width: 0;
+            max-height: 210px;
+            margin: 0;
+            overflow: auto;
+            border-radius: 7px;
+            background: #101827;
+            color: #ffffff61;
+            padding: 12px;
+            white-space: pre-wrap;
+        }
+
+        .code-block code {
+            color: inherit;
+            font: 650 11px/1.55 var(--font-mono);
+            overflow-wrap: anywhere;
+        }
+
+        .code-class {
+            display: inline-block;
+            margin: 1px 1px 1px 0;
+            padding: 1px 5px;
+            border-radius: 5px;
+            background: rgba(148, 163, 184, .16);
+            color: #dbeafe;
+            font-weight: 850;
+        }
+
+        .code-class--preset { background: rgba(37, 99, 235, .28); color: #bfdbfe; }
+        .code-class--step { background: rgba(245, 158, 11, .26); color: #fde68a; }
+        .code-class--modifier { background: rgba(16, 185, 129, .24); color: #bbf7d0; }
+        .code-class--group { background: rgba(168, 85, 247, .28); color: #e9d5ff; }
+        .code-class--loop { background: rgba(249, 115, 22, .24); color: #fed7aa; }
+        .code-class--state { background: rgba(239, 68, 68, .22); color: #fecaca; }
+
+        .expected-list {
+            display: grid;
+            gap: 7px;
+            margin: 0;
+            padding: 0 0 0 18px;
+            color: #334155;
+            font: 750 13px/1.38 var(--font-ui);
+        }
+
+        .preview-cell {
+            display: grid;
+            align-content: stretch;
+            gap: 12px;
+            min-width: 0;
+            padding: 16px;
+        }
+
+        .stage {
+            display: grid;
+            place-items: center;
+            min-width: 0;
+            min-height: 204px;
+            padding: 12px;
+        }
+
+        .motion-group,
+        [data-demo-stage] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            width: min(620px, 100%);
+            min-height: 142px;
+            padding: 18px;
+            border: 1px dashed #a9b8ce;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, .82);
+        }
+
+        .demo-box {
+            display: grid;
+            place-items: center;
+            width: 74px;
+            height: 74px;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, .1);
+            color: #0f172a;
+            font: 950 12px/1 var(--font-ui);
+            text-align: center;
+            transform-origin: center;
+        }
+
+        .demo-box.hot {
+            background: #101827;
+            border-color: #101827;
+            color: #ffffff;
+        }
+
+        .demo-box.blue {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: #ffffff;
+        }
+
+        .demo-status {
+            display: inline-flex;
+            width: max-content;
+            align-items: center;
+            justify-self: center;
+            min-height: 28px;
+            border: 1px solid #bfdbfe;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font: 900 11px/1 var(--font-ui);
+            padding: 0 10px;
+        }
+
+        .warning {
+            border-color: #fed7aa;
+            background: #fff7ed;
+            color: #9a3412;
+        }
+
+        @media (max-width: 980px) {
+            .case {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .case-cell {
+                border-right: 0;
+                border-bottom: 1px solid #e1e8f2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .topbar {
+                align-items: stretch;
+                flex-wrap: wrap;
+            }
+
+            .topbar .spacer { display: none; }
+
+            .topbar a,
+            .topbar button {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+
+            .demo-box {
+                width: 64px;
+                height: 64px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="topbar" aria-label="Motion test pages">
+        <a href="step-path-torture.html">Step Path Lab</a>
+        <a href="individual-animations.html">Individual Animations</a>
+        <a href="variants.html">Variants</a>
+        <a href="modifiers.html">Modifiers</a>
+        <a href="nested.html">Nested</a>
+        <a href="step-loops.html" aria-current="page">Step Loops</a>
+        <a href="docs.html">Docs</a>
+        <span class="spacer"></span>
+        <button type="button" data-action="reload">Reload</button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-inner">
+            <div class="kicker">Step Loop Behavior</div>
+            <h1>Step Loops Lab</h1>
+            <p class="intro">This page separates loop animations inside a numbered step from replaying an entire step sequence. The repeat examples use the repeat helper behavior and run from the local preview server.</p>
+            <div class="jump-list" id="jump-list"></div>
+        </div>
+    </header>
+
+    <main id="app"></main>
+
+    <script type="module">
+        const examples = [
+            {
+                id: 'final-step-loop',
+                title: 'Final step loops forever',
+                note: 'This is the cleanest step-loop case: no later slot needs to wait.',
+                code: `<div class="motion-group">
+  <div class="demo-box step-1:motion-preset-slide-up">ONE</div>
+  <div class="demo-box step-2:motion-preset-expand">TWO</div>
+  <div class="demo-box hot step-3:motion-preset-spin">SPIN</div>
+</div>`,
+                expected: [
+                    'Step 1 slides in.',
+                    'Step 2 expands after step 1.',
+                    'Step 3 starts a spin loop and keeps spinning forever.',
+                    'Because it is the final step, no later timeline slot exposes the loop-count caveat.'
+                ],
+                preview: `<div class="motion-group">
+  <div class="demo-box step-1:motion-preset-slide-up">ONE</div>
+  <div class="demo-box step-2:motion-preset-expand">TWO</div>
+  <div class="demo-box hot step-3:motion-preset-spin">SPIN</div>
+</div>`
+            },
+            {
+                id: 'bounded-loop-slot',
+                title: 'Bounded loop inside the middle slot',
+                note: 'This shows the current caveat: loop count does not extend the step clock.',
+                code: `<div class="motion-group">
+  <div class="demo-box step-1:motion-preset-slide-up">ONE</div>
+  <div class="demo-box blue step-2:motion-preset-pulse-md step-2:motion-loop-twice">PULSE</div>
+  <div class="demo-box step-3:motion-preset-slide-right">NEXT</div>
+</div>`,
+                expected: [
+                    'Step 2 starts a pulse loop and is limited to two iterations.',
+                    'Step 3 still starts from the step timeline, not after both pulse iterations finish.',
+                    'This is current code behavior: step active duration does not multiply by motion-loop-twice.',
+                    'Useful for overlapping effects, not for making the whole timeline wait for repeated loops.'
+                ],
+                preview: `<div class="motion-group">
+  <div class="demo-box step-1:motion-preset-slide-up">ONE</div>
+  <div class="demo-box blue step-2:motion-preset-pulse-md step-2:motion-loop-twice">PULSE</div>
+  <div class="demo-box step-3:motion-preset-slide-right">NEXT</div>
+</div>`
+            },
+            {
+                id: 'loop-anchors-to-path',
+                title: 'Loop anchors to the step path',
+                note: 'This is the behavior we fixed earlier: loop from the transformed state.',
+                code: `<div class="motion-group">
+  <div class="demo-box hot step-1:motion-preset-expand step-2:motion-preset-slide-up step-3:motion-preset-pulse-md">LOOP</div>
+</div>`,
+                expected: [
+                    'The same element expands in step 1.',
+                    'Then it slides up in step 2.',
+                    'Then the pulse loop should happen from that expanded and slid-up state.',
+                    'It should not snap back to normal size or normal position before pulsing.'
+                ],
+                preview: `<div class="motion-group">
+  <div class="demo-box hot step-1:motion-preset-expand step-2:motion-preset-slide-up step-3:motion-preset-pulse-md">LOOP</div>
+</div>`
+            },
+            {
+                id: 'whole-sequence-repeat',
+                title: 'Whole sequence repeats with helper',
+                note: 'This is step 1 -> step 2 -> step 3, then the helper remounts the group.',
+                code: `<div class="motion-group motion-repeat motion-repeat-delay-[900ms] motion-repeat-count-[3]">
+  <div class="demo-box step-1:motion-preset-slide-up">ONE</div>
+  <div class="demo-box blue step-2:motion-preset-pop">TWO</div>
+  <div class="demo-box hot step-3:motion-preset-slide-left">THREE</div>
+</div>
+
+JS:
+import { initMotionRepeats } from '../unocss/repeat.js';
+initMotionRepeats();`,
+                expected: [
+                    'The full three-step sequence plays.',
+                    'The final state holds for 900ms.',
+                    'The helper remounts the group and replays the whole sequence.',
+                    'motion-repeat-count-[3] means three total plays, including the first render.'
+                ],
+                preview: `<div class="motion-group motion-repeat motion-repeat-delay-[900ms] motion-repeat-count-[3]" data-repeat-label="three-play">
+  <div class="demo-box step-1:motion-preset-slide-up">ONE</div>
+  <div class="demo-box blue step-2:motion-preset-pop">TWO</div>
+  <div class="demo-box hot step-3:motion-preset-slide-left">THREE</div>
+  <div class="demo-status" data-repeat-status>play 1 of 3</div>
+</div>`
+            },
+            {
+                id: 'sparse-repeat',
+                title: 'Sparse steps repeat without dead slots',
+                note: 'This combines the collapsed-empty-step behavior with sequence replay.',
+                code: `<div class="motion-group motion-repeat motion-repeat-delay-500 motion-repeat-count-twice">
+  <div class="demo-box hot step-1:motion-preset-expand step-5:motion-preset-slide-up">SPARSE</div>
+</div>
+
+JS:
+import { initMotionRepeats } from '../unocss/repeat.js';
+initMotionRepeats();`,
+                expected: [
+                    'Step 1 expands.',
+                    'Step 5 runs after the previous active step, not after empty slots 2, 3, and 4.',
+                    'The helper replays the whole group one more time.',
+                    'motion-repeat-count-twice means two total plays.'
+                ],
+                preview: `<div class="motion-group motion-repeat motion-repeat-delay-500 motion-repeat-count-twice" data-repeat-label="sparse">
+  <div class="demo-box hot step-1:motion-preset-expand step-5:motion-preset-slide-up">SPARSE</div>
+  <div class="demo-status" data-repeat-status>play 1 of 2</div>
+</div>`
+            },
+            {
+                id: 'infinite-repeat',
+                title: 'Whole sequence repeats forever',
+                note: 'This is the actual go-back-to-step-1 behavior.',
+                code: `<div class="motion-group motion-repeat motion-repeat-delay-[1.2s] motion-repeat-count-infinite">
+  <div class="demo-box step-1:motion-preset-fade">AD</div>
+  <div class="demo-box blue step-2:motion-preset-slide-up">CTA</div>
+  <div class="demo-box hot step-3:motion-preset-pulse-sm">LOOP</div>
+</div>
+
+JS:
+import { initMotionRepeats } from '../unocss/repeat.js';
+initMotionRepeats();`,
+                expected: [
+                    'The full three-step sequence plays.',
+                    'The final state holds for 1.2s.',
+                    'The helper remounts the group indefinitely.',
+                    'This is different from a loop preset inside one step.'
+                ],
+                preview: `<div class="motion-group motion-repeat motion-repeat-delay-[1.2s] motion-repeat-count-infinite" data-repeat-label="infinite">
+  <div class="demo-box step-1:motion-preset-fade">AD</div>
+  <div class="demo-box blue step-2:motion-preset-slide-up">CTA</div>
+  <div class="demo-box hot step-3:motion-preset-pulse-sm">LOOP</div>
+  <div class="demo-status warning" data-repeat-status>infinite repeat</div>
+</div>`
+            }
+        ];
+
+        const app = document.getElementById('app');
+        const jumpList = document.getElementById('jump-list');
+        const fallbackRepeatTimers = new WeakMap();
+
+        function readMotionTime(value) {
+            const raw = String(value || '').trim();
+            const match = raw.match(/^(-?(?:\d+|\d*\.\d+))(ms|s)$/);
+            if (!match) return 0;
+            const amount = Number(match[1]);
+            return match[2] === 's' ? amount * 1000 : amount;
+        }
+
+        function motionSequenceDuration(scope) {
+            if (!scope?.getAnimations) return 0;
+            let max = 0;
+            for (const animation of scope.getAnimations({ subtree: true })) {
+                const name = animation.animationName || '';
+                if (!name.startsWith('motion-step-')) continue;
+                const timing = animation.effect?.getComputedTiming?.();
+                if (!timing || !Number.isFinite(timing.duration)) continue;
+                const iterations = timing.iterations === Infinity
+                    ? 1
+                    : Math.max(1, timing.iterations || 1);
+                const end = Math.max(0, timing.delay || 0)
+                    + (timing.duration * iterations)
+                    + Math.max(0, timing.endDelay || 0);
+                if (Number.isFinite(end)) max = Math.max(max, end);
+            }
+            return max;
+        }
+
+        function clearFallbackRepeat(scope) {
+            const timer = fallbackRepeatTimers.get(scope);
+            if (timer) clearTimeout(timer);
+            fallbackRepeatTimers.delete(scope);
+        }
+
+        function scheduleFallbackRepeat(scope, options = {}) {
+            if (!scope?.isConnected) return null;
+            clearFallbackRepeat(scope);
+            const style = getComputedStyle(scope);
+            if (style.getPropertyValue('--motion-repeat').trim() !== '1') return null;
+            const countRaw = style.getPropertyValue('--motion-repeat-count').trim() || 'infinite';
+            const maxPlays = countRaw === 'infinite' ? Infinity : Number(countRaw);
+            const completedRepeats = Number(scope.dataset.motionRepeatDone || 0);
+            if (Number.isFinite(maxPlays) && completedRepeats >= Math.max(0, maxPlays - 1)) return null;
+            const hold = readMotionTime(style.getPropertyValue('--motion-repeat-delay'));
+            const duration = motionSequenceDuration(scope);
+            if (!duration) return null;
+            const timer = setTimeout(() => {
+                fallbackRepeatTimers.delete(scope);
+                if (!scope.isConnected) return;
+                const clone = scope.cloneNode(true);
+                clone.dataset.motionRepeatDone = String(completedRepeats + 1);
+                scope.replaceWith(clone);
+                options.onRepeat?.(clone, scope);
+                requestAnimationFrame(() => scheduleFallbackRepeat(clone, options));
+            }, duration + hold);
+            fallbackRepeatTimers.set(scope, timer);
+            return timer;
+        }
+
+        function fallbackInitMotionRepeats(root = document, options = {}) {
+            const scopes = [];
+            if (root.matches?.('.motion-repeat')) scopes.push(root);
+            root.querySelectorAll?.('.motion-repeat').forEach((scope) => scopes.push(scope));
+            requestAnimationFrame(() => scopes.forEach((scope) => scheduleFallbackRepeat(scope, options)));
+            return scopes;
+        }
+
+        async function loadRepeatHelper() {
+            try {
+                const helper = await import('../unocss/repeat.js');
+                return helper.initMotionRepeats;
+            } catch {
+                return fallbackInitMotionRepeats;
+            }
+        }
+
+
+        function escapeHTML(value) {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('"', '&quot;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;');
+        }
+
+        function classKind(token) {
+            const parts = token.split(':');
+            const base = parts.at(-1);
+            const prefixes = parts.slice(0, -1);
+            if (/^step-\d+$/.test(prefixes.at(0) || '')) return 'step';
+            if (base === 'motion-group') return 'group';
+            if (/^motion-repeat/.test(base)) return 'loop';
+            if (/^motion-preset-/.test(base)) return /spin|blink|pulse|wobble|seesaw|oscillate|stretch|float/.test(base) ? 'loop' : 'preset';
+            if (/^motion-(duration|delay|ease|gap|overlap|loop)/.test(base)) return 'modifier';
+            if (/^(wait|still|pause|play|motion-paused|motion-running)$/.test(base)) return 'state';
+            return 'other';
+        }
+
+        function highlightClasses(classes) {
+            return classes
+                .split(/\s+/)
+                .filter(Boolean)
+                .map((token) => `<span class="code-class code-class--${classKind(token)}">${escapeHTML(token)}</span>`)
+                .join(' ');
+        }
+
+        function highlightCode(source) {
+            return escapeHTML(source).replace(/class=&quot;([^&]*)&quot;/g, (_, classes) => {
+                return `class=&quot;${highlightClasses(classes)}&quot;`;
+            });
+        }
+
+        function renderCase(test) {
+            return `
+                <article class="case" id="${escapeHTML(test.id)}">
+                    <div class="case-cell">
+                        <div class="cell-label">Code</div>
+                        <h2>${escapeHTML(test.title)}</h2>
+                        <p class="case-note">${escapeHTML(test.note)}</p>
+                        <pre class="code-block"><code>${highlightCode(test.code)}</code></pre>
+                    </div>
+                    <div class="case-cell">
+                        <div class="cell-label">Expected</div>
+                        <ul class="expected-list">
+                            ${test.expected.map((item) => `<li>${escapeHTML(item)}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="preview-cell">
+                        <div class="cell-label">Preview</div>
+                        <div class="stage">${test.preview}</div>
+                    </div>
+                </article>
+            `;
+        }
+
+        jumpList.innerHTML = examples
+            .map((example, index) => `<a href="#${escapeHTML(example.id)}">${String(index + 1).padStart(2, '0')}. ${escapeHTML(example.title)}</a>`)
+            .join('');
+        app.innerHTML = examples.map(renderCase).join('');
+
+        const initRepeats = await loadRepeatHelper();
+        initRepeats(document, {
+            onRepeat: (clone) => {
+                const status = clone.querySelector('[data-repeat-status]');
+                if (!status) return;
+                const done = Number(clone.dataset.motionRepeatDone || 0);
+                const count = getComputedStyle(clone).getPropertyValue('--motion-repeat-count').trim();
+                const playNumber = done + 1;
+                status.textContent = count === 'infinite'
+                    ? `repeat ${playNumber}`
+                    : `play ${playNumber} of ${count}`;
+            }
+        });
+
+        document.querySelector('[data-action="reload"]').addEventListener('click', () => {
+            location.reload();
+        });
+    </script>
+</body>
+</html>

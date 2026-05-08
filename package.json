@@ -1,6 +1,6 @@
 {
     "name": "unocss-preset-tailwindcss-motion",
-    "version": "4.0.3",
+    "version": "4.1.0",
     "description": "Unofficial UnoCSS preset for the TailwindCSS Motion plugin by @romboHQ",
     "type": "module",
     "main": "dist/index.js",
@@ -22,8 +22,14 @@
         "build": "npm run build:unocss && npm run build:tailwind && npm run build:preset",
         "build:unocss": "node unocss/build.js",
         "build:tailwind": "npx tailwindcss -i ./tailwind/app.css -o ./tailwind/tailwind.css -c ./tailwind/tailwind.config.js",
-        "build:preset": "cp ./unocss/index.js ./dist/index.js",
-        "serve": "open ./test/index.html"
+        "build:preset": "cp ./unocss/index.js ./dist/index.js && cp ./unocss/repeat.js ./dist/repeat.js",
+        "serve": "open ./test/individual-animations.html",
+        "serve:steps": "open ./test/step-path-torture.html",
+        "serve:variants": "open ./test/variants.html",
+        "serve:modifiers": "open ./test/modifiers.html",
+        "serve:nested": "open ./test/nested.html",
+        "serve:step-loops": "open ./test/step-loops.html",
+        "serve:docs": "open ./test/docs.html"
     },
     "devDependencies": {
         "@unocss/preset-uno": "^0.63.4",
